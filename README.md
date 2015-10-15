@@ -1,6 +1,15 @@
 # Software-Engineering-II- #
 Team: wedoIT
 
+**Teammates:**
+
+| name        | email           |
+|-------------|-----------------|
+|Jonas Ringler| ringler@hm.edu  |
+|             |                 |
+|             |                 |
+|             |                 |
+
 - - - -
 
 # Preliminary Specification
