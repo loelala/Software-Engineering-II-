@@ -27,8 +27,8 @@ If a supplier is clicked, a detailed view of this supplier should appear. In thi
 #### 1.1.3	Comparing some suppliers
 An optional feature is to compare multiple suppliers by selecting more than one supplier in the 1.1.2 - view. Then a new view should show something similar to 1.1.3 comparing all checked suppliers.
 
-### 1.2	Choose able time interval
-A time interval must be choose able for the whole application, so that the comparing is done for this interval.
+### 1.2	Chooseable time interval
+A time interval must be chooseable for the whole application, so that the comparing is done for this interval.
 
 ### 1.3	Authentication
 A static login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
