@@ -1,11 +1,15 @@
-angular.module('SupplierManagement', [
+var app = angular.module('SupplierManagement', [
     'ngRoute',
-    'SupplierManagement.controllers'
+    'smart-table'
 ]);
 
-/*.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.
-	when("/index", {templateUrl: "partials/index.html", controller: "IndexCtrl"}).
-	when("/suppliers", {templateUrl: "partials/supplierList.html", controller: "SupplierCtrl"}).
-	otherwise({redirectTo: '/index'});
+/*app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    $routeProvider.
+    when("/supplier", {
+        templateUrl: "partials/supplier.html",
+        controller: "OneSupplierCtrl"
+    })
+    otherwise({
+        redirectTo: '/index'
+    });
 }]);*/
