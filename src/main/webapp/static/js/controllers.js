@@ -4,82 +4,89 @@ app.controller('IndexCtrl', function () {
     vm.test = 'hallo ich bin ein Test';
 });
 
-app.controller('SupplierCtrl', ['$location', function ($location) {
-    var vm = this;
-    vm.supplierList = [
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        },
-        {
-            name: 'Test GmbH',
-            address: {
-                city: 'München',
-                street: 'Lothstrasse'
-            }
-        }
-    ];
+app.controller('SupplierCtrl', function ($scope, $http, $location) {
+
+    $scope.supplierList = {};
+    $http.get("/api/vendor/all")
+        .success(function(response) {$scope.supplierList = response;});
+    //var vm = this;
+    //
+    //
+    //
+    //vm.supplierList = [
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    },
+    //    {
+    //        name: 'Test GmbH',
+    //        address: {
+    //            city: 'München',
+    //            street: 'Lothstrasse'
+    //        }
+    //    }
+    //];
 
     /*Here we have to inject the id of the suplier and than we can open the specific supplier*/
-    vm.open = function (path) {
-        console.log('we now want to got to the supplier', path);
-        $location.path(path);
-    }
+    //vm.open = function (path) {
+    //    console.log('we now want to got to the supplier', path);
+    //    $location.path(path);
+    //}
 
 
-}]);
+});
 
 app.controller('DatePickerCtrl', function () {
     var vm = this;

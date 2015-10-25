@@ -8,6 +8,6 @@
 </script>
 </head>
 <body>
-Go to <a href="partials/index.html">/pages/index.html</a>
+Go to <a href="partials/index.html">res/pages/index.html</a>
 </body>
 </html>

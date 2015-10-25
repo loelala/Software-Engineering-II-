@@ -107,15 +107,15 @@
                                 <thead>
                                     <tr>
                                         <th st-sort="name">Name</th>
-                                        <th st-sort="city">City</th>
-                                        <th st-sort="street">Street</th>
+                                        <th st-sort="city">id</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="row in vm.supplierList" ng-click="vm.open(supplier.hmtl)">
+                                    <tr ng-repeat="row in supplierList">
                                         <td>{{row.name}}</td>
-                                        <td>{{row.address.city | uppercase}}</td>
-                                        <td>{{row.address.street}}</td>
+                                        <td>{{row.id}}</td>
+
                                     </tr>
                                 </tbody>
                             </table>
