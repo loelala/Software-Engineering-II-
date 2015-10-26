@@ -8,7 +8,7 @@
 |Jonas Ringler| ringler@hm.edu  |
 |Bernhard Schaidhammer|schaidha@hm.edu|
 |Alexandra Vogel|avogel@hm.edu|
-|             |                 |
+|Adomas Simonenkovas |                 |
 
 - - - -
 
