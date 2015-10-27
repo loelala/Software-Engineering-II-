@@ -8,13 +8,13 @@
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link href="../res/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="../res/css/styles.css" rel="stylesheet">
-    <link href="../res/fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="../res/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
+    <link href="static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/styles.css" rel="stylesheet">
+    <link href="static/fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
 </head>
 
-<body ng-app="SupplierManagement" ng-controller="IndexCtrl as vm">
+<body ng-app="SupplierManagement">
     <!-- header -->
     <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
@@ -58,9 +58,9 @@
                     <li><a> And maybe some more ... </a></li>
 
                     <hr>
-                    <li><a href="../res/partials/supplierList.html"><i class="fa fa-industry"></i> All Supliers</a>
+                    <li><a href="static/partials/supplierList.html"><i class="fa fa-industry"></i> All Supliers</a>
                     </li>
-                    <li><a href="../res/partials/supplier.html"><i class="fa fa-eye"></i> Views</a>
+                    <li><a href="static/partials/supplier.html"><i class="fa fa-eye"></i> Views</a>
                     </li>
                 </ul>
 
@@ -88,13 +88,16 @@
     <!-- /Main -->
 
     <!-- script references -->
-    <script src="../res/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../res/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../res/bower_components/angular/angular.js"></script>
-    <script src="../res/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="../res/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
-    <script src="../res/js/app.js"></script>
-    <script src="../res/js/controllers.js"></script>
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/bower_components/angular/angular.js"></script>
+    <script src="static/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="static/bower_components/angular-route/angular-route.js"></script>
+    <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="static/js/module.js"></script>
+    <script src="static/js/supplier/supplier.details.controller.js"></script>
+    <script src="static/js/supplier/supplier.list.controller.js"></script>
+    <script src="static/js/supplier/supplier.resource.service.js"></script>
 </body>
 
 </html>

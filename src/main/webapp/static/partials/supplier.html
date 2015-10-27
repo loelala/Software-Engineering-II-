@@ -53,7 +53,7 @@
                 <hr>
 
                 <ul class="nav nav-stacked">
-                    <li class="active"> <a href="../partials/index.html"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="active"> <a href="../../index.html"><i class="fa fa-home"></i> Home</a></li>
                     <li><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
                     <li><a> And maybe some more ... </a></li>
 
@@ -72,28 +72,9 @@
                 <a href="#"><strong><i class="fa fa-plane-o"></i> The specific supplier</strong></a>
                 <hr>
                 <!--row datepicker-->
-                <div class="row" ng-controller="DatePickerCtrl as vm">
+                <div class="row">
                     <h4>Select the time:</h4>
-
-                    <div class="col-md-6">
-                        <p class="input-group">
-                            <input type="date" class="form-control" uib-datepicker-popup ng-model="vm.dateFrom" is-open="vm.status.opened" min- date="vm.minDate" max-date="vm.maxDate" datepicker-options="vm.dateOptions" date-disabled="vm.disabled(date, mode)" close-text="Close" />
-                            <span class="input-group-btn">
-                            <button type="button" class="btn btn-default">
-                                <i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                        </p>
-                    </div>
-
-                    <div class="col-md-6">
-                        <p class="input-group">
-                            <input type="date" class="form-control" uib-datepicker-popup ng-model="vm.dateUntil" is-open="vm.status.opened" min-date="vm.minDate" max-date="vm.maxDate" datepicker-options="vm.dateOptions" date-disabled="vm.disabled(date, mode)" close-text="Close" />
-                            <span class="input-group-btn">
-                        <button type="button" class="btn btn-default">
-                            <i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                        </p>
-                    </div>
+                    <!--We have to add a Datepicker-->
                 </div>
                 <!--/row datepicker-->
 
@@ -117,9 +98,12 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="../bower_components/angular-smart-table/dist/smart-table.min.js"></script>
-    <script src="../js/app.js"></script>
-    <script src="../js/controllers.js"></script>
+    <script src="../js/module.js"></script>
+    <script src="../js/supplier/supplier.resource.service.js"></script>
+    <script src="../js/supplier/supplier.list.controller.js"></script>
+    <script src="../js/supplier/supplier.details.controller.js"></script>
 
 
 </body>
