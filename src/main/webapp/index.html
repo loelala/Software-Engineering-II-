@@ -86,7 +86,22 @@
         </div>
     </div>
     <!-- /Main -->
+    <script>
 
+        window.onload = function() {
+
+            if(localStorage.loggedin != "true"){
+                window.location.replace("../login.html");
+            }
+
+        }
+        function logout(){
+            localStorage.removeItem("loggedin");
+            location.reload();
+
+        }
+
+    </script>
     <!-- script references -->
     <script src="../res/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../res/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

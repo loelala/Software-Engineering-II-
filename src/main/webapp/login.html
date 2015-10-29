@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script language="javascript">
+			function checklogin(){
+			var username = document.getElementById("user").value;
+			var password = document.getElementById("pass").value;
+			
+			 if(username == "username" && password == "password"){
+			 localStorage.loggedin = "true";
+			 window.location.replace("../");
+			 
+			 
+			 }
+			 else{
+			  alert("wrong username or password");
+			 }
+			 
+			}
+		</script>
+	</head>
+
+	<body>
+	<center>
+		<form>
+			username <br>
+			<input type="text" name="user" id="user">
+			<br>
+			password <br>
+			<input Type="password" name="pass" id="pass">
+			<br>
+			<input type="button" value="login" onclick="checklogin()">
+		</form>
+	</center>
+	</body>
+</html>
