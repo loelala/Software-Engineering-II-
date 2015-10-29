@@ -21,7 +21,16 @@ public class VendorController
     @Autowired
     VendorDao vendorDao;
 
-    @RequestMapping("/{id}")
+
+    @RequestMapping("/all")
+    public List<Vendor> getAllVendor()
+    {
+        System.out.println("getAllVendor Rest");
+        return vendorDao.getAllVendor();
+    }
+
+
+    @RequestMapping("/:id")
     public Vendor getVendorById(@PathVariable(value="id") String id)
     {
         System.out.println("id" + id);
@@ -31,10 +40,4 @@ public class VendorController
         return v;
     }
 
-    @RequestMapping("/all")
-    public List<Vendor> getAllVendor()
-    {
-        System.out.println("getAllVendor Rest");
-        return vendorDao.getAllVendor();
-    }
 }
