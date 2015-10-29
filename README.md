@@ -2,6 +2,7 @@
 **Team: WeDoIT**
 
 IP: 10.28.2.169
+VPN: username with #
 
 **Teammates:**
 
