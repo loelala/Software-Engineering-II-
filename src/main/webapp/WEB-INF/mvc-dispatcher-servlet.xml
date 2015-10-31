@@ -20,8 +20,8 @@
         <property name="password" value="vH30k7LF" />
     </bean>
 
-    <bean id="vendorDaoImpl"
-          class="edu.hm.wedoit.dao.impl.VendorDaoImpl">
+    <bean id="supplierDaoImpl"
+          class="edu.hm.wedoit.dao.impl.SupplierDaoImpl">
         <property name="dataSource"  ref="dataSource" />
     </bean>
 
