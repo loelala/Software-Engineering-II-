@@ -15,26 +15,19 @@
     <link href="static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
     <script language="javascript">
-        function checklogin(){
+        function checklogin() {
             var username = document.getElementById("user").value;
             var password = document.getElementById("pass").value;
 
-            if(username == "username" && password == "password"){
+
+            if (username == "username" && password == "password") {
                 localStorage.loggedin = "true";
                 window.location.replace("../");
-
-
             }
-            else{
-                alert("wrong username or password");
-            }
-
         }
     </script>
-</head>
 
-<body>
-
+<body ng-app="SupplierManagement">
 <!-- header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
@@ -54,7 +47,7 @@
                         <li><a href="#">My Profile</a></li>
                     </ul>
                 </li>
-                <li><a href="login" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
+                <li><a ui-sref="login" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -78,6 +71,7 @@
                 <li><a> And maybe some more ... </a></li>
 
                 <hr>
+
                 <li><a ui-sref="allSuppliers"><i class="fa fa-industry"></i> All Supliers</a>
                 </li>
                 <li><a ui-sref="supplier"><i class="fa fa-eye"></i> Views</a>
