@@ -1,8 +1,9 @@
 /**
- * Created by Alex on 23.10.15.
+ * @author Alexandra Vogel
  */
 angular.module('SupplierManagement', [
     'ngRoute',
+    'ui.router',
     'ngResource',
     'smart-table',
 
@@ -13,19 +14,42 @@ angular.module('SupplierManagement', [
     'supplierDetails',
     // module for connect to the backend (service)
     'supplierservice'
+    // model for the index (controller)
+
+    // model for connection to the backend (service)
+
+
 ]);
 
 
+angular.module('SupplierManagement')
+    .config(function($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.otherwise('/home');
 
-/*app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
- $routeProvider.
- when("/supplier", {
- templateUrl: "partials/supplier.html",
- controller: "OneSupplierCtrl"
- })
- otherwise({
- redirectTo: '/index'
- });
- }]);*/
+    $stateProvider
+
+        // HOME STATES
+        .state('home', {
+            url: '/home',
+            templateUrl: 'static/partials/home.html'
+        })
+
+        .state('allSuppliers', {
+            url: '/allSuppliers',
+            templateUrl: 'static/partials/supplierList.html',
+            controller: 'SupplierListCtrl'
+        })
+
+        .state('supplier', {
+            url: '/supplier',
+            templateUrl: 'static/partials/supplier.html',
+            controller: 'SupplierDetailsCtrl'
+        });
+
+});
+
+angular.module('SupplierManagement').run(['$state', function ($state) {
+    $state.transitionTo('home');
+}]);
 
