@@ -27,7 +27,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao
                                 "(SELECT lieferant.LIFNR, lieferant.NAME1, ekko.EBELN " +
                                         "FROM (	SELECT LIFNR, NAME1 " +
                                                 "FROM sap_emulation.lfa1 " +
-                                                "WHERE LIFNR = " + id + ") as lieferant " +
+                                                "WHERE LIFNR = \"" + id + "\") as lieferant " +
                                         "INNER JOIN sap_emulation.ekko " +
                                         "ON lieferant.LIFNR=ekko.LIFNR " +
                                         "GROUP BY EBELN) as liefUOrder " +

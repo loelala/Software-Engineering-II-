@@ -1,9 +1,11 @@
 package edu.hm.wedoit.mapper;
 
 import edu.hm.wedoit.dao.OrderDao;
+import edu.hm.wedoit.dao.SupplierWithScoreDao;
 import edu.hm.wedoit.dao.impl.OrderDaoImpl;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.SupplierWithScore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -15,6 +17,13 @@ import java.util.List;
  */
 public class SupplierWithScoreMapper implements RowMapper<SupplierWithScore> {
 
+    private OrderDao orderDao;
+
+    public SupplierWithScoreMapper(OrderDao orderDao)
+    {
+        this.orderDao = orderDao;
+    }
+
     public SupplierWithScore mapRow(ResultSet resultSet, int i) throws SQLException
     {
         SupplierWithScore supplier = new SupplierWithScore();
@@ -22,7 +31,6 @@ public class SupplierWithScoreMapper implements RowMapper<SupplierWithScore> {
         supplier.setId(resultSet.getString("LIFNR"));
         supplier.setName(resultSet.getString("NAME1"));
 
-        OrderDao orderDao = new OrderDaoImpl();
         List<Order> orders = orderDao.getAllOrdersForId(supplier.getId());
         supplier.setOrders(orders);
 

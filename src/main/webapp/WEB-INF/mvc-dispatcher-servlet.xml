@@ -25,10 +25,9 @@
         <property name="dataSource"  ref="dataSource" />
     </bean>
 
-    <bean id="supplierWithScoreDaoImpl" depends-on="orderDaoImpl"
+    <bean id="supplierWithScoreDaoImpl"
           class="edu.hm.wedoit.dao.impl.SupplierWithScoreDaoImpl">
         <property name="dataSource"  ref="dataSource" />
-        <property name="orderDao" ref="orderDaoImpl" />
     </bean>
 
     <bean id="orderDaoImpl"
@@ -38,6 +37,5 @@
 
     <mvc:resources mapping="/res/**" location="/static/" />
     <mvc:default-servlet-handler />
-
 
 </beans>

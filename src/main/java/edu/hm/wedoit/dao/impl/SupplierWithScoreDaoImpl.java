@@ -18,16 +18,10 @@ import java.util.List;
 /**
  * Created by Joncn on 02.11.2015.
  */
-@Repository
 public class SupplierWithScoreDaoImpl extends AbstractDao implements SupplierWithScoreDao
 {
     @Autowired
     OrderDao orderDao;
-
-    public void setOrderDao(OrderDao orderDao)
-    {
-        this.orderDao = orderDao;
-    }
 
     @Override
     public List<SupplierWithScore> getAllSuppliersWithScore()
@@ -35,12 +29,14 @@ public class SupplierWithScoreDaoImpl extends AbstractDao implements SupplierWit
         System.out.println("getAllSuppliersWithScore");
         final String query = "SELECT NAME1, LIFNR FROM lfa1;";
 
-        List<SupplierWithScore> supplierWithScores  = jdbcTemplate.query(query,new SupplierWithScoreMapper());
+        List<SupplierWithScore> supplierWithScores  = jdbcTemplate.query(query,new SupplierWithScoreMapper(orderDao));
 
+        /*
         for (SupplierWithScore s : supplierWithScores)
         {
             s.setOrders(orderDao.getAllOrdersForId(s.getId()));
         }
+        */
 
         return supplierWithScores;
     }
