@@ -1,6 +1,8 @@
 package edu.hm.wedoit.rest;
 
 import edu.hm.wedoit.model.User;
+import edu.hm.wedoit.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import javax.xml.ws.Response;
 @RequestMapping("/api/user")
 public class UserController
 {
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public User getExample()
@@ -25,8 +29,9 @@ public class UserController
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password)
     {
-        if(username.equals("username") && password.equals("password"))
+        if(userService.loginOK(username,password))
         {
+
             return new ResponseEntity<String>("Login success", HttpStatus.OK);
 
         }

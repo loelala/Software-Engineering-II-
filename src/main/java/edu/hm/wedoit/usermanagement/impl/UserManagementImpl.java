@@ -56,7 +56,15 @@ public class UserManagementImpl implements UserManagement
         userdbFile = new File(this.rootDir + File.separator+ USER_DB_FILE);
 //        keyFile = new File(this.rootDir + File.separator + KEY_FILE);
 
-        byte[] secretBytes;
+        if(userdbFile.exists())
+        {
+            users = loadUsers();
+        }
+        else
+        {
+            createDefault();
+        }
+//        byte[] secretBytes;
 //        if(keyFile.exists())
 //        {
 //            secretBytes = loadKey();
@@ -155,6 +163,7 @@ public class UserManagementImpl implements UserManagement
     @Override
     public boolean loginOK(String username, String passwordHash)
     {
+        System.out.println("login ok - usermanagementimpl");
         if(users.containsKey(username))
         {
             if(users.get(username).getPassword().equals(passwordHash))
