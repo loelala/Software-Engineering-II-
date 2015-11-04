@@ -15,9 +15,14 @@
 
     <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://swe2.cs.hm.edu:21964/sap_emulation" />
-        <property name="username" value="ExtDev5" />
-        <property name="password" value="vH30k7LF" />
+        <property name="url" value="jdbc:mysql://10.28.2.169:3306/sap_emulation" />
+        <property name="username" value="${dbuser}" />
+        <property name="password" value="${dbpassword}" />
+    </bean>
+
+    <bean name="userMangement" class="edu.hm.wedoit.usermanagement.impl.UserManagementImpl">
+        <constructor-arg name="rootDir" value="${wedoithome}"/>
+        <constructor-arg name="springenv" ref="environment"/>
     </bean>
 
     <bean id="vendorDaoImpl"
@@ -28,5 +33,7 @@
     <mvc:resources mapping="/res/**" location="/static/" />
     <mvc:default-servlet-handler />
 
+    <context:property-placeholder
+            location="file:///${wedoithome}/wedoit.properties" />
 
 </beans>

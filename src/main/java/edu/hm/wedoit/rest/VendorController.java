@@ -30,7 +30,7 @@ public class VendorController
     }
 
 
-    @RequestMapping("/:id")
+    @RequestMapping("/{id}")
     public Vendor getVendorById(@PathVariable(value="id") String id)
     {
         System.out.println("id" + id);
