@@ -3,6 +3,8 @@ package edu.hm.wedoit.usermanagement.impl;
 import edu.hm.wedoit.config.Constants;
 import edu.hm.wedoit.model.User;
 import edu.hm.wedoit.usermanagement.UserManagement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -31,6 +33,7 @@ import java.util.Map;
 public class UserManagementImpl implements UserManagement
 {
 
+    private final static Logger logger = LoggerFactory.getLogger(UserManagementImpl.class);
     private final String rootDir;
     private final File userdbFile;
     //private final File keyFile;
@@ -41,10 +44,10 @@ public class UserManagementImpl implements UserManagement
 //    private SecretKey secret;
     private Map<String,User> users;
 
-    private static final byte[] SALT = {
-            (byte) 0xA9, (byte) 0x9B, (byte) 0xC8, (byte) 0x32,
-            (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03
-    };
+//    private static final byte[] SALT = {
+//            (byte) 0xA9, (byte) 0x9B, (byte) 0xC8, (byte) 0x32,
+//            (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03
+//    };
 
 
     private Environment springenv;
