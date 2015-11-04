@@ -22,6 +22,4 @@ public abstract class AbstractDao implements BaseDao
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(this.dataSource);
     }
-
-
 }
