@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="SupplierManagement">
 
 <head>
+    <base href="/">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Supplier Management</title>
@@ -11,108 +12,89 @@
     <link href="static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="static/css/styles.css" rel="stylesheet">
     <link href="static/fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
-</head>
-
-<body ng-app="SupplierManagement">
-    <!-- header -->
-    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Supplier Management</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> Admin <span class="caret"></span></a>
-                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                            <li><a href="#">My Profile</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../login.html" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
-                </ul>
-            </div>
+<body>
+<!-- header -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid" ng-controller="IndexCtrl as vm">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Supplier Management</a>
         </div>
-        <!-- /container -->
-    </div>
-    <!-- /Header -->
-
-    <!-- Main -->
-    <div class="container-fluid">
-        <div class="row">
-
-            <!-- Left column -->
-            <div class="col-md-3">
-                <a href="#"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
-
-                <hr>
-
-                <ul class="nav nav-stacked">
-                    <li class="active"> <a href="/"><i class="fa fa-home"></i> Home</a></li>
-                    <li><a href="../login.html" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
-                    <li><a> And maybe some more ... </a></li>
-
-                    <hr>
-                    <li><a href="static/partials/supplierList.html"><i class="fa fa-industry"></i> All Supliers</a>
-                    </li>
-                    <li><a href="static/partials/supplier.html"><i class="fa fa-eye"></i> Views</a>
-                    </li>
-                </ul>
-
-                <hr>
-            </div>
-            <!-- /col-3 -->
-
-
-            <div class="col-md-9">
-                <a href="#"><strong><i class="fa fa-television"></i> My Dashboard</strong></a>
-                <hr>
-
-                <div class="col-md-12">
-                    <h1>Startseite</h1>
-                </div>
-                <!--/row-->
-
-
-
-
-            </div>
-            <!--/col-span-9-->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> Admin <span class="caret"></span></a>
+                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="#">My Profile</a></li>
+                    </ul>
+                </li>
+                <li><a ui-sref="login" ng-click="vm.logout"><i class="fa fa-lock"></i> Logout</a></li>
+            </ul>
         </div>
     </div>
-    <!-- /Main -->
-    <script>
+    <!-- /container -->
+</div>
+<!-- /Header -->
 
-        window.onload = function() {
+<!-- Main -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left column -->
+        <div class="col-md-3">
+            <a href="#"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
 
-            if(localStorage.loggedin != "true"){
-                window.location.replace("../login.html");
-            }
+            <hr>
 
-        }
-        function logout(){
-            localStorage.removeItem("loggedin");
-            location.reload();
+            <ul class="nav nav-stacked">
+                <li class="active"> <a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
 
-        }
+                <hr>
 
-    </script>
+                <li><a ui-sref="allSuppliers"><i class="fa fa-industry"></i> All Supliers</a>
+                </li>
+                <!--<li><a ui-sref="supplier"><i class="fa fa-eye"></i> Views</a>
+                </li>-->
+            </ul>
+
+            <hr>
+        </div>
+        <!-- /col-3 -->
+
+        <!-- col-9 here we inject the view -->
+        <div class="col-md-9">
+            <div ui-view></div>
+        </div>
+        <!--/col-span-9-->
+    </div>
+    <!--/row-->
+
+</div>
+
+<!-- /Main -->
     <!-- script references -->
     <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="static/bower_components/angular/angular.js"></script>
     <script src="static/bower_components/angular-resource/angular-resource.js"></script>
     <script src="static/bower_components/angular-route/angular-route.js"></script>
+    <script src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="static/js/module.js"></script>
     <script src="static/js/supplier/supplier.details.controller.js"></script>
     <script src="static/js/supplier/supplier.list.controller.js"></script>
     <script src="static/js/supplier/supplier.resource.service.js"></script>
+    <script src="static/js/authentication/authentication.service.js"></script>
+    <script src="static/js/user/user.service.js"></script>
+    <script src="static/js/login/login.controller.js"></script>
+    <script src="static/js/index/index.controller.js"></script>
 </body>
 
 </html>

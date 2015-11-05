@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
 
-/**
- * Created by B3rni on 02.11.2015.
- */
-
 @RestController
 @RequestMapping("/api/user")
 public class UserController

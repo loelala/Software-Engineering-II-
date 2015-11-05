@@ -12,7 +12,7 @@
     function supplierservice ($resource) {
 
         var service = $resource('../../api/supplier/:id', {}, {
-            query: {method:'GET', params: {id: 'all'}, isArray: true},
+            query: {method:'GET', params: {id: 'allwithscore'}, isArray: true},
             get: {method:'GET', params: {id:'@id'}, isArray: false}
         });
 
