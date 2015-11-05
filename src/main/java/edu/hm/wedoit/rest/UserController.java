@@ -37,13 +37,11 @@ public class UserController
         logger.debug("received a login request with username: {} and password: {}",username,password );
         if(userService.loginOK(username,password))
         {
-            return new ResponseEntity<String>("Login success", HttpStatus.OK);
+            return new ResponseEntity<String>(HttpStatus.OK);
         }
         else
         {
-            return new ResponseEntity<String>("Login failed", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
         }
     }
-
-
 }
