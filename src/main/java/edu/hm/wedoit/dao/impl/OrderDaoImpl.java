@@ -20,7 +20,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao
         System.out.println("getAllOrdersForId: " + id);
         final String query =
 
-        "SELECT LIFNR, NAME1, liefUSlfdt.EBELN, SLFDT, BUDAT " +
+        "SELECT LIFNR, NAME1, liefUSlfdt.EBELN, SLFDT, BLDAT " +
         "FROM " +
                 "(SELECT LIFNR, NAME1, liefUOrder.EBELN, SLFDT " +
                         "FROM " +
