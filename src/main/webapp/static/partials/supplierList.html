@@ -1,39 +1,133 @@
-<div class="col-md-12">
-    <a href="#"><strong><i class="fa fa-leaf"></i> All Suppliers</strong></a>
-     <hr>
-        <!--row datepicker-->
-        <div class="row">
-            <h4>Select the time:</h4>
-            <!--We have to add a datepicker-->
-        </div>
-                    <!--/row datepicker-->
+<!DOCTYPE html>
+<html lang="en">
 
-    <hr>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta name="generator" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-                    <!-- row table all supplier -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panle panle-default">
-                <table st-table="vm.supplierList" class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th st-sort="id">ID</th>
-                        <th st-sort="name">Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="row in vm.supplierList"
-                        ng-class="{'selected':$index == vm.selectedRow}"
-                        ng-click="vm.select($index,row)">
-                        <td>{{row.id}}</td>
-                        <td>{{row.name}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
+</head>
+
+<body ng-app="SupplierManagement">
+    <!-- header -->
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Supplier Management</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> Admin <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../login.html" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
+                </ul>
             </div>
         </div>
+        <!-- /container -->
     </div>
-    <!--/row table all supplier -->
-    <hr>
+    <!-- /Header -->
 
-</div>
+    <!-- Main -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left column -->
+            <div class="col-md-3">
+                <a href="#"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
+
+                <hr>
+
+                <ul class="nav nav-stacked">
+                    <li class="active"> <a href="../../index.html"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="../../login.html" onclick="logout()"><i class="fa fa-lock"></i> Logout</a></li>
+                    <li><a> And maybe some more ... </a></li>
+
+                    <hr>
+                    <li><a href="../partials/supplierList.html"><i class="fa fa-industry"></i> All Supliers</a></li>
+                    <li><a href="../partials/supplier.html"><i class="fa fa-eye"></i> Views</a></li>
+                </ul>
+
+                <hr>
+
+            </div>
+            <!-- /col-3 -->
+
+
+            <div class="col-md-9">
+                <a href="#"><strong><i class="fa fa-leaf"></i> All Suppliers</strong></a>
+                <hr>
+                <!--row datepicker-->
+                <div class="row">
+                    <h4>Select the time:</h4>
+                    <!--We have to add a datepicker-->
+                </div>
+                <!--/row datepicker-->
+
+                <hr>
+
+                <!-- row table all supplier -->
+                <div class="row" ng-controller="SupplierListCtrl as vm">
+                    <div class="col-md-12">
+                        <div class="panle panle-default">
+                            <table st-table="vm.supplierList" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th st-sort="id">ID</th>
+                                        <th st-sort="name">Name</th>
+                                        <th st-sort="name">Number of Orders</th>
+                                        <th st-sort="name">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in vm.supplierList"
+                                        ng-class="{'selected':$index == vm.selectedRow}"
+                                        ng-click="vm.select($index,row)">
+                                        <td>{{row.id}}</td>
+                                        <td>{{row.name}}</td>
+                                        <td>{{row.numberOfOrders}}</td>
+                                        <td>{{row.score}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/row table all supplier -->
+                <hr>
+
+            </div>
+            <!--/col-span-9-->
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <!-- script references -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="../js/module.js"></script>
+    <script src="../js/supplier/supplier.details.controller.js"></script>
+    <script src="../js/supplier/supplier.list.controller.js"></script>
+    <script src="../js/supplier/supplier.resource.service.js"></script>
+
+</body>
+
+</html>
