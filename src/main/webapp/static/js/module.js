@@ -49,7 +49,8 @@ angular.module('SupplierManagement')
             url: '/allSuppliers',
             templateUrl: 'static/partials/supplierList.html',
             controller: 'SupplierListCtrl',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+
         })
 
         .state('supplier', {
@@ -63,20 +64,34 @@ angular.module('SupplierManagement')
             templateUrl: 'static/partials/loginPage.html',
             controller: 'LoginController',
             controllerAs: 'vm'
-        })
+        });
+        $urlRouterProvider.otherwise("/login");
     }
 
     run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
 
-    function run($state) {
+    function run($state, $rootScope) {
 
         $state.transitionTo('login');
 
-        window.onload = function() {
-            if(localStorage.isLoggedIn != 'true') {
+        $rootScope.$on("$stateChangeStart",function(event, toState, toParams, fromState, fromParams){
+            if(localStorage.isLoggedIn != 'true')
+            {
+                console.log("stateChangeSTart - IF");
                 $state.transitionTo('login');
+                event.preventDefault();
             }
-        };
+            else
+            {
+                console.log(localStorage.isLoggedIn);
+               console.log("stateChangeSTart - ELSE");
+            }
+        });
+        //window.onload = function() {
+        //    if(localStorage.isLoggedIn != 'true') {
+        //        $state.transitionTo('login');
+        //    }
+        //};
 
         /*
         // keep user logged in after page refresh
