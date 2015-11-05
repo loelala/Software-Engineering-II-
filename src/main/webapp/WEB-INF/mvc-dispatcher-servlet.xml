@@ -20,8 +20,6 @@
         <property name="password" value="${dbpassword}" />
     </bean>
 
-    <bean id="supplierDaoImpl"
-          class="edu.hm.wedoit.dao.impl.SupplierDaoImpl">
     <bean name="userManagement" class="edu.hm.wedoit.usermanagement.impl.UserManagementImpl">
         <constructor-arg name="rootDir" value="${wedoithome}"/>
         <constructor-arg name="springenv" ref="environment"/>

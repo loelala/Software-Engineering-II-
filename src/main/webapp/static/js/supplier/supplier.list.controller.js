@@ -24,9 +24,6 @@
             vm.error = error;
         })
 
-
-
-
         function select(index, selectedSupplier) {
             vm.selectedRow = index;
             vm.idSelectedSupplier = selectedSupplier.id;
