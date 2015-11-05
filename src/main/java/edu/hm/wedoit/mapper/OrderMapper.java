@@ -17,7 +17,7 @@ public class OrderMapper implements RowMapper<Order>
     {
         Order order = new Order();
 
-        order.setDeliveryDate(resultSet.getDate("BUDAT"));
+        order.setDeliveryDate(resultSet.getDate("BLDAT"));
         order.setPromisedDate(resultSet.getDate("SLFDT"));
         order.setEbeln(resultSet.getString("EBELN"));
 
