@@ -89,6 +89,8 @@
                                     <tr>
                                         <th st-sort="id">ID</th>
                                         <th st-sort="name">Name</th>
+                                        <th st-sort="name">Number of Orders</th>
+                                        <th st-sort="name">Score</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,6 +99,8 @@
                                         ng-click="vm.select($index,row)">
                                         <td>{{row.id}}</td>
                                         <td>{{row.name}}</td>
+                                        <td>{{row.numberOfOrders}}</td>
+                                        <td>{{row.score}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,7 +7,7 @@ app.controller('IndexCtrl', function () {
 app.controller('SupplierCtrl', function ($scope, $http, $location) {
 
     $scope.supplierList = {};
-    $http.get("/api/supplier/all")
+    $http.get("/api/supplier/allwithscore")
         .success(function(response) {$scope.supplierList = response;});
 });
 

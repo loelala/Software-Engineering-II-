@@ -9,6 +9,7 @@ import java.util.List;
 public class SupplierWithScore extends Supplier {
 
     private List<Order> orders;
+    private int numberOfOrders;
     private float score = -1;
 
     public float getScore()
@@ -18,6 +19,11 @@ public class SupplierWithScore extends Supplier {
             calculateScore();
         }
         return score;
+    }
+
+    public int getNumberOfOrders()
+    {
+        return this.numberOfOrders;
     }
 
     public void setScore(float score)
@@ -30,6 +36,7 @@ public class SupplierWithScore extends Supplier {
     public void setOrders(List<Order> orders)
     {
         this.orders = orders;
+        this.numberOfOrders = this.orders.size();
         calculateScore();
     }
 
