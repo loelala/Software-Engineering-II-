@@ -7,13 +7,14 @@
     angular.module('index', [])
         .controller('IndexCtrl', IndexCtrl);
 
-    IndexCtrl.$inject = ['indexservice'];
+    IndexCtrl.$inject = ['$state', 'AuthenticationService'];
 
-    function IndexCtrl (indexservice) {
+    function IndexCtrl  ($state) {
         var vm = this;
 
-        vm.login = function() {
-
+        vm.logout = function(){
+            localStorage.removeItem('isLoggedIn');
+            $state.transitionTo('login');
         }
     }
 })();

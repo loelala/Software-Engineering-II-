@@ -20,7 +20,8 @@ angular.module('SupplierManagement', [
     // module for user (service)
     'userservice',
     // module for login (controller)
-    'login'
+    'login',
+    'index'
 
 
 ]);
@@ -41,18 +42,7 @@ angular.module('SupplierManagement')
         // HOME STATES
         .state('home', {
             url: '/home',
-            templateUrl: 'static/partials/home.html',
-            resolve: {
-                auth: ['$q', 'authenticationservice', function($q, authenticationservice) {
-                    var userInfo = authenticationservice.getUserInfo();
-
-                    if (userInfo) {
-                        return $q.when(userInfo);
-                    } else {
-                        return $q.reject({ authenticated: false });
-                    }
-                }]
-            }
+            templateUrl: 'static/partials/home.html'
         })
 
         .state('allSuppliers', {
@@ -77,18 +67,36 @@ angular.module('SupplierManagement')
     }
 
     run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
-    function run($state, $routeScope, $location, $cookieStore, $resource  ) {
-        $state.transitionTo('home');
 
-        $routeScope.$on('$routeChangeSuccess', function(userInfo) {
-            console.log(userInfo);
+    function run($state) {
+
+        $state.transitionTo('login');
+
+        window.onload = function() {
+            if(localStorage.isLoggedIn != 'true') {
+                $state.transitionTo('login');
+            }
+        };
+
+        /*
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authData; // jshint ignore:line
+        }
+
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                $state.transitionTo('login');
+            }
         });
 
         $rootScope.$on('$rootChangeError', function(event, current, previous, eventObj) {
-           if (eventObj.authenticated == false) {
-               $state.transitionTo('login');
-           }
-        })
+            $state.transitionTo('login');
+        });
+
+        */
 
     }
 

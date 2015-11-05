@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
 
-/**
- * Created by B3rni on 02.11.2015.
- */
-
 @RestController
 @RequestMapping("/api/user")
 public class UserController
@@ -37,11 +33,11 @@ public class UserController
         logger.debug("received a login request with username: {} and password: {}",username,password );
         if(userService.loginOK(username,password))
         {
-            return new ResponseEntity<String>("Login success", HttpStatus.OK);
+            return new ResponseEntity<String>(HttpStatus.OK);
         }
         else
         {
-            return new ResponseEntity<String>("Login failed", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
         }
     }
 
