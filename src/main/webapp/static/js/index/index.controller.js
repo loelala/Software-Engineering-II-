@@ -13,8 +13,8 @@
         var vm = this;
 
         vm.logout = function(){
+            console.log("user logging out!")
             localStorage.removeItem('isLoggedIn');
-            $state.transitionTo('login');
         }
     }
 })();

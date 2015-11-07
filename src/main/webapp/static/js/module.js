@@ -75,17 +75,27 @@ angular.module('SupplierManagement')
         $state.transitionTo('login');
 
         $rootScope.$on("$stateChangeStart",function(event, toState, toParams, fromState, fromParams){
-            if(localStorage.isLoggedIn != 'true')
+
+            if(toState.name == "login")
             {
-                console.log("stateChangeSTart - IF");
-                $state.transitionTo('login');
-                event.preventDefault();
+                console.log("$stateChangeStart - no login chainning! returning now")
+                return
             }
             else
             {
-                console.log(localStorage.isLoggedIn);
-               console.log("stateChangeSTart - ELSE");
+                if(localStorage.isLoggedIn != 'true')
+                {
+                    console.log("tostate name " + toState.name)
+                    console.log("stateChangeSTart - IF");
+                    event.preventDefault();
+                    $state.go('login');
+                }
+                else
+                {
+                    console.log("The User is Logged in? " + localStorage.isLoggedIn);
+                }
             }
+
         });
         //window.onload = function() {
         //    if(localStorage.isLoggedIn != 'true') {
