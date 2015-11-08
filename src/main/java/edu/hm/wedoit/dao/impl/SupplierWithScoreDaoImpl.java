@@ -27,6 +27,7 @@ public class SupplierWithScoreDaoImpl extends AbstractDao implements SupplierWit
     public List<SupplierWithScore> getAllSuppliersWithScore()
     {
         System.out.println("getAllSuppliersWithScore");
+        //final String query = "SELECT NAME1, LIFNR FROM lfa1 LIMIT 0,10;";
         final String query = "SELECT NAME1, LIFNR FROM lfa1;";
 
         List<SupplierWithScore> supplierWithScores  = jdbcTemplate.query(query,new SupplierWithScoreMapper(orderDao));

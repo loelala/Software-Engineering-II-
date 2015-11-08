@@ -7,13 +7,14 @@
     angular.module('supplierList', [])
         .controller('SupplierListCtrl', SupplierListCtrl);
 
-    SupplierListCtrl.$inject = ['supplierservice'];
+    SupplierListCtrl.$inject = ['supplierservice','dataShareService'];
 
-    function SupplierListCtrl (supplierservice) {
+    function SupplierListCtrl (supplierservice,dataShareService) {
         var vm = this;
 
         vm.select = select;
         vm.selectedRow = null;
+        dataShareService.eraseList();
 
         var allSuppliers = supplierservice.query();
         allSuppliers.$promise.then(function(data) {
@@ -28,6 +29,8 @@
             vm.selectedRow = index;
             vm.idSelectedSupplier = selectedSupplier.id;
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
+            dataShareService.addSupplier(selectedSupplier);
+            console.log('added ' + selectedSupplier + ' to dataShareService');
         }
 
 

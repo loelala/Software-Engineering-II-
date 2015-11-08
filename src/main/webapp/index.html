@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="SupplierManagement">
+<html lang="en" ng-app="WeDoIt">
 
 <head>
     <base href="/">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Supplier Management</title>
+    <title>WeDoIT Supplier Comparison Application for NoKloo'boutIT</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <link rel="stylesheet" href="static/css/angular-chart.min.css">
     <link href="static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="static/css/styles.css" rel="stylesheet">
     <link href="static/fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
@@ -58,6 +58,7 @@
 
                 <li><a ui-sref="allSuppliers"><i class="fa fa-industry"></i> All Supliers</a>
                 </li>
+                <li><a ui-sref="comparison"><i class="fa fa-industry"></i>Comparison View</a> </li>
                 <!--<li><a ui-sref="supplier"><i class="fa fa-eye"></i> Views</a>
                 </li>-->
             </ul>
@@ -87,7 +88,10 @@
     <script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
     <script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="static/js/module.js"></script>
+    <script src="static/js/Chart.min.js"></script>
+    <script src="static/js/angular-chart.min.js"></script>
+    <script src="static/js/datashareservice/data.share.service.js"></script>
+
     <script src="static/js/supplier/supplier.details.controller.js"></script>
     <script src="static/js/supplier/supplier.list.controller.js"></script>
     <script src="static/js/supplier/supplier.resource.service.js"></script>
@@ -95,6 +99,8 @@
     <script src="static/js/user/user.service.js"></script>
     <script src="static/js/login/login.controller.js"></script>
     <script src="static/js/index/index.controller.js"></script>
+    <script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
+    <script src="static/js/module.js"></script>
 </body>
 
 </html>
