@@ -9,12 +9,13 @@
 
     IndexCtrl.$inject = ['$state', 'AuthenticationService'];
 
-    function IndexCtrl  ($state) {
+    function IndexCtrl  () {
         var vm = this;
 
         vm.logout = function(){
             console.log("user logging out!")
             localStorage.removeItem('isLoggedIn');
+            vm.message = 'You are successfully logged out!'
         }
     }
 })();

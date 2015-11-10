@@ -5,9 +5,11 @@ angular.module('WeDoIt', [
     'ngRoute',
     'ui.router',
     'ngResource',
+    'ngAnimate',
     'ngCookies',
     'smart-table',
     'chart.js',
+
     /* ---- custom modules ----*/
     'DataShareServiceModule',
 
@@ -24,9 +26,8 @@ angular.module('WeDoIt', [
     // module for login (controller)
     'login',
     'index',
-    'BarChartModule'
-
-
+    'BarChartModule',
+    'dateRange.directive'
 
 ]);
 
@@ -36,8 +37,8 @@ angular.module('WeDoIt')
     .run(run);
 
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$locationProvider','$stateProvider', '$urlRouterProvider'];
+    function config($locationProvider, $stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -77,6 +78,10 @@ angular.module('WeDoIt')
             controllerAs: 'vm'
         });
         $urlRouterProvider.otherwise("/login");
+
+        // needed for our urls -- no # in front of our states
+        $locationProvider.html5Mode(true);
+
     }
 
     run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
