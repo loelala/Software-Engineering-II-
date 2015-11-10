@@ -64,7 +64,6 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                     s.setOrders(orders);
                 }
 
-
                 cacheTime = System.currentTimeMillis();
             }
         }
@@ -140,73 +139,4 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         }
         return null;
     }
-
-
-
-                /*
-                System.out.println("No suppliers fetched yet!");
-                Map<String, List<Order>> allMap = new HashMap<>();
-
-                final String supplierQuery = "SELECT NAME1, LIFNR FROM lfa1;";
-
-                System.out.println("Querying all suppliers");
-
-                time = System.currentTimeMillis();
-                List<Supplier> supplierList = jdbcTemplate.query(supplierQuery, new SupplierWithScoreMapper());
-
-                System.out.println("Querying all suppliers: " + (System.currentTimeMillis() - time) + " ms");
-                System.out.println("Creating new suppliers");
-
-                for (Supplier s : supplierList) {
-                    allMap.put(s.getId(), new ArrayList<Order>());
-                }
-
-                System.out.println("Creating new suppliers: " + (System.currentTimeMillis() - time) + " ms");
-
-                System.out.println("Start fetching all data");
-                time = System.currentTimeMillis();
-
-                final String dataQuery =
-                        "SELECT tmp5.LIFNR, NAME1, tmp6.EBELN, BLDAT, SLFDT FROM\n" +
-                        "\n" +
-                        "\t(SELECT tmp3.LIFNR, NAME1, tmp4.EBELN, BLDAT FROM\n" +
-                        "\n" +
-                        "\t\t(SELECT tmp1.LIFNR, NAME1, EBELN FROM\n" +
-                        "\t\t\t(SELECT LIFNR, NAME1 FROM sap_emulation.lfa1) as tmp1\n" +
-                        "\t\t\tINNER JOIN\n" +
-                        "\t\t\t(SELECT LIFNR, EBELN FROM sap_emulation.ekko) as tmp2\n" +
-                        "\t\t\tON tmp2.LIFNR = tmp1.LIFNR) as tmp3\n" +
-                        "\t\t\t\n" +
-                        "\t\tINNER JOIN    \n" +
-                        "\t\t\n" +
-                        "\t\t(SELECT EBELN, BLDAT FROM sap_emulation.ekbe WHERE BEWTP = 'E' AND BWART = 101) as tmp4\n" +
-                        "\t\tON tmp3.EBELN = tmp4.EBELN\n" +
-                        "        ) as tmp5\n" +
-                        "        \n" +
-                        "\tINNER JOIN\n" +
-                        "        \n" +
-                        "\t(SELECT EBELN, SLFDT FROM sap_emulation.eket) as tmp6\n" +
-                        "    ON tmp5.EBELN = tmp6.EBELN";
-
-                //jdbcTemplate.query(dataQuery, new OrderMapper(allMap));
-                jdbcTemplate.query(dataQuery, new OrderRowCallbackHandler(allMap));
-
-                System.out.println("Start fetching all data: " + (System.currentTimeMillis() - time) + " ms");
-
-                System.out.println("Calculating score");
-
-
-                all = supplierList;
-                for (Supplier s : all)
-                {
-                    s.setOrders(allMap.get(s.getId()));
-                }
-
-                System.out.println("Calculating: " + (System.currentTimeMillis() - time) + " ms");
-                Collections.sort(all, new Comparator<Supplier>() {
-                    @Override
-                    public int compare(Supplier o1, Supplier o2) {
-                        return Double.compare(o1.getScore(), o2.getScore());
-                    }
-                });*/
 }
