@@ -30,7 +30,6 @@
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
         }
 
-
     }
 
 })();

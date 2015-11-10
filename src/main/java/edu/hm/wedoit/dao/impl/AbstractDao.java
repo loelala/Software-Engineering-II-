@@ -1,9 +1,11 @@
 package edu.hm.wedoit.dao.impl;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 import edu.hm.wedoit.dao.BaseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.ConnectionPoolDataSource;
 import javax.sql.DataSource;
 
 /**

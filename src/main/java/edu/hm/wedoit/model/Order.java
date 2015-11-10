@@ -12,6 +12,20 @@ public class Order {
 
     private int orderScore = -1;
 
+    public Order(String ebeln, Date promisedDate, Date deliveryDate)
+    {
+        this.ebeln = ebeln;
+        this.promisedDate = promisedDate;
+        this.deliveryDate = deliveryDate;
+    }
+
+    public Order(String ebeln)
+    {
+        this.ebeln = ebeln;
+    }
+
+    public Order(){};
+
     public Date getPromisedDate()
     {
         return promisedDate;
