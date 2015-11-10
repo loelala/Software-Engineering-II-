@@ -3,6 +3,7 @@ package edu.hm.wedoit.dao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -29,4 +30,6 @@ public interface AllDao
      * @return the supplier with the given id or null if this supplier doesn't exist
      */
     public Supplier getSupplierById(String id);
+
+    List<Supplier> getAllSuppliersDate(Date from, Date to);
 }

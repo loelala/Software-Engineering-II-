@@ -24,6 +24,13 @@ public class Order {
         this.ebeln = ebeln;
     }
 
+    public Order(Order order)
+    {
+        this.ebeln = order.getEbeln();
+        setDeliveryDate(order.getDeliveryDate());
+        setPromisedDate(order.getPromisedDate());
+    }
+
     public Order(){};
 
     public Date getPromisedDate()
