@@ -20,6 +20,11 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     private Map<String, Map<String, Order>> supplierMap;
     private long cacheTime = 0;
 
+    /**
+     * This method retrieves the data from the database and fills the supplierList and the supplierMap.
+     * This is only done, if the cacheTime is older then 5 minutes.
+     * It is Thread-safe. Due to that only one cache-update is done at once
+     */
     private void getDataFromDatabase()
     {
         synchronized (this)
