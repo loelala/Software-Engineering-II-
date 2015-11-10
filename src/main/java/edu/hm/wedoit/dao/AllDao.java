@@ -6,7 +6,7 @@ import edu.hm.wedoit.model.Supplier;
 import java.util.List;
 
 /**
- * Created by Joncn on 02.11.2015.
+ * Interface for the access to the database
  */
 public interface AllDao
 {

@@ -12,7 +12,7 @@ import edu.hm.wedoit.model.Supplier;
 import java.util.*;
 
 /**
- * Created by Joncn on 02.11.2015.
+ * Implemetation of the {@link edu.hm.wedoit.dao.AllDao} interface
  */
 public class AllDaoImpl extends AbstractDao implements AllDao
 {
@@ -65,6 +65,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         }
     }
 
+    /**
+     * {@link AllDao#getAllSuppliersWithScore()}
+     */
     @Override
     public List<Supplier> getAllSuppliersWithScore()
     {
@@ -93,6 +96,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     }
 
 
+    /**
+     * {@link AllDao#getAllOrdersForId(String)}
+     */
     @Override
     public List<Order> getAllOrdersForId(String id)
     {
@@ -115,6 +121,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         return null;
     }
 
+    /**
+     * {@link AllDao#getSupplierById(String)}
+     */
     @Override
     public Supplier getSupplierById(String id)
     {
