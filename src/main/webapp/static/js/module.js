@@ -49,7 +49,8 @@ angular.module('SupplierManagement')
             url: '/allSuppliers',
             templateUrl: 'static/partials/supplierList.html',
             controller: 'SupplierListCtrl',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+
         })
 
         .state('supplier', {
@@ -63,20 +64,44 @@ angular.module('SupplierManagement')
             templateUrl: 'static/partials/loginPage.html',
             controller: 'LoginController',
             controllerAs: 'vm'
-        })
+        });
+        $urlRouterProvider.otherwise("/login");
     }
 
     run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
 
-    function run($state) {
+    function run($state, $rootScope) {
 
         $state.transitionTo('login');
 
-        window.onload = function() {
-            if(localStorage.isLoggedIn != 'true') {
-                $state.transitionTo('login');
+        $rootScope.$on("$stateChangeStart",function(event, toState, toParams, fromState, fromParams){
+
+            if(toState.name == "login")
+            {
+                console.log("$stateChangeStart - no login chainning! returning now")
+                return
             }
-        };
+            else
+            {
+                if(localStorage.isLoggedIn != 'true')
+                {
+                    console.log("tostate name " + toState.name)
+                    console.log("stateChangeSTart - IF");
+                    event.preventDefault();
+                    $state.go('login');
+                }
+                else
+                {
+                    console.log("The User is Logged in? " + localStorage.isLoggedIn);
+                }
+            }
+
+        });
+        //window.onload = function() {
+        //    if(localStorage.isLoggedIn != 'true') {
+        //        $state.transitionTo('login');
+        //    }
+        //};
 
         /*
         // keep user logged in after page refresh

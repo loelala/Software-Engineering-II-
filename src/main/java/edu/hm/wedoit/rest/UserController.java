@@ -40,6 +40,4 @@ public class UserController
             return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
         }
     }
-
-
 }

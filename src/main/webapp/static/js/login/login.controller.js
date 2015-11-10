@@ -54,15 +54,7 @@
             AuthenticationService.login(username, password);
         };
 
-        vm.logout = function(){
-            AuthenticationService.logout()
-                .then(function(data) {
-                    localStorage.removeItem('isLoggedIn');
-                    $state.transitionTo('login');
-                }, function(error) {
-                    alert('Error!');
-                });
-        }
+
 
     }
 
