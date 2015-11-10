@@ -1,11 +1,8 @@
 package edu.hm.wedoit.rest;
 
-import edu.hm.wedoit.dao.OrderDao;
-import edu.hm.wedoit.dao.SupplierDao;
-import edu.hm.wedoit.dao.SupplierWithScoreDao;
+import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
-import edu.hm.wedoit.model.SupplierWithScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,44 +17,27 @@ import java.util.List;
 @RequestMapping("/api/supplier")
 public class SupplierController
 {
-
     @Autowired
-    SupplierDao supplierDao;
-
-    @Autowired
-    SupplierWithScoreDao supplierWithScoreDao;
-
-    @Autowired
-    OrderDao orderDao;
-
+    AllDao allDao;
 
     @RequestMapping("/all")
-    public List<Supplier> getAllSuppliers()
+    public List<Supplier> getAllSuppliersWithScore()
     {
         System.out.println("getAllSuppliers Rest");
-        return supplierDao.getAllSuppliers();
+        return allDao.getAllSuppliersWithScore();
     }
 
-    @RequestMapping("/allwithscore")
-    public List<SupplierWithScore> getAllSuppliersWithScore()
-    {
-        System.out.println("getAllSuppliersWithScore Rest");
-        return supplierWithScoreDao.getAllSuppliersWithScore();
-    }
-
-    @RequestMapping("/score/{id}")
-    public List<Order> getOrdersForId(@PathVariable(value="id") String id)
-    {
-        System.out.println("test Rest");
-        return orderDao.getAllOrdersForId(id);
-    }
-
-
-    @RequestMapping("/:id")
+    @RequestMapping("/{id}")
     public Supplier getSupplierById(@PathVariable(value="id") String id)
     {
-        System.out.println("getSupplierById Rest, id = " + id);
-        return supplierDao.getSupplierById(id);
+        System.out.println("getSupplierById " + id + " Rest");
+        return allDao.getSupplierById(id);
     }
 
+    @RequestMapping("/{id}/orders")
+    public List<Order> getOrdersForId(@PathVariable(value="id") String id)
+    {
+        System.out.println("getOrdersForId " + id + " Rest");
+        return allDao.getAllOrdersForId(id);
+    }
 }
