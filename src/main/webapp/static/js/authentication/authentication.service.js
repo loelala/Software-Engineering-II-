@@ -22,14 +22,7 @@
                     return str.join("&");
                 },
                 data: {username: username, password: password}
-            }).then(function success(response) {
-                console.log('Login success!', response.data);
-                localStorage.isLoggedIn = 'true';
-                $state.transitionTo('home');
-            }, function error(response) {
-                console.log('Error!!!', response.data);
             });
-
         };
 
         return service;
