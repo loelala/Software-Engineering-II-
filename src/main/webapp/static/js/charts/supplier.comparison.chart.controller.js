@@ -16,9 +16,20 @@
             vm.rawData = dataShareService.getSuppliers();
             var dataArray = [];
             var supplierNameArray = [];
+            vm.selectedRow = null;
+
             vm.rawData.forEach(function(entry) {
-                dataArray.push(entry["score"]);
-                supplierNameArray.push(entry["name"]);
+                if(isNaN(entry["score"]))
+                {
+                    dataArray.push(0);
+                    supplierNameArray.push(entry["name"]);
+                }
+                else
+                {
+                    dataArray.push(entry["score"]);
+                    supplierNameArray.push(entry["name"]);
+                }
+
             });
 
             supplierNameArray.forEach(function(entry){
@@ -35,6 +46,14 @@
             vm.data = [
                 dataArray
             ];
+
+
+        function select(index, selectedSupplier) {
+            vm.selectedRow = index;
+            vm.idSelectedSupplier = selectedSupplier.id;
+            console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
+            console.log('added ' + selectedSupplier + ' to dataShareService');
+        }
     };
 })();
 /**

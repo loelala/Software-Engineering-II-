@@ -31,10 +31,31 @@
             supplierList = [];
         }
 
+        var removeSupplier = function(supplier)
+        {
+            var i = 0;
+            var index = -1;
+            for(i = 0 ; i < supplierList.length ; i++)
+            {
+                console.log(supplierList[i]);
+                if(supplier["id"] == supplierList[i]["id"])
+                {
+                    index = i;
+                }
+
+            }
+            if(index != -1)
+            {
+                supplierList.splice(index, 1);
+            }
+
+        }
+
         return {
             addSupplier: addSupplier,
             getSuppliers: getSuppliers,
-            eraseList : eraseList
+            eraseList : eraseList,
+            removeSupplier : removeSupplier
         };
 
     });

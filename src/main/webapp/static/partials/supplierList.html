@@ -10,7 +10,29 @@
                 <!--/row datepicker-->
 
                 <hr>
+                <div class="row">
+                    <table st-table="vm.selectedSuppliers" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th st-sort="name">Name</th>
+                            <th st-sort="name">Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <td ng-repeat="row in vm.selectedSuppliers"
+                                ng-class="{'selected':$index == vm.selectedSupplierRow}"
+                                ng-click="vm.removeSelected($index,row)">
 
+                               <td>{{row.name}}</td>
+                                <td>{{row.score}}</td>
+
+
+                            </td>
+
+                        </tbody>
+                    </table>
+
+                </div>
                 <!-- row table all supplier -->
                 <div class="row" ng-controller="SupplierListCtrl as vm">
                     <div class="col-md-12">

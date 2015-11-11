@@ -14,7 +14,9 @@
 
         vm.select = select;
         vm.selectedRow = null;
+        vm.selectedSupplierRow = null;
         dataShareService.eraseList();
+        vm.selectedSuppliers = dataShareService.getSuppliers();
 
         var allSuppliers = supplierservice.query();
         allSuppliers.$promise.then(function(data) {
@@ -32,7 +34,9 @@
             dataShareService.addSupplier(selectedSupplier);
             console.log('added ' + selectedSupplier + ' to dataShareService');
         }
-
+        function removeSelected(index, selectedSupplier) {
+            dataShareService.removeSupplier(selectedSupplier);
+        }
 
     }
 
