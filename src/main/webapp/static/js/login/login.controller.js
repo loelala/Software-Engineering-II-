@@ -29,12 +29,13 @@
         };
 
         vm.login = function(username, password){
-            AuthenticationService.login(username, password).then(function() {
+            AuthenticationService.login(username, password)
+                .then(function() { //success
                 console.log('Login sucesss!');
                 localStorage.isLoggedIn = 'true';
                 $state.transitionTo('home');
                 vm.error = null;
-            }, function() {
+            }, function() { //error
                 console.log('error by login');
                 vm.error = 'Username or password is incorrect!';
             });
