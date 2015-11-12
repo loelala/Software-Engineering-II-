@@ -34,13 +34,13 @@ An optional feature is to compare multiple suppliers by selecting more than one 
 ### 1.2	Chooseable time interval
 A time interval must be chooseable for the whole application, so that the comparing is done for this interval.
 
-### 1.3	Authentication
+### 1.3	Authentication (done)
 A dynamic login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
 
 ### 1.3.1	User control
 There should be 1 admin user, who can create, delete and manage users for the system.
 
-### 1.4	Export reports as PDF (check if it is still a requirement)
+### 1.4	Export reports as PDF 
 The Overview (1.1.1), the Detailed-View (1.1.2) and the Comparing-View (1.1.3) must be exportable as a PDF containing all important information and the important charts.
 
 ### 1.5	Useable on a desktop and a tablet (done)
@@ -48,6 +48,15 @@ The application must be usable on a desktop-pc with Windows 7 as OS and on a tab
 
 ### 1.6	Database error handling (done)
 The application must inform the user if there are any error with the database (fetching data or connecting to database).
+
+### 1.7 Supplier cathegories
+There should be a possibility to categorise suppliers by the amount of orders.
+
+### 1.7.1 Category management
+The admin should be able to change the category requirements.
+
+### 1.8 Scoring management
+The admin should be able to change the scoring algorithm.
 
 
 ## 2.	Non-Functional Requirements
@@ -57,6 +66,12 @@ The client-company allows read-only access to the MySQL-Database over a remote S
 
 ### 2.2	Documentation
 A documentation of the software is needed and must be handed over to the client-company
+
+### 2.2.1	Code documentation
+A document explaining the code needs to be done in pdf.
+
+### 2.2.2	User manual
+A user manual needs to be done for the customer as a pdf. It should explain how to use the software.
 
 ### 2.3	Software-Quality
 To guarantee a minimum of software-quality unit-tests must be implemented.
@@ -80,4 +95,16 @@ The deadline of this project is at the beginning of January 2016.
 
 ### 2.8	Encrypt server info (done)
 The login info for the database must be encrypted so it's not in the software as a plank text.
+
+### 2.9 Performance (done)
+
+### 2.9.1 Startuptime (done)
+The startup shouldn't take more than 30 seconds after login.
+
+### 2.9.2 selecting suplier (done)
+Selecting new supliers shouldn't take more than 1 second.
+
+### 2.9.3 Date selecting (done)
+Changing the filtering date shouldn't take more than 5 seconds.
+
 
