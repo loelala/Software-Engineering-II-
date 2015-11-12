@@ -7,9 +7,9 @@
     angular.module('supplierList', [])
         .controller('SupplierListCtrl', SupplierListCtrl);
 
-    SupplierListCtrl.$inject = ['supplierservice','dataShareService'];
+    SupplierListCtrl.$inject = ['supplierservice','dataShareService','toastr'];
 
-    function SupplierListCtrl (supplierservice,dataShareService) {
+    function SupplierListCtrl (supplierservice,dataShareService,toastr) {
         var vm = this;
         vm.fallbackData = 
         vm.select = select;
@@ -34,11 +34,22 @@
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
             if(dataShareService.addSupplier(selectedSupplier))
             {
+
                 console.log('added ' + selectedSupplier + ' to dataShareService');
+                toastr.success('Added \"' + selectedSupplier['name'] + '\" to the checklist');
             }
             else
             {
                 console.log('could not add')
+                if(dataShareService.getSuppliers().length == 4)
+                {
+                    toastr.warning('Can\'t add more than 4 suppliers','Checklist full');
+                }
+                else
+                {
+                    toastr.warning('You can\'t add same supplier twice');
+                }
+
             }
 
         }

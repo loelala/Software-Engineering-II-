@@ -23,7 +23,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="row in vm.rawData"
-                ng-class="{'selected':$index == vm.selectedRow}"
+                ng-class="{'success': vm.selectedRow[$index], 'active':!vm.selectedRow[$index]}"
                 ng-click="vm.removeSelected($index,row)">
                 <td>{{row.name}}</td>
                 <td>{{row.score}}</td>

@@ -7,77 +7,124 @@
     angular.module("BarChartModule", ["chart.js"])
         .controller("BarChartController", BarChartController);
 
-    BarChartController.$inject = ['dataShareService'];
+    BarChartController.$inject = ['dataShareService','toastr'];
 
-    function BarChartController(dataShareService)
+    function BarChartController(dataShareService,toastr)
     {
             var vm = this;
 
             vm.rawData = dataShareService.getSuppliers();
-            var displayData = vm.rawData;
-            var dataArray = [];
-            var supplierNameArray = [];
-            vm.selectedRow = null;
+            var displayData = vm.rawData.slice();
 
+            vm.dataArray = [];
+            vm.supplierNameArray = [];
+            vm.selectedRow = [];
+
+            var j = 0;
+            for(j = 0 ; j < vm.rawData.length ;j++)
+            {
+                vm.selectedRow[j] = true;
+            }
+
+            buildDisplayData();
             function buildDisplayData()
             {
-                dataArray = [];
-                supplierNameArray = [];
+                console.log("building Display DAta");
+                vm.dataArray = [];
+                vm.supplierNameArray = [];
                 displayData.forEach(function(entry) {
                     if(isNaN(entry["score"]))
                     {
-                        dataArray.push(0);
-                        supplierNameArray.push(entry["name"]);
+                        vm.dataArray.push(0);
+                        vm.supplierNameArray.push(entry["name"]);
                     }
                     else
                     {
-                        dataArray.push(entry["score"]);
-                        supplierNameArray.push(entry["name"]);
+                        vm.dataArray.push(entry["score"]);
+                        vm.supplierNameArray.push(entry["name"]);
                     }
 
-                });
+                })
+
+                vm.labels = vm.supplierNameArray;
+                vm.series = ['Score'];
+                vm.colours = [{
+                    fillColor: 'rgba(220,0,0,0.5)'
+                }];
+                vm.data = [
+                    vm.dataArray
+                ];
             }
 
 
-            supplierNameArray.forEach(function(entry){
-                console.log(entry);
-            })
+            //vm.supplierNameArray.forEach(function(entry){
+            //    console.log(entry);
+            //})
 
             console.log("raw data" + dataShareService.getSuppliers());
 
-            vm.labels = supplierNameArray;
-            vm.series = ['Score'];
-            vm.colours = [{
-                fillColor: 'rgba(220,0,0,0.5)'
-            }];
-            vm.data = [
-                dataArray
-            ];
 
 
-        function select(index, selectedSupplier) {
 
+        vm.removeSelected = function removeSelected(index, selectedSupplier) {
+            console.log("remove Selected from View " + selectedSupplier);
             var i = 0;
-            var index = -1;
-            for(i = 0 ; i < displayData.length ; i++)
+            var check = -1;
+
+            for(i = 0 ; i < vm.rawData.length ; i++)
             {
-
-                if(selectedSupplier["id"] == displayData[i]["id"])
+                if(i < displayData.length)
                 {
-                    index = i;
+                    if(selectedSupplier["id"] == displayData[i]["id"])
+                    {
+                        check = i;
+                    }
                 }
-
             }
 
-            if(index != -1 )
+            if(check != -1 )
             {
-                displayData.splice(index, 1);
+                console.log("splicing one out")
+                //displayData.splice(index, 1);
+                var k = 0 ;
+                var count = 0;
+                for(k = 0 ; k < vm.selectedRow.length ; k++)
+                {
+                    if(vm.selectedRow[k] && k != index)
+                    {
+                        vm.selectedRow[index] = false;
+                        break;
+                    }
+                    else
+                    {
+                        toastr.warning('Last supplier can\'t be deactivated');
+                        console.log("last supplier cant be deactivated");
+                    }
+                }
             }
             else
             {
-                displayData.push(selectedSupplier);
+                console.log("pushing again to view")
+                //displayData.push(selectedSupplier);
+                vm.selectedRow[index] = true;
+
             }
+            recreate();
             buildDisplayData();
+        }
+
+        function recreate()
+        {
+            displayData = [];
+            var i = 0;
+
+            for(i = 0; i < vm.selectedRow.length; i++)
+            {
+                if(vm.selectedRow[i])
+                {
+                    displayData.push(vm.rawData[i])
+                }
+            }
         }
     };
 })();

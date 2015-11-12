@@ -14,7 +14,9 @@
 
                     <div class="col-md-2">
                         <!-- button to go to the comparison view -->
-                        <a ui-sref="comparison" class="btn btn-default">Compare</a>
+                        <button type="button" ng-click="go('comparison')" ng-disabled="vm.selectedSuppliers.length == 0" class="btn btn-default" >
+                            Compare
+                        </button>
                     </div>
 
                     <div class="col-md-8">

@@ -8,6 +8,8 @@ angular.module('WeDoIt', [
     'ngCookies',
     'smart-table',
     'chart.js',
+    'ngAnimate',
+    'toastr',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
 
@@ -36,8 +38,19 @@ angular.module('WeDoIt')
     .run(run);
 
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
+    function config($stateProvider, $urlRouterProvider,toastrConfig) {
+
+        angular.extend(toastrConfig, {
+            autoDismiss: true,
+            containerId: 'toast-container',
+            maxOpened: 2,
+            newestOnTop: true,
+            positionClass: 'toast-top-center',
+            preventDuplicates: false,
+            preventOpenDuplicates: true,
+            target: 'body'
+        });
 
     $urlRouterProvider.otherwise('/home');
 
