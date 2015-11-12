@@ -9,28 +9,6 @@
     function LoginController($state, AuthenticationService) {
         var vm = this;
 
-        //AuthenticationService.clearCredentials();
-
-        /*vm.login = function () {
-            vm.dataLoading = true;
-            AuthenticationService.Login(vm.username, vm.password, function(response) {
-                if (response.success) {
-                    console.log('Hello you are logged in');
-                    AuthenticationService.setCredentials(vm.username, vm.password);
-                    $state.transitionTo('home');
-                } else {
-                    vm.error = response.message;
-                    vm.dataLoading = false;
-                }
-            })
-        };*/
-
-        // have to be implemented
-        /*vm.logout = function() {
-            vm.dataLoading = true;
-            AuthenticationService.Logout();
-        };*/
-
         vm.username = '';
         vm.password = '';
 
@@ -51,11 +29,16 @@
         };
 
         vm.login = function(username, password){
-            AuthenticationService.login(username, password);
+            AuthenticationService.login(username, password).then(function() {
+                console.log('Login sucesss!');
+                localStorage.isLoggedIn = 'true';
+                $state.transitionTo('home');
+                vm.error = null;
+            }, function() {
+                console.log('error by login');
+                vm.error = 'Username or password is incorrect!';
+            });
         };
-
-
-
     }
 
 })();

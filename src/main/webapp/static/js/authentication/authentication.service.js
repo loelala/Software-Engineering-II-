@@ -10,53 +10,6 @@
 
     function AuthenticationService ($http, $state) {
 
-        var vm = this;
-
-        /*var service = {};
-
-         service.Login = function (username, password, callback) {
-
-         /*$timeout(function(){
-         var response = { success: username === 'test' && password === 'test' };
-         if(!response.success) {
-         response.message = 'Username or password is incorrect';
-         }
-         callback(response);
-         }, 1000);*/
-
-        /*console.log('want to log in');
-
-         resource.post('api/user/login', {username: username, password: password})
-         .success(function (response) {
-         callback(response);
-         })
-
-
-         };
-
-         service.setCredentials = function(username, password) {
-         var authData = Base64.encode(username + ':' + password);
-
-         $rootScope.globals = {
-         currentUser: {
-         username: username,
-         authData: authData
-         }
-         };
-         $resource.defaults.headers.common['Authorization'] = 'Basic ' + authData; // jshint ignore:line
-         $cookieStore.put('globals', $rootScope.globals);
-
-         };
-
-         service.ClearCredentials = function () {
-         $rootScope.globals = {};
-         $cookieStore.remove('globals');
-         $http.defaults.headers.common.Authorization = 'Basic ';
-         };
-
-         return service;*/
-
-
         var service = {};
 
         service.login = function(username, password) {
@@ -69,15 +22,7 @@
                     return str.join("&");
                 },
                 data: {username: username, password: password}
-            }).then(function success(response) {
-                console.log('Login success!', response.data);
-                localStorage.isLoggedIn = 'true';
-                $state.transitionTo('home');
-            }, function error(response) {
-                console.log('Error!!!', response.data);
-                alert('Error!');
             });
-
         };
 
         return service;
