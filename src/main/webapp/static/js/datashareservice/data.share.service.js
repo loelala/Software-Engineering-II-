@@ -42,7 +42,6 @@
 
         };
 
-
         var getSuppliers = function(){
             return supplierList;
         };
@@ -50,7 +49,7 @@
         var eraseList = function(){
             console.log("erased list");
             supplierList = [];
-        }
+        };
 
         var removeSupplier = function(supplier)
         {
