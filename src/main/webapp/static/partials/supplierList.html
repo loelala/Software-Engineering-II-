@@ -1,5 +1,5 @@
 
-            <div class="col-md-9">
+            <div ng-controller="SupplierListCtrl as vm">
                 <a href="#"><strong><i class="fa fa-leaf"></i> All Suppliers</strong></a>
                 <hr>
                 <!--row datepicker-->
@@ -10,9 +10,40 @@
                 <!--/row datepicker-->
 
                 <hr>
+                <div class="row">
 
+                    <div class="col-md-2">
+                        <!-- button to go to the comparison view -->
+                        <button type="button" ng-click="go('comparison')" ng-disabled="vm.selectedSuppliers.length == 0" class="btn btn-default" >
+                            Compare
+                        </button>
+                    </div>
+
+                    <div class="col-md-8">
+                    <h3> Selected suppliers:</h3>
+                    <table st-table="vm.selectedSuppliers" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th st-sort="name">Name</th>
+                            <th st-sort="name">Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in vm.selectedSuppliers"
+                                ng-class="{'selected':$index == vm.selectedSupplierRow}"
+                                ng-click="vm.removeSelected($index,row)">
+                               <td>{{row.name}}</td>
+                               <td>{{row.score}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="col-md-2"/>
+
+                </div>
+                <hr/>
                 <!-- row table all supplier -->
-                <div class="row" ng-controller="SupplierListCtrl as vm">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="panle panle-default">
                             <table st-table="vm.supplierList" class="table table-hover">
@@ -43,6 +74,6 @@
 
             </div>
             <!--/col-span-9-->
-        </div>
-    </div>
+
+
     <!-- /Main -->

@@ -1,14 +1,18 @@
 /**
  * @author Alexandra Vogel
  */
-angular.module('SupplierManagement', [
+angular.module('WeDoIt', [
     'ngRoute',
     'ui.router',
     'ngResource',
     'ngCookies',
     'smart-table',
-
+    'chart.js',
+    'ngAnimate',
+    'toastr',
     /* ---- custom modules ----*/
+    'DataShareServiceModule',
+
     // module for all suppliers (controller)
     'supplierList',
     // module for a specific supplier (controller)
@@ -21,19 +25,32 @@ angular.module('SupplierManagement', [
     'userservice',
     // module for login (controller)
     'login',
-    'index'
+    'index',
+    'BarChartModule'
+
 
 
 ]);
 
 // Call our app! important lines!!!
-angular.module('SupplierManagement')
+angular.module('WeDoIt')
     .config(config)
     .run(run);
 
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
+    function config($stateProvider, $urlRouterProvider,toastrConfig) {
+
+        angular.extend(toastrConfig, {
+            autoDismiss: true,
+            containerId: 'toast-container',
+            maxOpened: 2,
+            newestOnTop: true,
+            positionClass: 'toast-top-center',
+            preventDuplicates: false,
+            preventOpenDuplicates: true,
+            target: 'body'
+        });
 
     $urlRouterProvider.otherwise('/home');
 
@@ -49,7 +66,7 @@ angular.module('SupplierManagement')
             url: '/allSuppliers',
             templateUrl: 'static/partials/supplierList.html',
             controller: 'SupplierListCtrl',
-            controllerAs: 'vm',
+            controllerAs: 'vm'
 
         })
 
@@ -63,6 +80,13 @@ angular.module('SupplierManagement')
             url: '/login',
             templateUrl: 'static/partials/loginPage.html',
             controller: 'LoginController',
+            controllerAs: 'vm'
+        })
+        .state('comparison',
+        {
+            url:'/comparison',
+            templateUrl: 'static/partials/supplierChartComparison.html',
+            controller: 'BarChartController',
             controllerAs: 'vm'
         });
         $urlRouterProvider.otherwise("/login");

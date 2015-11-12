@@ -1,0 +1,49 @@
+<div ng-controller="BarChartController as vm">
+
+
+<div class="row">
+    <div class="col-md-4">
+        <!-- currently empty -->
+    </div>
+    <div class="col-md-4">
+        <p>Your selected suppliers:</p>
+        <!--<ul>-->
+            <!--<li ng-repeat="row in vm.rawData"-->
+                <!--ng-class="{'selected':$index == vm.selectedRow}"-->
+                <!--ng-click="vm.select($index,row)">-->
+                    <!--<b>{{row.name}} </b> - {{row.score}}-->
+                <!--</li>-->
+        <!--</ul>-->
+        <table st-table="vm.rawData" class="table table-hover">
+            <thead>
+            <tr>
+                <th st-sort="name">Name</th>
+                <th st-sort="name">Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.rawData"
+                ng-class="{'success': vm.selectedRow[$index], 'active':!vm.selectedRow[$index]}"
+                ng-click="vm.removeSelected($index,row)">
+                <td>{{row.name}}</td>
+                <td>{{row.score}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <!-- currently empty -->
+    </div>
+</div>
+<div class="row">
+<div class="col-md-8"> <!-- Chart Div -->
+
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="vm.data" chart-labels="vm.labels" colours="vm.colours">
+    </canvas>
+
+</div>
+<div class="col-md-4"></div>
+</div>
+
+</div>
