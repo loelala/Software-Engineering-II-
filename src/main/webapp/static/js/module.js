@@ -91,7 +91,7 @@ angular.module('WeDoIt')
         $urlRouterProvider.otherwise("/login");
 
         // needed for our urls -- no # in front of our states
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
 
     }
 

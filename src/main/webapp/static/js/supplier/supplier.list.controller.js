@@ -6,12 +6,12 @@
 
     angular.module('supplierList', [])
         .controller('SupplierListCtrl', SupplierListCtrl)
-        .directive('csSelect', select)
-        .directive('stSelectRow', selectRow);
+        //.directive('csSelect', select)
+        //.directive('stSelectRow', selectRow);
 
-    SupplierListCtrl.$inject = ['supplierservice','dataShareService','toastr'];
+    SupplierListCtrl.$inject = ['$state','supplierservice','dataShareService','toastr'];
 
-    function SupplierListCtrl (supplierservice,dataShareService,toastr) {
+    function SupplierListCtrl ($state,supplierservice,dataShareService,toastr) {
         var vm = this;
 
         vm.select = select;
@@ -21,6 +21,9 @@
         dataShareService.eraseList();
         vm.selectedSuppliers = dataShareService.getSuppliers();
 
+        vm.goToComparison = function(){
+            $state.go('comparison');
+        }
 
         var allSuppliers = supplierservice.query();
         allSuppliers.$promise.then(function(data) {
@@ -29,6 +32,7 @@
         }, function(error) {
             console.log('some error occurred', error);
             errorFunction(error);
+            toastr.error('Couldn\'t connect to the database','Database connection error!');
         });
 
         function select(index, selectedSupplier) {
@@ -105,53 +109,53 @@
 
     }
 
-    function select() {
-        return {
-            require: '^stTable',
-            template: '<input type="checkbox"/>',
-            scope: {
-                row: '=csSelect'
-            },
-            link: function (scope, element, attr, ctrl) {
+    //function select() {
+    //    return {
+    //        require: '^stTable',
+    //        template: '<input type="checkbox"/>',
+    //        scope: {
+    //            row: '=csSelect'
+    //        },
+    //        link: function (scope, element, attr, ctrl) {
+    //
+    //            element.bind('change', function (evt) {
+    //                scope.$apply(function () {
+    //                    ctrl.select(scope.row, 'multiple');
+    //                });
+    //            });
+    //
+    //            scope.$watch('row.isSelected', function (newValue, oldValue) {
+    //                if (newValue === true) {
+    //                    element.parent().addClass('st-selected');
+    //                } else {
+    //                    element.parent().removeClass('st-selected');
+    //                }
+    //            });
+    //        }
+    //    };
+    //}
 
-                element.bind('change', function (evt) {
-                    scope.$apply(function () {
-                        ctrl.select(scope.row, 'multiple');
-                    });
-                });
-
-                scope.$watch('row.isSelected', function (newValue, oldValue) {
-                    if (newValue === true) {
-                        element.parent().addClass('st-selected');
-                    } else {
-                        element.parent().removeClass('st-selected');
-                    }
-                });
-            }
-        };
-    }
-
-    function selectRow() {
-        return {
-            restrict: 'A',
-            require: '^stTable',
-            scope: {
-                row: '=stSelectRow',
-                callback: '&stSelected' // ADDED THIS
-            },
-            link: function (scope, element, attr, ctrl) {
-                var mode = attr.stSelectMode || 'single';
-                element.bind('click', function ($event) {
-                    scope.$apply(function () {
-                        ctrl.select(scope.row, mode, $event.shiftKey);
-                        scope.callback(); // AND THIS
-                    });
-                });
-
-                //***///
-            }
-        };
-    }
+    //function selectRow() {
+    //    return {
+    //        restrict: 'A',
+    //        require: '^stTable',
+    //        scope: {
+    //            row: '=stSelectRow',
+    //            callback: '&stSelected' // ADDED THIS
+    //        },
+    //        link: function (scope, element, attr, ctrl) {
+    //            var mode = attr.stSelectMode || 'single';
+    //            element.bind('click', function ($event) {
+    //                scope.$apply(function () {
+    //                    ctrl.select(scope.row, mode, $event.shiftKey);
+    //                    scope.callback(); // AND THIS
+    //                });
+    //            });
+    //
+    //            //***///
+    //        }
+    //    };
+    //}
 
 })();
 

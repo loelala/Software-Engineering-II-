@@ -13,10 +13,10 @@
                 <div class="row">
 
                     <div class="col-md-2">
-                        <!-- button to go to the comparison view -->
-                        <button type="button" ng-click="go('comparison')" ng-disabled="vm.selectedSuppliers.length == 0" class="btn btn-default" >
+                        <button type="button" ng-click='vm.goToComparison()' ng-disabled="vm.selectedSuppliers.length <= 1" ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1, 'btn btn-success':vm.selectedSuppliers.length > 1}" >
                             Compare
                         </button>
+
                     </div>
 
                     <div class="col-md-8">
@@ -54,7 +54,7 @@
                             <table st-table="vm.supplierList" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th></th>
+
                                         <th st-sort="id">ID</th>
                                         <th st-sort="name">Name</th>
                                         <th st-sort="orders">Number of Orders</th>
@@ -65,7 +65,7 @@
                                     <tr ng-repeat="row in vm.supplierList | limitTo: 50"
                                         ng-class="{'selected':$index == vm.selectedRow}"
                                         ng-click="vm.select($index,row)">
-                                        <td cs-select="row"></td>
+
                                         <td>{{row.id}}</td>
                                         <td>{{row.name}}</td>
                                         <td>{{row.numberOfOrders}}</td>

@@ -7,9 +7,9 @@
     angular.module("BarChartModule", ["chart.js"])
         .controller("BarChartController", BarChartController);
 
-    BarChartController.$inject = ['dataShareService','toastr'];
+    BarChartController.$inject = ['$state','dataShareService','toastr'];
 
-    function BarChartController(dataShareService,toastr)
+    function BarChartController($state,dataShareService,toastr)
     {
             var vm = this;
 
@@ -19,6 +19,10 @@
             vm.dataArray = [];
             vm.supplierNameArray = [];
             vm.selectedRow = [];
+
+            vm.goToSupplierList = function(){
+                $state.go('allSuppliers');
+            }
 
             var j = 0;
             for(j = 0 ; j < vm.rawData.length ;j++)
