@@ -12,6 +12,7 @@ import edu.hm.wedoit.model.Supplier;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Implemetation of the {@link edu.hm.wedoit.dao.AllDao} interface
@@ -20,6 +21,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
 {
     private Map<String, Supplier> supplierList;
     private Map<String, Map<String, Order>> supplierMap;
+    private Object updateLock = new Object();
     private long cacheTime = 0;
 
     /**
@@ -29,63 +31,66 @@ public class AllDaoImpl extends AbstractDao implements AllDao
      */
     private void getDataFromDatabase(boolean forceUpdate)
     {
-        synchronized (this)
+        if (forceUpdate || supplierMap == null || (System.currentTimeMillis() - cacheTime) > 60000 * 5)
         {
-            if (forceUpdate || supplierMap == null || (System.currentTimeMillis() - cacheTime) > 60000 * 5)
+            System.out.println("Fetching suppliers and their orders");
+
+            Map<String, Map<String, Order>> supplierMap = new HashMap<>();
+
+            Map<String, Supplier> supplierList = new HashMap<>();
+            final String supplierQuery = "SELECT NAME1, LIFNR FROM sap_emulation.lfa1;";
+            jdbcTemplate.query(supplierQuery, new SupplierRowCallbackHandler(supplierList, supplierMap));
+
+            final String ebelnQuery = "SELECT LIFNR, EBELN FROM sap_emulation.ekko;";
+            jdbcTemplate.query(ebelnQuery, new EbelnRowCallbackHandler(supplierMap));
+
+            final String bldatQuery = "SELECT EBELN, BLDAT FROM sap_emulation.ekbe WHERE BEWTP = 'E' AND BWART = 101;";
+            jdbcTemplate.query(bldatQuery, new BldatRowCallbackHandler(supplierMap));
+
+            final String slfdtQuery = "SELECT EBELN, SLFDT FROM eket";
+            jdbcTemplate.query(slfdtQuery, new SlfdtRowCallbackHandler(supplierMap));
+
+            for (Supplier s : supplierList.values())
             {
-                System.out.println("Fetching suppliers and their orders");
-
-                supplierMap = new HashMap<>();
-
-                supplierList = new HashMap<>();
-                final String supplierQuery = "SELECT NAME1, LIFNR FROM sap_emulation.lfa1;";
-                jdbcTemplate.query(supplierQuery, new SupplierRowCallbackHandler(supplierList, supplierMap));
-
-                final String ebelnQuery = "SELECT LIFNR, EBELN FROM sap_emulation.ekko;";
-                jdbcTemplate.query(ebelnQuery, new EbelnRowCallbackHandler(supplierMap));
-
-                final String bldatQuery = "SELECT EBELN, BLDAT FROM sap_emulation.ekbe WHERE BEWTP = 'E' AND BWART = 101;";
-                jdbcTemplate.query(bldatQuery, new BldatRowCallbackHandler(supplierMap));
-
-                final String slfdtQuery = "SELECT EBELN, SLFDT FROM eket";
-                jdbcTemplate.query(slfdtQuery, new SlfdtRowCallbackHandler(supplierMap));
-
-                for (Supplier s : supplierList.values())
+                List orders;
+                Collection<Order> o = supplierMap.get(s.getId()).values();
+                if (o instanceof List)
                 {
-                    List orders;
-                    Collection<Order> o = supplierMap.get(s.getId()).values();
-                    if (o instanceof List)
-                    {
-                        orders = (List) o;
-                    }
-                    else
-                    {
-                        orders = new ArrayList(o);
-                    }
-
-                    s.setOrders(orders);
+                    orders = (List) o;
+                }
+                else
+                {
+                    orders = new ArrayList(o);
                 }
 
-                cacheTime = System.currentTimeMillis();
-                new Thread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        try
-                        {
-                            Thread.sleep(1000 * 60 * 1);
-                            System.out.println("Updating cache");
-                            getDataFromDatabase(true);
-                            System.out.println("Cache is now up to date");
-                        }
-                        catch (InterruptedException e)
-                        {
-                            System.out.println("UpdateThread was interrupted");
-                        }
-                    }
-                }).start();
+                s.setOrders(orders);
             }
+
+            cacheTime = System.currentTimeMillis();
+            synchronized (this)
+            {
+                this.supplierMap = supplierMap;
+                this.supplierList = supplierList;
+            }
+
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        Thread.sleep(1000 * 60 * 1);
+                        System.out.println("Updating cache");
+                        getDataFromDatabase(true);
+                        System.out.println("Cache is now up to date");
+                    }
+                    catch (InterruptedException e)
+                    {
+                        System.out.println("UpdateThread was interrupted");
+                    }
+                }
+            }).start();
         }
     }
 
