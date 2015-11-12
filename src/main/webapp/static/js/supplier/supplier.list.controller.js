@@ -11,8 +11,9 @@
 
     function SupplierListCtrl (supplierservice,dataShareService) {
         var vm = this;
-
+        vm.fallbackData = 
         vm.select = select;
+        vm.removeSelected = removeSelected;
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
         dataShareService.eraseList();
@@ -31,13 +32,22 @@
             vm.selectedRow = index;
             vm.idSelectedSupplier = selectedSupplier.id;
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
-            dataShareService.addSupplier(selectedSupplier);
-            console.log('added ' + selectedSupplier + ' to dataShareService');
+            if(dataShareService.addSupplier(selectedSupplier))
+            {
+                console.log('added ' + selectedSupplier + ' to dataShareService');
+            }
+            else
+            {
+                console.log('could not add')
+            }
+
         }
         function removeSelected(index, selectedSupplier) {
+            console.log("removing " + selectedSupplier);
             dataShareService.removeSupplier(selectedSupplier);
         }
 
     }
 
 })();
+

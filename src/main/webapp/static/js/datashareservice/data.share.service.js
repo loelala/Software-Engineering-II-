@@ -12,11 +12,32 @@
             if(supplierList.length >= 4)
             {
                 console.log("not adding supplier, cant have more than 4");
+                return false;
             }
             else
             {
                 console.log("adding new Supplier" + supplier)
-                supplierList.push(supplier);
+                var i = 0;
+                var index = -1;
+                for(i = 0 ; i < supplierList.length ; i++)
+                {
+                    console.log(supplierList[i]);
+                    if(supplier["id"] == supplierList[i]["id"])
+                    {
+                        index = i;
+                    }
+
+                }
+                if(index == -1)
+                {
+                    supplierList.push(supplier);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
 
         };

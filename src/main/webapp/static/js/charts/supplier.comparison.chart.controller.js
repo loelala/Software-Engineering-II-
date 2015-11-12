@@ -14,23 +14,30 @@
             var vm = this;
 
             vm.rawData = dataShareService.getSuppliers();
+            var displayData = vm.rawData;
             var dataArray = [];
             var supplierNameArray = [];
             vm.selectedRow = null;
 
-            vm.rawData.forEach(function(entry) {
-                if(isNaN(entry["score"]))
-                {
-                    dataArray.push(0);
-                    supplierNameArray.push(entry["name"]);
-                }
-                else
-                {
-                    dataArray.push(entry["score"]);
-                    supplierNameArray.push(entry["name"]);
-                }
+            function buildDisplayData()
+            {
+                dataArray = [];
+                supplierNameArray = [];
+                displayData.forEach(function(entry) {
+                    if(isNaN(entry["score"]))
+                    {
+                        dataArray.push(0);
+                        supplierNameArray.push(entry["name"]);
+                    }
+                    else
+                    {
+                        dataArray.push(entry["score"]);
+                        supplierNameArray.push(entry["name"]);
+                    }
 
-            });
+                });
+            }
+
 
             supplierNameArray.forEach(function(entry){
                 console.log(entry);
@@ -49,10 +56,28 @@
 
 
         function select(index, selectedSupplier) {
-            vm.selectedRow = index;
-            vm.idSelectedSupplier = selectedSupplier.id;
-            console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
-            console.log('added ' + selectedSupplier + ' to dataShareService');
+
+            var i = 0;
+            var index = -1;
+            for(i = 0 ; i < displayData.length ; i++)
+            {
+
+                if(selectedSupplier["id"] == displayData[i]["id"])
+                {
+                    index = i;
+                }
+
+            }
+
+            if(index != -1 )
+            {
+                displayData.splice(index, 1);
+            }
+            else
+            {
+                displayData.push(selectedSupplier);
+            }
+            buildDisplayData();
         }
     };
 })();
