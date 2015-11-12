@@ -38,7 +38,7 @@ A time interval must be chooseable for the whole application, so that the compar
 A dynamic login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
 
 ### 1.3.1	User control
-There should be 1 admin user, who can create,delete and manage users for the system.
+There should be 1 admin user, who can create, delete and manage users for the system.
 
 ### 1.4	Export reports as PDF (check if it is still a requirement)
 The Overview (1.1.1), the Detailed-View (1.1.2) and the Comparing-View (1.1.3) must be exportable as a PDF containing all important information and the important charts.
@@ -46,7 +46,7 @@ The Overview (1.1.1), the Detailed-View (1.1.2) and the Comparing-View (1.1.3) m
 ### 1.5	Useable on a desktop and a tablet (done)
 The application must be usable on a desktop-pc with Windows 7 as OS and on a tablet.
 
-### 1.6	Database error handling (underwork)
+### 1.6	Database error handling (done)
 The application must inform the user if there are any error with the database (fetching data or connecting to database).
 
 
