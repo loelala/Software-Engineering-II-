@@ -1,7 +1,7 @@
 package edu.hm.wedoit.config;
 
 /**
- * Created by B3rni on 01.11.2015.
+ * contains basic constants needed within the application
  */
 public class Constants
 {

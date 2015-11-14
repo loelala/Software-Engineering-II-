@@ -15,15 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 import java.util.List;
 
+/**
+ * this class handles user requests from the frontend
+ */
 @RestController
 @RequestMapping("/api/user")
 public class UserController
 {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    /**
+     * service passing the request to the actual business logic
+     */
     @Autowired
     UserService userService;
 
+    /**
+     *
+     * @return a example user
+     */
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public User getExample()
     {
@@ -31,6 +41,10 @@ public class UserController
         return new User("example","example");
     }
 
+    /**
+     *
+     * @return returns all users in the system.
+     */
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<User> getAllUser()
     {
@@ -38,6 +52,12 @@ public class UserController
         return userService.getAllUser();
     }
 
+    /**
+     * checks if the login is valid
+     * @param username
+     * @param password
+     * @return the http code wether the login is ok (200) or not (forbidden)
+     */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password)
     {
@@ -68,6 +88,14 @@ public class UserController
         }
     }
 
+    /**
+     * passes the user creation to the service
+     * @param username
+     * @param password
+     * @param request
+     * @param response
+     * @return wether the user was created or not
+     */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password,HttpServletRequest request, HttpServletResponse response)
     {

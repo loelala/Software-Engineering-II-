@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * Created by B3rni on 04.11.2015.
+ * This class extends the DriverManagerDataSource to decrypt the password. which is stored securely
  */
 public class SecureDriverManagerDataSource extends DriverManagerDataSource
 {
