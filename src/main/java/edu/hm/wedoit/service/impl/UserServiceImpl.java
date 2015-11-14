@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 
 /**
  * Created by B3rni on 01.11.2015.
@@ -28,18 +30,25 @@ public class UserServiceImpl implements UserService
     @Override
     public boolean createUser(String username, String password)
     {
-        return false;
+        return userManagement.createUser(username,password);
     }
 
     @Override
     public boolean removeUser(String username)
     {
-        return false;
+
+        return userManagement.removeUser(username);
     }
 
     @Override
     public User getUser(String username)
     {
         return null;
+    }
+
+    @Override
+    public List<User> getAllUser()
+    {
+        return userManagement.getAllUser();
     }
 }
