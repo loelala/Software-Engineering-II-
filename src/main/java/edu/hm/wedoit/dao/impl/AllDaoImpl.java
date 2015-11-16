@@ -67,10 +67,21 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             }
 
             cacheTime = System.currentTimeMillis();
-            synchronized (this)
+            if(!supplierMap.isEmpty() || !supplierList.isEmpty())
             {
-                this.supplierMap = supplierMap;
-                this.supplierList = supplierList;
+                synchronized (this)
+                {
+                    this.supplierMap = supplierMap;
+                    this.supplierList = supplierList;
+                }
+            }
+            else if(this.supplierMap.isEmpty() || this.supplierList.isEmpty())
+            {
+                System.out.println("No Cache and no Database connection");
+            }
+            else
+            {
+                System.out.println("Cache is in use");
             }
 
             new Thread(new Runnable()
