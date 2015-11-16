@@ -7,17 +7,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 
 /**
  * Created by B3rni on 01.11.2015.
  */
-
 public class UserServiceImpl implements UserService
 {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     UserManagement userManagement;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean loginOK(String username, String passwordHash)
     {
@@ -25,21 +29,40 @@ public class UserServiceImpl implements UserService
         return userManagement.loginOK(username, passwordHash);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean createUser(String username, String password)
     {
-        return false;
+        return userManagement.createUser(username,password);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean removeUser(String username)
     {
-        return false;
+
+        return userManagement.removeUser(username);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User getUser(String username)
     {
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<User> getAllUser()
+    {
+        return userManagement.getAllUser();
     }
 }

@@ -2,6 +2,8 @@ package edu.hm.wedoit.usermanagement;
 
 import edu.hm.wedoit.model.User;
 
+import java.util.List;
+
 /**
  * Created by B3rni on 01.11.2015.
  */
@@ -11,4 +13,5 @@ public interface UserManagement
     public boolean createUser(String username, String password);
     public boolean removeUser(String username);
     public User getUser(String username);
+    public List<User> getAllUser();
 }

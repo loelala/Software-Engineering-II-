@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 /**
  * Created by B3rni on 25.10.2015.
+ * implements the basedao interface, we dont have to do it in every upcoming dao
  */
 public abstract class AbstractDao implements BaseDao
 {

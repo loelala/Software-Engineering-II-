@@ -1,47 +1,52 @@
 
             <div ng-controller="SupplierListCtrl as vm">
-                <a href="#"><strong><i class="fa fa-leaf"></i> All Suppliers</strong></a>
+                <h3><i class="fa fa-industry"/> All Suppliers</h3>
                 <hr>
+                <div class="row">
                 <!--row datepicker-->
-                <div class="row">
-                    <h4>Select the time:</h4>
-                    <!--We have to add a datepicker-->
-                </div>
-                <!--/row datepicker-->
-
-                <hr>
-                <div class="row">
-
-                    <div class="col-md-2">
-                        <!-- button to go to the comparison view -->
-                        <button type="button" ng-click="go('comparison')" ng-disabled="vm.selectedSuppliers.length == 0" class="btn btn-default" >
-                            Compare
-                        </button>
+                    <div class="row">
+                        <h4>Select the time:</h4>
+                        <!--We have to add a datepicker-->
                     </div>
+                    <!--/row datepicker-->
 
-                    <div class="col-md-8">
-                    <h3> Selected suppliers:</h3>
-                    <table st-table="vm.selectedSuppliers" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th st-sort="name">Name</th>
-                            <th st-sort="name">Score</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="row in vm.selectedSuppliers"
-                                ng-class="{'selected':$index == vm.selectedSupplierRow}"
-                                ng-click="vm.removeSelected($index,row)">
-                               <td>{{row.name}}</td>
-                               <td>{{row.score}}</td>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <button type="button" ng-click='vm.goToComparison()' ng-disabled="vm.selectedSuppliers.length <= 1" ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1, 'btn btn-success':vm.selectedSuppliers.length > 1}" >
+                                Compare
+                            </button>
+                        </div>
+
+                        <div class="col-md-8">
+                        <h3> Selected suppliers:</h3>
+                        <table st-table="vm.selectedSuppliers" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th st-sort="name">Name</th>
+                                <th st-sort="name">Score</th>
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in vm.selectedSuppliers"
+                                    ng-class="{'selected':$index == vm.selectedSupplierRow}"
+                                    ng-click="vm.removeSelected($index,row)">
+                                   <td>{{row.name}}</td>
+                                   <td>{{row.score}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="col-md-2"/>
+
                     </div>
-                    <div class="col-md-2"/>
+                    <hr/>
+                    <div class="alert alert-danger" role="alert" ng-show="vm.error">
+                        <strong>Error!</strong> {{vm.error}}
+                    </div>
 
                 </div>
-                <hr/>
                 <!-- row table all supplier -->
                 <div class="row">
                     <div class="col-md-12">
@@ -49,22 +54,29 @@
                             <table st-table="vm.supplierList" class="table table-hover">
                                 <thead>
                                     <tr>
+
                                         <th st-sort="id">ID</th>
                                         <th st-sort="name">Name</th>
-                                        <th st-sort="name">Number of Orders</th>
-                                        <th st-sort="name">Score</th>
+                                        <th st-sort="orders">Number of Orders</th>
+                                        <th st-sort="score">Score</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="row in vm.supplierList"
+                                    <tr ng-repeat="row in vm.supplierList | limitTo: 50"
                                         ng-class="{'selected':$index == vm.selectedRow}"
                                         ng-click="vm.select($index,row)">
+
                                         <td>{{row.id}}</td>
                                         <td>{{row.name}}</td>
                                         <td>{{row.numberOfOrders}}</td>
                                         <td>{{row.score}}</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <td colspan="5" class="text-center">
+                                        <div st-times-by-page="30" st-pagination=""></div>
+                                    </td>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

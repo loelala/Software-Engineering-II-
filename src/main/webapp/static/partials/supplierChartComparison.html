@@ -2,18 +2,14 @@
 
 
 <div class="row">
-    <div class="col-md-4">
-        <!-- currently empty -->
+    <div class="col-md-2">
+        <button type="button" ng-click='vm.goToSupplierList()' class="btn btn-success" >
+            Back to supplierlist
+        </button>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <p>Your selected suppliers:</p>
-        <!--<ul>-->
-            <!--<li ng-repeat="row in vm.rawData"-->
-                <!--ng-class="{'selected':$index == vm.selectedRow}"-->
-                <!--ng-click="vm.select($index,row)">-->
-                    <!--<b>{{row.name}} </b> - {{row.score}}-->
-                <!--</li>-->
-        <!--</ul>-->
+
         <table st-table="vm.rawData" class="table table-hover">
             <thead>
             <tr>
@@ -31,7 +27,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
         <!-- currently empty -->
     </div>
 </div>

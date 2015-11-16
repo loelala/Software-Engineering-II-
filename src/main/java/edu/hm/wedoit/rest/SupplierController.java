@@ -16,14 +16,20 @@ import java.util.List;
 
 /**
  * Created by B3rni on 24.10.2015.
+ * This class is the interface for the frontend to handle all supplier concerning requests from the frontend
  */
 @RestController
 @RequestMapping("/api/supplier")
 public class SupplierController
 {
+
     @Autowired
     AllDao allDao;
 
+    /**
+     *
+     * @return all suppliers with score
+     */
     @RequestMapping("/all")
     public List<Supplier> getAllSuppliers()
     {
@@ -31,6 +37,11 @@ public class SupplierController
         return allDao.getAllSuppliersWithScore();
     }
 
+    /**
+     *
+     * @param id of the supplier
+     * @return the supplier according to the supplier id
+     */
     @RequestMapping("/{id}")
     public Supplier getSupplierById(@PathVariable(value="id") String id)
     {
@@ -38,6 +49,11 @@ public class SupplierController
         return allDao.getSupplierById(id);
     }
 
+    /**
+     *
+     * @param id of the supplier
+     * @return all orders from a specific supplier
+     */
     @RequestMapping("/{id}/orders")
     public List<Order> getOrdersForId(@PathVariable(value="id") String id)
     {
@@ -45,6 +61,12 @@ public class SupplierController
         return allDao.getAllOrdersForId(id);
     }
 
+    /**
+     * DDMMYYY - date pattern
+     * @param from
+     * @param to
+     * @return suppliers with score based on a time interval
+     */
     @RequestMapping("/all/between/{from}/{to}")
     public List<Supplier> getAllSuppliersDate(@PathVariable(value="from") String from, @PathVariable(value="to") String to)
     {

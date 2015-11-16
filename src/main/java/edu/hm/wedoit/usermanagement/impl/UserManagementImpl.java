@@ -226,7 +226,24 @@ public class UserManagementImpl implements UserManagement
     @Override
     public boolean removeUser(String username)
     {
-        return false;
+        boolean result = false;
+        if(users.containsKey(username))
+        {
+            if(users.remove(username) != null)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+        else
+        {
+            result = false;
+        }
+        return result;
+
     }
 
     @Override
@@ -235,7 +252,16 @@ public class UserManagementImpl implements UserManagement
         return null;
     }
 
-
+    @Override
+    public List<User> getAllUser()
+    {
+        List<User> result = new ArrayList<>();
+        for(Map.Entry<String, User> entry : users.entrySet())
+        {
+            result.add(entry.getValue());
+        }
+        return result;
+    }
 
 
     private void createDefault() throws FileNotFoundException

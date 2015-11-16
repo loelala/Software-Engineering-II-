@@ -26,9 +26,8 @@ angular.module('WeDoIt', [
     // module for login (controller)
     'login',
     'index',
-    'BarChartModule'
-
-
+    'BarChartModule',
+    'dateRange.directive'
 
 ]);
 
@@ -38,8 +37,8 @@ angular.module('WeDoIt')
     .run(run);
 
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
-    function config($stateProvider, $urlRouterProvider,toastrConfig) {
+    config.$inject = ['$locationProvider','$stateProvider', '$urlRouterProvider','toastrConfig'];
+    function config($locationProvider,$stateProvider, $urlRouterProvider,toastrConfig) {
 
         angular.extend(toastrConfig, {
             autoDismiss: true,
@@ -90,6 +89,10 @@ angular.module('WeDoIt')
             controllerAs: 'vm'
         });
         $urlRouterProvider.otherwise("/login");
+
+        // needed for our urls -- no # in front of our states
+        //$locationProvider.html5Mode(true);
+
     }
 
     run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
