@@ -5,13 +5,11 @@
     'use strict';
 
     angular.module('supplierList', [])
-        .controller('SupplierListCtrl', SupplierListCtrl)
-        //.directive('csSelect', select)
-        //.directive('stSelectRow', selectRow);
+        .controller('SupplierListCtrl', SupplierListCtrl);
 
-    SupplierListCtrl.$inject = ['$state','supplierservice','dataShareService','toastr'];
+    SupplierListCtrl.$inject = ['$scope','$state','supplierservice','dataShareService','toastr'];
 
-    function SupplierListCtrl ($state,supplierservice,dataShareService,toastr) {
+    function SupplierListCtrl ($scope, $state,supplierservice,dataShareService,toastr) {
         var vm = this;
 
         vm.select = select;
@@ -93,69 +91,84 @@
                 })
         }*/
 
-        /*function updateSelectedItems(row) {
 
-            console.log('ITEMS SELECTED: ', vm.selectedItems);
+        // ========= DATEPICKER STUFF =============
 
-            if (vm.selectedItems.length > 4) {
-                vm.error = 'You can only select up to 4 suppliers to compare';
-            } else {
-                console.log('push item');
-               vm.selectedItems.push(row);
+        // Today for the To date selection
+        vm.today = function() {
+            vm.to = new Date();
+            vm.form = new Date();
+        };
+
+        vm.today();
+
+        vm.clear = function() {
+            vm.from = null;
+            vm.to = null;
+        };
+
+        // disable weekend selection
+        vm.disable = function(date, mode) {
+            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+        };
+
+        vm.maxDateFrom = new Date(2020, 5, 22);
+        vm.maxDateTo = new Date(2020,5,22);
+        vm.opens = [];
+
+        $scope.$watch(function () {
+            return vm.status.open;
+        },function(value){
+            vm.opens.push("valuationDatePickerIsOpen: " + value + " at: " + new Date());
+        });
+
+        vm.open = function($event) {
+
+            if ($event) {
+                $event.preventDefault();
+                $event.stopPropagation(); // This is the magic
             }
-        }*/
 
-        /*$scope.$watch('selectedItems', vm.updateSelectedItems, true);*/
+            vm.status.open = true;
+        };
+
+        vm.setDateTo = function(year, month, day) {
+            vm.to = new Date(year, month, day);
+        };
+
+        vm.setDateFrom = function(year, month, day) {
+            vm.from = new Date(year, month, day);
+        };
+
+        vm.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        vm.format = vm.formats[0];
+
+        vm.status = {
+            opened: false
+        };
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 2);
+        vm.events = [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+            }
+        ];
+
 
     }
 
-    //function select() {
-    //    return {
-    //        require: '^stTable',
-    //        template: '<input type="checkbox"/>',
-    //        scope: {
-    //            row: '=csSelect'
-    //        },
-    //        link: function (scope, element, attr, ctrl) {
-    //
-    //            element.bind('change', function (evt) {
-    //                scope.$apply(function () {
-    //                    ctrl.select(scope.row, 'multiple');
-    //                });
-    //            });
-    //
-    //            scope.$watch('row.isSelected', function (newValue, oldValue) {
-    //                if (newValue === true) {
-    //                    element.parent().addClass('st-selected');
-    //                } else {
-    //                    element.parent().removeClass('st-selected');
-    //                }
-    //            });
-    //        }
-    //    };
-    //}
-
-    //function selectRow() {
-    //    return {
-    //        restrict: 'A',
-    //        require: '^stTable',
-    //        scope: {
-    //            row: '=stSelectRow',
-    //            callback: '&stSelected' // ADDED THIS
-    //        },
-    //        link: function (scope, element, attr, ctrl) {
-    //            var mode = attr.stSelectMode || 'single';
-    //            element.bind('click', function ($event) {
-    //                scope.$apply(function () {
-    //                    ctrl.select(scope.row, mode, $event.shiftKey);
-    //                    scope.callback(); // AND THIS
-    //                });
-    //            });
-    //
-    //            //***///
-    //        }
-    //    };
-    //}
-
 })();
-

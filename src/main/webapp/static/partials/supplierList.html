@@ -1,52 +1,109 @@
 
             <div ng-controller="SupplierListCtrl as vm">
-                <h3><i class="fa fa-industry"/> All Suppliers</h3>
+                <h3><i class="fa fa-industry"></i> All Suppliers</h3>
                 <hr>
                 <div class="row">
-                <!--row datepicker-->
-                    <div class="row">
+                <!--row datepicker / comparison-->
+                    <div class="col-md-12 col-lg-12">
                         <h4>Select the time:</h4>
-                        <!--We have to add a datepicker-->
+
+                        <p> Selected Date From: {{vm.from | date: 'fullDate'}}</p>
+                        <p> Selected Date To: {{vm.to | date: 'fullDate'}}</p>
+
+                        <div class="col-md-3 col-lg-3">
+                            <p class="input-group">
+                                <label for="from">From: </label>
+                                <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                                        ng-model="vm.from"
+                                        is-open="vm.status.open"
+                                        min-date="vm.minDateFrom"
+                                        max-date="vm.maxDateFrom"
+                                        datepicker-options="vm.dateOptions"
+                                        date-disabled="vm.disabled(date, mode)" close-text="Close">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </div>
+                            </p>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3">
+                            <p class="input-group">
+                                <label for="to">To: </label>
+                                <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                                       ng-model="vm.to"
+                                       is-open="vm.status.opened"
+                                       min-date="vm.minDateTo"
+                                       max-date="vm.maxDateTo"
+                                       datepicker-options="vm.dateOptions"
+                                       date-disabled="vm.disabled(date, mode)"
+                                       close-text="Close">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </div>
+                            </p>
+                        </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <label>Format:</label>
+                            <select class="form-control"
+                                    ng-model="vm.format"
+                                    ng-options="f for f in vm.formats"><option></option></select>
+                        </div>
                     </div>
-                    <!--/row datepicker-->
+
+                    </div>
 
                     <hr>
-                    <div class="row">
 
-                        <div class="col-md-2">
-                            <button type="button" ng-click='vm.goToComparison()' ng-disabled="vm.selectedSuppliers.length <= 1" ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1, 'btn btn-success':vm.selectedSuppliers.length > 1}" >
-                                Compare
-                            </button>
+                    <div class="col-md-12 col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title"> Selected suppliers </div>
+                                </div>
+                                <table st-table="vm.selectedSuppliers" class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th st-sort="name">Name</th>
+                                            <th st-sort="name">Score</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="row in vm.selectedSuppliers"
+                                            ng-class="{'selected':$index == vm.selectedSupplierRow}"
+                                            ng-click="vm.removeSelected($index,row)">
+                                            <td>{{row.name}}</td>
+                                            <td>{{row.score}}</td>
+                                        </tr>
+                                        </tbody>
+                                </table>
+                            </div>
                         </div>
-
-                        <div class="col-md-8">
-                        <h3> Selected suppliers:</h3>
-                        <table st-table="vm.selectedSuppliers" class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th st-sort="name">Name</th>
-                                <th st-sort="name">Score</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="row in vm.selectedSuppliers"
-                                    ng-class="{'selected':$index == vm.selectedSupplierRow}"
-                                    ng-click="vm.removeSelected($index,row)">
-                                   <td>{{row.name}}</td>
-                                   <td>{{row.score}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                        <div class="col-md-2"/>
-
                     </div>
-                    <hr/>
+
                     <div class="alert alert-danger" role="alert" ng-show="vm.error">
                         <strong>Error!</strong> {{vm.error}}
                     </div>
 
-                </div>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2">
+                            <button style="margin-left: 16px" type="button"
+                                    ng-click='vm.goToComparison()'
+                                    ng-disabled="vm.selectedSuppliers.length <= 1"
+                                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
+                                    'btn btn-success':vm.selectedSuppliers.length > 1}" >
+                                Compare
+                            </button>
+                        </div>
+                    </div>
+                </div> <!--/ row datepicker / comparison-->
+
+                 <hr/>
+
                 <!-- row table all supplier -->
                 <div class="row">
                     <div class="col-md-12">

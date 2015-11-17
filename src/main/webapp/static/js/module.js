@@ -9,10 +9,10 @@ angular.module('WeDoIt', [
     'smart-table',
     'chart.js',
     'ngAnimate',
+    'ui.bootstrap',
     'toastr',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
-
     // module for all suppliers (controller)
     'supplierList',
     // module for a specific supplier (controller)

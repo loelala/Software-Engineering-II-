@@ -11,11 +11,9 @@
 
     function supplierservice ($resource) {
 
-        var service = $resource('../../api/supplier/:id', {}, {
+        return $resource('../../api/supplier/:id', {}, {
             query: {method:'GET', params: {id: 'all'}, isArray: true}
         });
-
-        return service;
     }
 
 })();
