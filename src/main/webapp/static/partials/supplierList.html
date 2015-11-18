@@ -2,64 +2,6 @@
             <div ng-controller="SupplierListCtrl as vm">
                 <h3><i class="fa fa-industry"></i> All Suppliers</h3>
                 <hr>
-                <div class="row">
-                <!--row datepicker / comparison-->
-                    <div class="col-md-12 col-lg-12">
-                        <h4>Select the time:</h4>
-
-                        <p> Selected Date From: {{vm.from | date: 'fullDate'}}</p>
-                        <p> Selected Date To: {{vm.to | date: 'fullDate'}}</p>
-
-                        <div class="col-md-3 col-lg-3">
-                            <p class="input-group">
-                                <label for="from">From: </label>
-                                <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                                        ng-model="vm.from"
-                                        is-open="vm.status.open"
-                                        min-date="vm.minDateFrom"
-                                        max-date="vm.maxDateFrom"
-                                        datepicker-options="vm.dateOptions"
-                                        date-disabled="vm.disabled(date, mode)" close-text="Close">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="vm.open($event)">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </button>
-                                </div>
-                            </p>
-                        </div>
-
-                        <div class="col-md-3 col-lg-3">
-                            <p class="input-group">
-                                <label for="to">To: </label>
-                                <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                                       ng-model="vm.to"
-                                       is-open="vm.status.opened"
-                                       min-date="vm.minDateTo"
-                                       max-date="vm.maxDateTo"
-                                       datepicker-options="vm.dateOptions"
-                                       date-disabled="vm.disabled(date, mode)"
-                                       close-text="Close">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="vm.open($event)">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </button>
-                                </div>
-                            </p>
-                        </div>
-
-                    <div class="row">
-                        <div class="col-md-3 col-lg-3">
-                            <label>Format:</label>
-                            <select class="form-control"
-                                    ng-model="vm.format"
-                                    ng-options="f for f in vm.formats"><option></option></select>
-                        </div>
-                    </div>
-
-                    </div>
-
-                    <hr>
-
                     <div class="col-md-12 col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">

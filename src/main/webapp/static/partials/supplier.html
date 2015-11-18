@@ -1,20 +1,19 @@
 
-            <div class="col-md-9">
-                <a href="#"><strong><i class="fa fa-plane-o"></i> The specific supplier</strong></a>
-                <hr>
-                <!--row datepicker-->
+            <div class="col-md-12 col-lg-12" ng-controller="SupplierCtrl as vm">
+                <a><strong>Suppliers</strong></a>
+
                 <div class="row">
-                    <h4>Select the time:</h4>
-                    <!--We have to add a Datepicker-->
+                    <div class="btn btn-group-vertical" ng-show="vm.disable">
+                        <button type="button" ui-sref="supplier.all" class="btn btn-primary" ng-click="vm.disableButton()">
+                            <i class="fa fa-bullseye"></i> Select Suppliers
+                        </button>
+                        <button type="button" ui-sref="supplier.byDate" class="btn btn-primary" ng-click="vm.disableButton()">
+                            <i class="fa fa-calendar"></i> Select Suppliers by Date
+                        </button>
+                    </div>
                 </div>
-                <!--/row datepicker-->
-
-                <hr>
-
-                <div class="col-md-12">
-                    <img src="../img/barchart.jpg">
-                </div>
-
+                
+                <div ui-view></div>
 
                 <hr>
 
