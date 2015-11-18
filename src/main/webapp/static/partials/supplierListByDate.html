@@ -41,6 +41,15 @@
         </div>
     </div><!-- ./ row datepicker / comparison-->
 
+    <div class="row">
+        <div class="col-md-2 col-lg-2">
+            <button class="btn btn-default" style="margin-left: 16px" type="button"
+                    ng-click='vm.byDateQuery(vm.to, vm.form)'>
+                Show all Suppliers
+            </button>
+        </div>
+    </div>
+
     <hr>
 
     <div class="row" ng-show="!vm.timeIsSelected">
@@ -71,15 +80,6 @@
 
     <div class="alert alert-danger" role="alert" ng-show="vm.error">
         <strong>Error!</strong> {{vm.error}}
-    </div>
-
-    <div class="row" ng-show="vm.timeIsSelected">
-        <div class="col-md-2 col-lg-2">
-            <button class="btn btn-default" style="margin-left: 16px" type="button"
-                    ng-click='vm.byDateQuery(vm.to, vm.form)'>
-                Show all Suppliers
-            </button>
-        </div>
     </div>
 
     <div class="row" ng-show="!vm.timeIsSelected">
