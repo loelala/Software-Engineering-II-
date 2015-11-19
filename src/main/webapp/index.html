@@ -15,6 +15,7 @@
     <link href="static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css" />
+    <link rel="stylesheet" href="static/bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
 <body>
 <!-- header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
@@ -45,10 +46,10 @@
 
 <!-- Main -->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row col-lg-12 col-md-12">
         <!-- Left column -->
-        <div class="col-md-3">
-            <a href="#"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
+        <div class="col-md-3 col-lg-3">
+            <a><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
 
             <hr>
 
@@ -57,7 +58,7 @@
 
                 <hr>
 
-                <li><a ui-sref="allSuppliers"><i class="fa fa-industry"></i> All Suppliers</a>
+                <li><a ui-sref="supplier"><i class="fa fa-industry"></i> All Suppliers</a>
                 </li>
 
                 <!--<li><a ui-sref="supplier"><i class="fa fa-eye"></i> Views</a>
@@ -69,13 +70,12 @@
         <!-- /col-3 -->
 
         <!-- col-9 here we inject the view -->
-        <div class="col-md-9">
+        <div class="col-md-9 col-lg-9">
             <div ui-view></div>
         </div>
         <!--/col-span-9-->
     </div>
     <!--/row-->
-
 </div>
 
 <!-- /Main -->
@@ -86,21 +86,22 @@
     <script src="static/bower_components/angular-resource/angular-resource.js"></script>
     <script src="static/bower_components/angular-route/angular-route.js"></script>
     <script src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="static/bower_components/angular-ui-bootstrap/src/datepicker/datepicker.js"></script>
     <script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
     <script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="static/js/Chart.min.js"></script>
     <script src="static/js/angular-chart.min.js"></script>
+    <script src="static/js/ui-bootstrap-tpls-0.14.3.js"></script>
     <script type="text/javascript" src="/static/js/angular-toastr.tpls.min.js"></script>
     <script type="text/javascript" src="/static/js/angular-animate.min.js"></script>
     <script src="static/js/datashareservice/data.share.service.js"></script>
 
-
-
     <script src="static/js/supplier/supplier.details.controller.js"></script>
+    <script src="static/js/supplier/supplier.controller.js"></script>
     <script src="static/js/supplier/supplier.list.controller.js"></script>
     <script src="static/js/supplier/supplier.resource.service.js"></script>
+    <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
+    <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
     <script src="static/js/authentication/authentication.service.js"></script>
     <script src="static/js/user/user.service.js"></script>
     <script src="static/js/login/login.controller.js"></script>

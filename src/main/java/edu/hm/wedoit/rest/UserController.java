@@ -97,7 +97,7 @@ public class UserController
      * @return wether the user was created or not
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
-    public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password,HttpServletRequest request, HttpServletResponse response)
+    public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response)
     {
         logger.debug("received a create user request with username: {} and password: {}",username,password );
         if (userService.createUser(username,password))
