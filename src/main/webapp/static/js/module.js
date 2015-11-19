@@ -29,8 +29,10 @@ angular.module('WeDoIt', [
     // module for login (controller)
     'login',
     'index',
+    'newuser',
     'BarChartModule',
-    'dateRange.directive'
+    'dateRange.directive',
+    'sharedService'
 
 ]);
 
@@ -74,6 +76,12 @@ angular.module('WeDoIt')
             url: '/allSuppliers/byDate',
             templateUrl: 'static/partials/supplierListByDate.html',
             controller: 'SupplierListByDateCtrl',
+            controllerAs: 'vm'
+        })
+        .state('useradmin', {
+            url: '/useradmin',
+            templateUrl: 'static/partials/userAdminPartial.html',
+            controller: 'UserController',
             controllerAs: 'vm'
         })
         //.state('supplier.all', {
