@@ -9,16 +9,19 @@ angular.module('WeDoIt', [
     'smart-table',
     'chart.js',
     'ngAnimate',
+    'ui.bootstrap',
     'toastr',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
-
     // module for all suppliers (controller)
+    'supplier',
     'supplierList',
+    'supplierListByDate',
     // module for a specific supplier (controller)
     'supplierDetails',
     // module for connect to the backend (service)
     'supplierservice',
+    'supplierserviceByDate',
     // module for authentication (service)
     'authenticationservice',
     // module for user (service)
@@ -61,20 +64,28 @@ angular.module('WeDoIt')
             templateUrl: 'static/partials/home.html'
         })
 
-        .state('allSuppliers', {
-            url: '/allSuppliers',
-            templateUrl: 'static/partials/supplierList.html',
-            controller: 'SupplierListCtrl',
-            controllerAs: 'vm'
-
-        })
-
+        //.state('supplier', {
+        //    url: '/suppliers',
+        //    templateUrl: 'static/partials/supplier.html',
+        //    controller: 'SupplierCtrl',
+        //    controllerAs: 'vm'
+        //})
         .state('supplier', {
-            url: '/supplier',
-            templateUrl: 'static/partials/supplier.html',
-            controller: 'SupplierDetailsCtrl',
+            url: '/allSuppliers/byDate',
+            templateUrl: 'static/partials/supplierListByDate.html',
+            controller: 'SupplierListByDateCtrl',
             controllerAs: 'vm'
         })
+        //.state('supplier.all', {
+        //    parent: 'supplier',
+        //    url: '/allSuppliers/all',
+        //    templateUrl: 'static/partials/supplierList.html',
+        //    controller: 'SupplierListCtrl',
+        //    controllerAs: 'vm'
+        //})
+
+
+
         .state('login', {
             url: '/login',
             templateUrl: 'static/partials/loginPage.html',
@@ -105,7 +116,7 @@ angular.module('WeDoIt')
 
             if(toState.name == "login")
             {
-                console.log("$stateChangeStart - no login chainning! returning now")
+                console.log("$stateChangeStart - no login chainning! returning now");
                 return
             }
             else
@@ -124,31 +135,5 @@ angular.module('WeDoIt')
             }
 
         });
-        //window.onload = function() {
-        //    if(localStorage.isLoggedIn != 'true') {
-        //        $state.transitionTo('login');
-        //    }
-        //};
-
-        /*
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookieStore.get('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authData; // jshint ignore:line
-        }
-
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in
-            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-                $state.transitionTo('login');
-            }
-        });
-
-        $rootScope.$on('$rootChangeError', function(event, current, previous, eventObj) {
-            $state.transitionTo('login');
-        });
-
-        */
-
     }
 

@@ -1,0 +1,135 @@
+<div ng-controller="SupplierListByDateCtrl as vm">
+    <h3><i class="fa fa-industry"></i> All Suppliers</h3>
+    <hr>
+    <div class="row">
+        <!--row datepicker / comparison-->
+        <div class="col-md-12 col-lg-12">
+            <h4>Select the time:</h4>
+
+            <p> Selected Date From: {{vm.from | date: 'fullDate'}}</p>
+            <p> Selected Date To: {{vm.to | date: 'fullDate'}}</p>
+
+            <div class="col-md-3 col-lg-3">
+                <p class="input-group">
+                    <label for="from">From: </label>
+                    <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                           ng-model="vm.from"
+                           is-open="vm.status.openfrom"
+                           min-date="vm.minDateFrom"
+                           max-date="vm.maxDateFrom"
+                           datepicker-options="vm.dateOptionsFrom"
+                           date-disabled="vm.disabledFrom(date, mode)" close-text="Close">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3">
+                <p class="input-group">
+                    <label for="to">To: </label>
+                    <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                           ng-model="vm.to"
+                           is-open="vm.status.openedto"
+                           min-date="vm.minDateTo"
+                           max-date="vm.maxDateTo"
+                           datepicker-options="vm.dateOptionsTo"
+                           date-disabled="vm.disabledTo(date, mode)"
+                           close-text="Close">
+            </div>
+        </div>
+    </div><!-- ./ row datepicker / comparison-->
+
+    <div class="row">
+        <div class="col-md-2 col-lg-2">
+            <button class="btn btn-default" style="margin-left: 16px" type="button"
+                    ng-click='vm.byDateQuery(vm.from,vm.to)'>
+                Show all Suppliers
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row" ng-show="!vm.timeIsSelected">
+    <div class="col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title"> Selected suppliers </div>
+            </div>
+            <table st-table="vm.selectedSuppliers" class="table table-hover">
+                <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="name">Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in vm.selectedSuppliers"
+                    ng-class="{'selected':$index == vm.selectedSupplierRow}"
+                    ng-click="vm.removeSelected($index,row)">
+                    <td>{{row.name}}</td>
+                    <td>{{row.score}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <div class="alert alert-danger" role="alert" ng-show="vm.error">
+        <strong>Error!</strong> {{vm.error}}
+    </div>
+
+    <div class="row" ng-show="!vm.timeIsSelected">
+        <div class="col-md-2 col-lg-2">
+            <button style="margin-left: 16px" type="button"
+                    ng-click='vm.goToComparison()'
+                    ng-disabled="vm.selectedSuppliers.length <= 1"
+                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
+                                        'btn btn-success':vm.selectedSuppliers.length > 1}" >
+                Compare
+            </button>
+        </div>
+    </div>
+
+
+<hr/>
+
+<!-- row table all supplier -->
+<div class="row" ng-show="!vm.timeIsSelected">
+    <div class="col-md-12">
+        <div class="panle panle-default">
+            <table st-table="vm.supplierList" class="table table-hover">
+                <thead>
+                <tr>
+
+                    <th st-sort="id">ID</th>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="orders">Number of Orders</th>
+                    <th st-sort="score">Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in vm.supplierList | limitTo: 50"
+                    ng-class="{'selected':$index == vm.selectedRow}"
+                    ng-click="vm.select($index,row)">
+
+                    <td>{{row.id}}</td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.numberOfOrders}}</td>
+                    <td>{{row.score}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <td colspan="5" class="text-center">
+                    <div st-times-by-page="30" st-pagination=""></div>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<!--/row table all supplier -->
+</div>

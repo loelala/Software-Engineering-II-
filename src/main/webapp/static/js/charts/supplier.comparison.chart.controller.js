@@ -13,7 +13,7 @@
     {
             var vm = this;
 
-            vm.rawData = dataShareService.getSuppliers();
+            vm.rawData = dataShareService.getSuppliersByDate();
             var displayData = vm.rawData.slice();
 
             vm.dataArray = [];
@@ -21,7 +21,7 @@
             vm.selectedRow = [];
 
             vm.goToSupplierList = function(){
-                $state.go('allSuppliers');
+                $state.go('supplier');
             }
 
             var j = 0;
