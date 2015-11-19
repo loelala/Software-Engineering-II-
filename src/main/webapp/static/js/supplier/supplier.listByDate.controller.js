@@ -16,17 +16,17 @@
         vm.removeSelected = removeSelected;
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
-        //dataShareService.eraseListByDate();
-        //vm.selectedSuppliers = dataShareService.getSuppliersByDate();
+        dataShareService.eraseListByDate();
+        vm.selectedSuppliers = dataShareService.getSuppliersByDate();
         vm.isTimeSelected = true;
 
         /*vm.goToComparison = function(){
             $state.go('comparison');
         };*/
 
-        vm.byDateQuery = function(after, before) {
+        vm.byDateQuery = function(from, to) {
             vm.isTimeSelected = false;
-            var allSuppliers = supplierserviceByDate.query({after: after, before: before});
+            var allSuppliers = supplierserviceByDate.query();
             allSuppliers.$promise.then(function(data) {
                 console.log('get all suppliers by date', data);
                 vm.supplierList = data;

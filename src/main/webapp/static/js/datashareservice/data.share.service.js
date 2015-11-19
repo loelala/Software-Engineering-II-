@@ -52,7 +52,7 @@
             }
             else
             {
-                console.log("adding new Supplier" + supplier)
+                console.log("adding new Supplier" + supplier);
                 var i = 0;
                 var index = -1;
                 for(i = 0 ; i < supplierList.length ; i++)
@@ -141,7 +141,7 @@
             getSuppliers: getSuppliers,
             getSuppliersByDate: getSuppliersByDate,
             eraseList : eraseList,
-            eraseListByDate: eraseListByDate(),
+            eraseListByDate: eraseListByDate,
             removeSupplier : removeSupplier,
             removeSupplierByDate : removeSupplierByDate
         };

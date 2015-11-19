@@ -11,9 +11,15 @@
 
     function supplierserviceByDate ($resource) {
 
-        return $resource('../../api/supplier/all/between/:after/:before ', {}, {
-            query: {method:'GET', params: {after: '@after', before: '@before'}, isArray: true}
+        var service = $resource('../../api/supplier/all/between/:from/:to ', {}, {
+            query: {
+                method:'GET',
+                params: {after: 'from', before: 'to'},
+                isArray: true
+            }
         });
+        
+        return service;
     }
 
 })();
