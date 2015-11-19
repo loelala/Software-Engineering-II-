@@ -13,6 +13,7 @@ public class Supplier
     private List<Order> orders;
     private int numberOfOrders;
     private double score = -1;
+    private Classification classification;
 
     public String getId()
     {
@@ -43,6 +44,11 @@ public class Supplier
         return score;
     }
 
+    public String getClassification()
+    {
+        return classification.toString();
+    }
+
     public void setId(String id)
     {
         this.id = id;
@@ -57,11 +63,17 @@ public class Supplier
     {
         this.orders = orders;
         this.numberOfOrders = this.orders.size();
+        this.classification = calculateClassification();
     }
 
     public void setScore(double score)
     {
         this.score = score;
+    }
+
+    public void setClassification(Classification classification)
+    {
+        this.classification = classification;
     }
 
     private void calculateScore()
@@ -79,6 +91,26 @@ public class Supplier
             this.score = 0;
         }
         return;
+    }
+
+    private Classification calculateClassification()
+    {
+        if(numberOfOrders >= 20)
+        {
+            return Classification.TOP;
+        }
+        else if(numberOfOrders < 20 && numberOfOrders > 2)
+        {
+            return Classification.NORMAL;
+        }
+        else if(numberOfOrders == 1 || numberOfOrders == 2)
+        {
+            return Classification.ONE_OFF;
+        }
+        else
+        {
+            return Classification.NONE;
+        }
     }
 
     @Override
