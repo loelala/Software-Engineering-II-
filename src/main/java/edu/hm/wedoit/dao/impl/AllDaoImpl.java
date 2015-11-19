@@ -8,13 +8,9 @@ import edu.hm.wedoit.CallbackHandler.SupplierRowCallbackHandler;
 import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
-import javafx.beans.InvalidationListener;
 
-import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-import java.util.concurrent.Exchanger;
-import java.util.concurrent.locks.Lock;
 
 /**
  * Implemetation of the {@link edu.hm.wedoit.dao.AllDao} interface
@@ -147,7 +143,16 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 @Override
                 public int compare(Supplier o1, Supplier o2)
                 {
-                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    String c1 = ((Supplier) o1).getClassification();
+                    String c2 = ((Supplier) o2).getClassification();
+
+                    int sComp = c1.compareTo(c2) *(-1);
+
+                    if (sComp != 0) {
+                        return sComp;
+                    } else {
+                        return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    }
                 }
             });
         }
@@ -274,7 +279,16 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             @Override
             public int compare(Supplier o1, Supplier o2)
             {
-                return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                String c1 = ((Supplier) o1).getClassification();
+                String c2 = ((Supplier) o2).getClassification();
+
+                int sComp = c1.compareTo(c2) *(-1);
+
+                if (sComp != 0) {
+                    return sComp;
+                } else {
+                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                }
             }
         });
         return suppliers;
