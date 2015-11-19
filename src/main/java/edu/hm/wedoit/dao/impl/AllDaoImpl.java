@@ -9,10 +9,8 @@ import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 
-import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-import java.util.concurrent.locks.Lock;
 
 /**
  * Implemetation of the {@link edu.hm.wedoit.dao.AllDao} interface
@@ -21,8 +19,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
 {
     private Map<String, Supplier> supplierList;
     private Map<String, Map<String, Order>> supplierMap;
-    private Object updateLock = new Object();
     private long cacheTime = 0;
+    private State state = State.CONNECTED;
+
 
     /**
      * This method retrieves the data from the database and fills the supplierList and the supplierMap.
@@ -38,17 +37,25 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             Map<String, Map<String, Order>> supplierMap = new HashMap<>();
 
             Map<String, Supplier> supplierList = new HashMap<>();
-            final String supplierQuery = "SELECT NAME1, LIFNR FROM sap_emulation.lfa1;";
-            jdbcTemplate.query(supplierQuery, new SupplierRowCallbackHandler(supplierList, supplierMap));
 
-            final String ebelnQuery = "SELECT LIFNR, EBELN FROM sap_emulation.ekko;";
-            jdbcTemplate.query(ebelnQuery, new EbelnRowCallbackHandler(supplierMap));
+            try
+            {
+                final String supplierQuery = "SELECT NAME1, LIFNR FROM sap_emulation.lfa1;";
+                jdbcTemplate.query(supplierQuery, new SupplierRowCallbackHandler(supplierList, supplierMap));
 
-            final String bldatQuery = "SELECT EBELN, BLDAT FROM sap_emulation.ekbe WHERE BEWTP = 'E' AND BWART = 101;";
-            jdbcTemplate.query(bldatQuery, new BldatRowCallbackHandler(supplierMap));
+                final String ebelnQuery = "SELECT LIFNR, EBELN FROM sap_emulation.ekko;";
+                jdbcTemplate.query(ebelnQuery, new EbelnRowCallbackHandler(supplierMap));
 
-            final String slfdtQuery = "SELECT EBELN, SLFDT FROM eket";
-            jdbcTemplate.query(slfdtQuery, new SlfdtRowCallbackHandler(supplierMap));
+                final String bldatQuery = "SELECT EBELN, BLDAT FROM sap_emulation.ekbe WHERE BEWTP = 'E' AND BWART = 101;";
+                jdbcTemplate.query(bldatQuery, new BldatRowCallbackHandler(supplierMap));
+
+                final String slfdtQuery = "SELECT EBELN, SLFDT FROM eket";
+                jdbcTemplate.query(slfdtQuery, new SlfdtRowCallbackHandler(supplierMap));
+            }
+            catch (Exception e)
+            {
+                state = State.NO_CONNECTION_AND_CACHE;
+            }
 
             for (Supplier s : supplierList.values())
             {
@@ -73,16 +80,21 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 {
                     this.supplierMap = supplierMap;
                     this.supplierList = supplierList;
+                    state = State.CONNECTED;
                 }
             }
             else if(this.supplierMap.isEmpty() || this.supplierList.isEmpty())
             {
                 System.out.println("No Cache and no Database connection");
+                state = State.NO_CONNECTION_AND_CACHE;
             }
             else
             {
                 System.out.println("Cache is in use");
+                state = State.CACHE_ONLY;
             }
+            setChanged();
+            notifyObservers();
 
             new Thread(new Runnable()
             {
@@ -131,7 +143,16 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 @Override
                 public int compare(Supplier o1, Supplier o2)
                 {
-                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    String c1 = ((Supplier) o1).getClassification();
+                    String c2 = ((Supplier) o2).getClassification();
+
+                    int sComp = c1.compareTo(c2) *(-1);
+
+                    if (sComp != 0) {
+                        return sComp;
+                    } else {
+                        return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    }
                 }
             });
         }
@@ -192,6 +213,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         getDataFromDatabase(false);
         Map<String, Supplier> supplierListDate = new HashMap<>();
         Map<String, Map<String, Order>> supplierMapDate= new HashMap<>();
+        Date after = new Date(from.getTime() - 1000 * 60 * 60 * 24);
+        Date before = new Date(to.getTime() + 1000 * 60 * 60 * 24);
         synchronized (this)
         {
             for (String supplierID : supplierMap.keySet())
@@ -205,8 +228,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                     {
                         continue;
                     }
-                    if (order.getDeliveryDate().after(from) && order.getDeliveryDate().before(to)
-                            || order.getPromisedDate().after(from) && order.getPromisedDate().before(to))
+                    if (order.getDeliveryDate().after(after) && order.getDeliveryDate().before(before)
+                            || order.getPromisedDate().after(after) && order.getPromisedDate().before(before))
                     {
                         Order newOrder = new Order(order);
                         newOrders.put(orderID, newOrder);
@@ -256,9 +279,23 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             @Override
             public int compare(Supplier o1, Supplier o2)
             {
-                return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                String c1 = ((Supplier) o1).getClassification();
+                String c2 = ((Supplier) o2).getClassification();
+
+                int sComp = c1.compareTo(c2) *(-1);
+
+                if (sComp != 0) {
+                    return sComp;
+                } else {
+                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                }
             }
         });
         return suppliers;
+    }
+
+    public State getState()
+    {
+        return state;
     }
 }

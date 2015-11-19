@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by B3rni on 24.10.2015.
@@ -20,11 +25,20 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/supplier")
-public class SupplierController
+public class SupplierController implements Observer
 {
+
+    private Semaphore sem = new Semaphore(1);
+    private AllDao.State newState;
 
     @Autowired
     AllDao allDao;
+
+    @PostConstruct
+    public void observeDao()
+    {
+        allDao.addObserver(this);
+    }
 
     /**
      *
@@ -85,5 +99,44 @@ public class SupplierController
         }
 
         return allDao.getAllSuppliersDate(fromDate, toDate);
+    }
+
+    /**
+     * Returns the state of the connection to the database
+     * @return the state of the connection to the database
+     */
+    @RequestMapping("/connection")
+    public AllDao.State getConnectionInfo()
+    {
+        System.out.println("getConnectionInfo Rest");
+        while(true)
+        {
+            try
+            {
+                sem.acquire();
+                return allDao.getState();
+            }
+            catch (InterruptedException ie)
+            {
+                return AllDao.State.CONNECTED;
+            }
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        AllDao dao = (AllDao) o;
+        if(newState != dao.getState())
+        {
+            newState = dao.getState();
+            sem.release();
+        }
+    }
+
+    @PreDestroy
+    void releaseDao()
+    {
+        allDao.deleteObserver(this);
     }
 }

@@ -100,7 +100,7 @@ public class UserController
     public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password,HttpServletRequest request, HttpServletResponse response)
     {
         logger.debug("received a create user request with username: {} and password: {}",username,password );
-        if (userService.createUser(username,password))
+        if (userService.createUser(username, password))
         {
             logger.debug("created {}",username);
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.CREATED);
