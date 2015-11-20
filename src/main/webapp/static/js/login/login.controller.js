@@ -5,8 +5,8 @@
         .module('login', [])
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'AuthenticationService'];
-    function LoginController($state, AuthenticationService) {
+    LoginController.$inject = ['$state', 'AuthenticationService','loginInformationHolderService'];
+    function LoginController($state, AuthenticationService,loginInformationHolderService) {
         var vm = this;
 
         vm.username = '';
@@ -30,11 +30,30 @@
 
         vm.login = function(username, password){
             AuthenticationService.login(username, password)
-                .then(function() { //success
+                .then(function(data) { //success
                 console.log('Login sucesss!');
-                localStorage.isLoggedIn = 'true';
+                //localStorage.isLoggedIn = 'true';
+                    loginInformationHolderService.updateIsLoggedIn(true);
+                    var headers = data.headers();
+                    console.log(data);
+                    console.log(data.headers());
+                    console.log(headers["wedoit-admin"]);
+                if(headers["wedoit-admin"] === "true")
+                {
+                    console.log("is admin login from login controller");
+                    loginInformationHolderService.updateIsAdmin(true);
+                }
+                else
+                {
+                    console.log("is NOTZ A admin login from login controller");
+                    loginInformationHolderService.updateIsAdmin(false);
+
+                }
                 $state.transitionTo('home');
                 vm.error = null;
+
+
+
             }, function() { //error
                 console.log('error by login');
                 vm.error = 'Username or password is incorrect!';

@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-md-2 col-lg-2">
             <button class="btn btn-default" style="margin-left: 16px" type="button"
-                    ng-click='vm.byDateQuery(vm.to, vm.form)'>
+                    ng-click='vm.byDateQuery(vm.from,vm.to)'>
                 Show all Suppliers
             </button>
         </div>
@@ -109,6 +109,7 @@
                     <th st-sort="name">Name</th>
                     <th st-sort="orders">Number of Orders</th>
                     <th st-sort="score">Score</th>
+                    <th st-sort="score">classification</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -120,6 +121,7 @@
                     <td>{{row.name}}</td>
                     <td>{{row.numberOfOrders}}</td>
                     <td>{{row.score}}</td>
+                    <td>{{row.classification}}</td>
                 </tr>
                 </tbody>
                 <tfoot>

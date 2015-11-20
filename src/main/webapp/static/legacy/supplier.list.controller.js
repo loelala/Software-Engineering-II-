@@ -19,6 +19,7 @@
         dataShareService.eraseList();
         vm.selectedSuppliers = dataShareService.getSuppliers();
 
+
         vm.goToComparison = function () {
             $state.go('comparison');
         };
@@ -38,8 +39,10 @@
             vm.idSelectedSupplier = selectedSupplier.id;
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
             if (dataShareService.addSupplier(selectedSupplier)) {
-
+                console.log("Size of selectedSuppliers " + vm.selectedSuppliers.length);
                 console.log('added ' + selectedSupplier + ' to dataShareService');
+                //vm.selectedSuppliers = dataShareService.getSuppliers();
+                //console.log("Size of selectedSuppliers " + vm.selectedSuppliers.length);
                 toastr.success('Added \"' + selectedSupplier['name'] + '\" to the checklist');
             }
             else {
@@ -55,8 +58,8 @@
 
         }
 
-        function removeSelected(selectedSupplier) {
-            console.log("removing " + selectedSupplier);
+        function removeSelected(index, selectedSupplier) {
+            console.log("removing index: "+ index + " object:  "  + selectedSupplier);
             dataShareService.removeSupplier(selectedSupplier);
         }
 

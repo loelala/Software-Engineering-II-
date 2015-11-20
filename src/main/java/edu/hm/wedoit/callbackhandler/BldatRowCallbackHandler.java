@@ -1,4 +1,4 @@
-package edu.hm.wedoit.CallbackHandler;
+package edu.hm.wedoit.callbackhandler;
 
 import edu.hm.wedoit.model.Order;
 import org.springframework.jdbc.core.RowCallbackHandler;
@@ -10,11 +10,11 @@ import java.util.Map;
 /**
  * Created by Joncn on 10.11.2015.
  */
-public class EbelnRowCallbackHandler implements RowCallbackHandler
+public class BldatRowCallbackHandler implements RowCallbackHandler
 {
     private Map<String, Map<String, Order>> map;
 
-    public EbelnRowCallbackHandler(Map<String, Map<String, Order>> map)
+    public BldatRowCallbackHandler(Map<String, Map<String, Order>> map)
     {
         this.map = map;
     }
@@ -26,10 +26,12 @@ public class EbelnRowCallbackHandler implements RowCallbackHandler
         while(resultSet.next())
         {
             String ebeln = resultSet.getString("EBELN");
-            String lifnr = resultSet.getString("LIFNR");
-            if(map.containsKey(lifnr))
+            for(Map<String, Order> m : map.values())
             {
-                map.get(resultSet.getString("LIFNR")).put(ebeln, new Order(ebeln));
+                if(m.containsKey(ebeln))
+                {
+                    m.get(ebeln).setDeliveryDate(resultSet.getDate("BLDAT"));
+                }
             }
         }
     }

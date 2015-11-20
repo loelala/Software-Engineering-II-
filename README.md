@@ -28,10 +28,10 @@ One view must give the overview of all suppliers containing the average of them.
 #### 1.1.2	Detailed View for each supplier 
 If a supplier is clicked, a detailed view of this supplier should appear. In this view a bar chart should show the deliveries of the supplier and if they were in time or not. It should give a nice overview of all deliveries of this single supplier
 
-#### 1.1.3	Comparing some suppliers (maximum of 4)(done)
-An optional feature is to compare multiple suppliers by selecting more than one supplier in the 1.1.2 - view. Then a new view should show something similar to 1.1.3 comparing all checked suppliers.
+#### 1.1.3	Comparing some suppliers (maximum of 4)(party "missing category labels")
+An optional feature is to compare multiple suppliers by selecting more than one supplier in the 1.1.2 - view. Then a new view should show something similar to 1.1.3 comparing all checked suppliers. The Label should say the suppliers classification next to it's name.
 
-### 1.2	Chooseable time interval
+### 1.2	Chooseable time interval (done)
 A time interval must be chooseable for the whole application, so that the comparing is done for this interval.
 
 ### 1.3	Authentication (done)
@@ -49,11 +49,14 @@ The application must be usable on a desktop-pc with Windows 7 as OS and on a tab
 ### 1.6	Database error handling (done)
 The application must inform the user if there are any error with the database (fetching data or connecting to database).
 
-### 1.7 Supplier cathegories
+### 1.7 Supplier cathegories (done)
 There should be a possibility to categorise suppliers by the amount of orders.
 
 ### 1.7.1 Category management
 The admin should be able to change the category requirements.
+
+### 1.7.2 Category selection
+Allow the user to select all the users in a category.
 
 ### 1.8 Scoring management
 The admin should be able to change the scoring algorithm.
@@ -61,7 +64,7 @@ The admin should be able to change the scoring algorithm.
 
 ## 2.	Non-Functional Requirements
 
-### 2.1	Database access
+### 2.1	Database access (done)
 The client-company allows read-only access to the MySQL-Database over a remote SSH-Connection. The data is sensitive, therefor encryption is needed to transfer data between the company internal infrastructures to the client side of the application.
 
 ### 2.2	Documentation

@@ -1,5 +1,7 @@
 /**
- * Controller for all suppliers (the list of suppliers).
+ * Important controller that handles all the input in the supplier overview
+ * as well as adding the selected supplier to the dataShareService which is
+ * necessary to get the data to the other controller (barChartController)
  */
 (function() {
     'use strict';
@@ -7,11 +9,11 @@
     angular.module('supplierListByDate', [])
         .controller('SupplierListByDateCtrl', SupplierListByDateCtrl);
 
-    SupplierListByDateCtrl.$inject = ['$scope','$state','supplierserviceByDate','dataShareService','toastr'];
+    SupplierListByDateCtrl.$inject = ['$filter','$state','supplierserviceByDate','dataShareService','toastr'];
 
-    function SupplierListByDateCtrl ($state,supplierserviceByDate,dataShareService,toastr) {
+    function SupplierListByDateCtrl ($filter,$state,supplierserviceByDate,dataShareService,toastr) {
         var vm = this;
-
+        const formatString = "ddMMyyyy";
         vm.select = select;
         vm.removeSelected = removeSelected;
         vm.selectedRow = null;
@@ -20,13 +22,17 @@
         vm.selectedSuppliers = dataShareService.getSuppliersByDate();
         vm.isTimeSelected = true;
 
-        /*vm.goToComparison = function(){
+        vm.goToComparison = function(){
             $state.go('comparison');
-        };*/
+        };
 
         vm.byDateQuery = function(from, to) {
+            var fromToPost = $filter('date')(from,formatString);
+            var toToPost = $filter('date')(to,formatString);
+            console.log(fromToPost);
+            console.log(toToPost);
             vm.isTimeSelected = false;
-            var allSuppliers = supplierserviceByDate.query();
+            var allSuppliers = supplierserviceByDate.query({from:fromToPost,to:toToPost});
             allSuppliers.$promise.then(function(data) {
                 console.log('get all suppliers by date', data);
                 vm.supplierList = data;
@@ -43,6 +49,7 @@
             console.log('selectedSupplier ID: ', vm.idSelectedSupplier);
             if(dataShareService.addSupplierByDate(selectedSupplier))
             {
+                console.log("Size of selectedSuppliers " + vm.selectedSuppliers.length);
                 console.log('added ' + selectedSupplier + ' to dataShareService');
                 toastr.success('Added \"' + selectedSupplier['name'] + '\" to the checklist');
             }
@@ -61,8 +68,8 @@
             }
 
         }
-        function removeSelected(selectedSupplier) {
-            console.log("removing " + selectedSupplier);
+        function removeSelected(index, selectedSupplier) {
+            console.log("removing index: "+ index + " object:  "  + selectedSupplier);
             dataShareService.removeSupplierByDate(selectedSupplier);
         }
 
@@ -150,7 +157,7 @@
             startingDay: 1
         };
 
-        vm.formats = ['dd-MMMM-yyyy'];
+        vm.formats = ['dd-MM-yyyy'];
         vm.format = vm.formats[0];
 
         vm.status = {

@@ -1,4 +1,4 @@
-package edu.hm.wedoit.CallbackHandler;
+package edu.hm.wedoit.callbackhandler;
 
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
