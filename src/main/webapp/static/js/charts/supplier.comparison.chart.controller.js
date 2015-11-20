@@ -1,11 +1,13 @@
 /**
- * Created by B3rni on 07.11.2015.
+ *  The bartChartController uses a external js library specially for anuglarjs to display
+ *  the bar Chart on the BarChartPage.
+ *  It uses the dataShareService to get the Information from the all supplier list
  */
 
 (function() {
     'use strict';
-    angular.module("BarChartModule", ["chart.js"])
-        .controller("BarChartController", BarChartController);
+    angular.module("barChartModule", ["chart.js"])
+        .controller("barChartController", BarChartController);
 
     BarChartController.$inject = ['$state','dataShareService','toastr'];
 
@@ -60,11 +62,6 @@
                 ];
             }
 
-
-            //vm.supplierNameArray.forEach(function(entry){
-            //    console.log(entry);
-            //})
-
             console.log("raw data" + dataShareService.getSuppliers());
 
 
@@ -89,7 +86,7 @@
             if(check != -1 )
             {
                 console.log("splicing one out")
-                //displayData.splice(index, 1);
+
                 var k = 0 ;
                 var count = 0;
                 for(k = 0 ; k < vm.selectedRow.length ; k++)
@@ -109,7 +106,7 @@
             else
             {
                 console.log("pushing again to view")
-                //displayData.push(selectedSupplier);
+
                 vm.selectedRow[index] = true;
 
             }
@@ -132,25 +129,3 @@
         }
     };
 })();
-/**
-// * Created by B3rni on 07.11.2015.
-// */
-//
-//(function() {
-//    'use strict';
-//    angular.module("BarChartModule", ["chart.js", "dataShareService"])
-//        .controller("BarChartController", function ($scope,dataShareService) {
-//
-//
-//
-//
-//            $scope.labels = ['Supploer A', 'Supplier B', 'Supplier C', 'Supplier D'];
-//            $scope.series = ['Score'];
-//            $scope.colours = [{
-//                fillColor: 'rgba(220,0,0,0.5)'
-//            }];
-//            $scope.data = [
-//                [9, 8, 7, 6]
-//            ];
-//        });
-//})();

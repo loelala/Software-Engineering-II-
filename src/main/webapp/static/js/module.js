@@ -14,13 +14,13 @@ angular.module('WeDoIt', [
     /* ---- custom modules ----*/
     'DataShareServiceModule',
     // module for all suppliers (controller)
-    'supplier',
-    'supplierList',
+    //'supplier',
+    //'supplierList',
     'supplierListByDate',
     // module for a specific supplier (controller)
-    'supplierDetails',
+    //'supplierDetails',
     // module for connect to the backend (service)
-    'supplierservice',
+    //'supplierservice',
     'supplierserviceByDate',
     // module for authentication (service)
     'authenticationservice',
@@ -30,9 +30,9 @@ angular.module('WeDoIt', [
     'login',
     'index',
     'newuser',
-    'BarChartModule',
+    'barChartModule',
     'dateRange.directive',
-    'sharedService'
+    'loginInformationHolderModule'
 
 ]);
 
@@ -65,13 +65,6 @@ angular.module('WeDoIt')
             url: '/home',
             templateUrl: 'static/partials/home.html'
         })
-
-        //.state('supplier', {
-        //    url: '/suppliers',
-        //    templateUrl: 'static/partials/supplier.html',
-        //    controller: 'SupplierCtrl',
-        //    controllerAs: 'vm'
-        //})
         .state('supplier', {
             url: '/allSuppliers/byDate',
             templateUrl: 'static/partials/supplierListByDate.html',
@@ -84,16 +77,6 @@ angular.module('WeDoIt')
             controller: 'UserController',
             controllerAs: 'vm'
         })
-        //.state('supplier.all', {
-        //    parent: 'supplier',
-        //    url: '/allSuppliers/all',
-        //    templateUrl: 'static/partials/supplierList.html',
-        //    controller: 'SupplierListCtrl',
-        //    controllerAs: 'vm'
-        //})
-
-
-
         .state('login', {
             url: '/login',
             templateUrl: 'static/partials/loginPage.html',
@@ -114,9 +97,9 @@ angular.module('WeDoIt')
 
     }
 
-    run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http'];
+    run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http','loginInformationHolderService'];
 
-    function run($state, $rootScope) {
+    function run($state, $rootScope,$location,$cookieStore,$http,loginInformationHolderService) {
 
         $state.transitionTo('login');
 
@@ -129,17 +112,18 @@ angular.module('WeDoIt')
             }
             else
             {
-                if(localStorage.isLoggedIn != 'true')
+                console.log("is logged in status from loginInformationHolerService" + loginInformationHolderService.isLoggedIn());
+                if(!loginInformationHolderService.isLoggedIn())
                 {
                     console.log("tostate name " + toState.name)
                     console.log("stateChangeSTart - IF");
                     event.preventDefault();
                     $state.go('login');
                 }
-                else
-                {
-                    console.log("The User is Logged in? " + localStorage.isLoggedIn);
-                }
+                //else
+                //{
+                //    //console.log("The User is Logged in? " + localStorage.isLoggedIn);
+                //}
             }
 
         });

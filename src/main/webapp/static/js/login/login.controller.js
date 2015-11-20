@@ -5,8 +5,8 @@
         .module('login', [])
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'AuthenticationService','shareService'];
-    function LoginController($state, AuthenticationService,shareService) {
+    LoginController.$inject = ['$state', 'AuthenticationService','loginInformationHolderService'];
+    function LoginController($state, AuthenticationService,loginInformationHolderService) {
         var vm = this;
 
         vm.username = '';
@@ -32,8 +32,8 @@
             AuthenticationService.login(username, password)
                 .then(function(data) { //success
                 console.log('Login sucesss!');
-                localStorage.isLoggedIn = 'true';
-
+                //localStorage.isLoggedIn = 'true';
+                    loginInformationHolderService.updateIsLoggedIn(true);
                     var headers = data.headers();
                     console.log(data);
                     console.log(data.headers());
@@ -41,12 +41,13 @@
                 if(headers["wedoit-admin"] === "true")
                 {
                     console.log("is admin login from login controller");
-                    shareService.updateIsAdmin(true);
+                    loginInformationHolderService.updateIsAdmin(true);
                 }
                 else
                 {
                     console.log("is NOTZ A admin login from login controller");
-                    shareService.updateIsAdmin(false);
+                    loginInformationHolderService.updateIsAdmin(false);
+
                 }
                 $state.transitionTo('home');
                 vm.error = null;

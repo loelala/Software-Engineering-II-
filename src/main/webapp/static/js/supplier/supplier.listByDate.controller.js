@@ -1,5 +1,7 @@
 /**
- * Controller for all suppliers (the list of suppliers).
+ * Important controller that handles all the input in the supplier overview
+ * as well as adding the selected supplier to the dataShareService which is
+ * necessary to get the data to the other controller (barChartController)
  */
 (function() {
     'use strict';

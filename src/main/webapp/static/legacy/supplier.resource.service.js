@@ -1,5 +1,5 @@
 /**
- * This is the module where we can define the functionality to connect to our backend.
+ *
  */
 (function() {
     'use strict';

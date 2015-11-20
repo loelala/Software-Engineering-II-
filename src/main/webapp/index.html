@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>WeDoIT Supplier Comparison Application for NoKloo'boutIT</title>
-    <meta name="generator" content="Bootply" />
+    <meta name="generator" content="Bootply"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="static/css/angular-chart.min.css">
     <link href="static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -14,105 +14,108 @@
     <link href="static/fronts/fonts-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="static/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css"/>
     <link rel="stylesheet" href="static/bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
 <body>
+
 <!-- header -->
-<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid" ng-controller="IndexCtrl as vm">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Supplier Management</a>
+<div ng-controller="IndexCtrl as vm">
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Supplier Management</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i
+                                class="fa fa-user"></i> Admin <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a ui-sref="login" ng-click="vm.logout()"><i class="fa fa-lock"></i> Logout</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> Admin <span class="caret"></span></a>
-                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="#">My Profile</a></li>
-                    </ul>
-                </li>
-                <li><a ui-sref="login" ng-click="vm.logout()"><i class="fa fa-lock"></i> Logout</a></li>
-            </ul>
-        </div>
+        <!-- /container -->
     </div>
-    <!-- /container -->
-</div>
-<!-- /Header -->
+    <!-- /Header -->
 
-<!-- Main -->
-<div class="container-fluid">
-    <div class="row col-lg-12 col-md-12">
-        <!-- Left column -->
-        <div class="col-md-3 col-lg-3">
-            <a><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
-
-            <hr>
-
-            <ul class="nav nav-stacked">
-                <li class="active"> <a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+    <!-- Main -->
+    <div class="container-fluid">
+        <div class="row col-lg-12 col-md-12">
+            <!-- Left column -->
+            <!-- Left column -->
+            <div ng-if="isLoggedIn" class="col-md-3 col-lg-3">
+                <a><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
 
                 <hr>
 
-                <li><a ui-sref="supplier"><i class="fa fa-industry"></i> All Suppliers</a>
-                </li>
+                <ul class="nav nav-stacked">
+                    <li class="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
 
-                <li><a ui-sref="useradmin"><i class="fa fa-industry"></i> Users administration</a>
-                </li>
+                    <hr>
 
-                <!--<li><a ui-sref="supplier"><i class="fa fa-eye"></i> Views</a>
-                </li>-->
-            </ul>
+                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i>All Suppliers</a>
+                    </li>
 
-            <hr>
+
+                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-industry"></i>Users administration</a>
+                    </li>
+
+                </ul>
+
+                <hr>
+            </div>
+            <!-- /col-3 -->
+
+            <!-- col-9 here we inject the view -->
+            <div class="col-md-9 col-lg-9">
+                <div ui-view></div>
+            </div>
+            <!--/col-span-9-->
         </div>
-        <!-- /col-3 -->
-
-        <!-- col-9 here we inject the view -->
-        <div class="col-md-9 col-lg-9">
-            <div ui-view></div>
-        </div>
-        <!--/col-span-9-->
+        <!--/row-->
     </div>
-    <!--/row-->
 </div>
-
 <!-- /Main -->
-    <!-- script references -->
-    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="static/bower_components/angular/angular.js"></script>
-    <script src="static/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="static/bower_components/angular-route/angular-route.js"></script>
-    <script src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
-    <script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="static/js/Chart.min.js"></script>
-    <script src="static/js/angular-chart.min.js"></script>
-    <script src="static/js/ui-bootstrap-tpls-0.14.3.js"></script>
-    <script type="text/javascript" src="/static/js/angular-toastr.tpls.min.js"></script>
-    <script type="text/javascript" src="/static/js/angular-animate.min.js"></script>
-    <script src="static/js/datashareservice/data.share.service.js"></script>
-    <script src="static/js/datashareservice/sharedService.js"></script>
-    <script src="static/js/user/user.controller.js"></script>
-    <script src="static/js/supplier/supplier.details.controller.js"></script>
-    <script src="static/js/supplier/supplier.controller.js"></script>
-    <script src="static/js/supplier/supplier.list.controller.js"></script>
-    <script src="static/js/supplier/supplier.resource.service.js"></script>
-    <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
-    <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
-    <script src="static/js/authentication/authentication.service.js"></script>
-    <script src="static/js/user/user.service.js"></script>
-    <script src="static/js/login/login.controller.js"></script>
-    <script src="static/js/index/index.controller.js"></script>
-    <script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
-    <script src="static/js/supplier/dateRange.directive.js"></script>
-    <script src="static/js/module.js"></script>
+<!-- script references -->
+<script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="static/bower_components/angular/angular.js"></script>
+<script src="static/bower_components/angular-resource/angular-resource.js"></script>
+<script src="static/bower_components/angular-route/angular-route.js"></script>
+<script src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+<script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="static/js/Chart.min.js"></script>
+<script src="static/js/angular-chart.min.js"></script>
+<script src="static/js/ui-bootstrap-tpls-0.14.3.js"></script>
+<script type="text/javascript" src="/static/js/angular-toastr.tpls.min.js"></script>
+<script type="text/javascript" src="/static/js/angular-animate.min.js"></script>
+<script src="static/js/datashareservice/data.share.service.js"></script>
+<script src="static/js/datashareservice/login.information.service.js"></script>
+<script src="static/js/user/user.controller.js"></script>
+<!--<script src="static/js/supplier/supplier.details.controller.js"></script>-->
+<!--<script src="static/js/supplier/supplier.controller.js"></script>-->
+<!--<script src="static/js/supplier/supplier.list.controller.js"></script>-->
+<!--<script src="static/js/supplier/supplier.resource.service.js"></script>-->
+<script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
+<script src="static/js/supplier/supplier.listByDate.controller.js"></script>
+<script src="static/js/authentication/authentication.service.js"></script>
+<script src="static/js/user/user.service.js"></script>
+<script src="static/js/login/login.controller.js"></script>
+<script src="static/js/index/index.controller.js"></script>
+<script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
+<script src="static/js/supplier/dateRange.directive.js"></script>
+<script src="static/js/module.js"></script>
 </body>
 
 </html>
