@@ -16,6 +16,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService
 {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     UserManagement userManagement;
 
