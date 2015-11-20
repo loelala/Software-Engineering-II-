@@ -143,7 +143,16 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 @Override
                 public int compare(Supplier o1, Supplier o2)
                 {
-                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    String c1 = ((Supplier) o1).getClassification();
+                    String c2 = ((Supplier) o2).getClassification();
+
+                    int sComp = c1.compareTo(c2) *(-1);
+
+                    if (sComp != 0) {
+                        return sComp;
+                    } else {
+                        return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                    }
                 }
             });
         }
@@ -270,7 +279,16 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             @Override
             public int compare(Supplier o1, Supplier o2)
             {
-                return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                String c1 = ((Supplier) o1).getClassification();
+                String c2 = ((Supplier) o2).getClassification();
+
+                int sComp = c1.compareTo(c2) *(-1);
+
+                if (sComp != 0) {
+                    return sComp;
+                } else {
+                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
+                }
             }
         });
         return suppliers;
