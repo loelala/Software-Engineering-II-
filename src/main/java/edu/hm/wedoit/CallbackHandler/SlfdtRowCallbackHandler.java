@@ -1,4 +1,4 @@
-package edu.hm.wedoit.CallbackHandler;
+package edu.hm.wedoit.callbackhandler;
 
 import edu.hm.wedoit.model.Order;
 import org.springframework.jdbc.core.RowCallbackHandler;
