@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 /**
- * Created by Joncn on 10.11.2015.
+ * This CallbackHandler fills the given map with the EBELN(Order ID) and the SLFDT(Promised Date) for each supplier
  */
 public class SlfdtRowCallbackHandler implements RowCallbackHandler
 {

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Joncn on 10.11.2015.
+ * This CallbackHandler fills the given maps with the LIFNR(ID) and the NAME1(Name) for each supplier
  */
 public class SupplierRowCallbackHandler implements RowCallbackHandler
 {
