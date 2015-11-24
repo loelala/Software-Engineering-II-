@@ -192,6 +192,10 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         return null;
     }
 
+    /**
+     *
+     * {@link AllDao#getAllSuppliersDate(Date, Date)}
+     */
     @Override
     public List<Supplier> getAllSuppliersDate(java.sql.Date from, java.sql.Date to)
     {
@@ -199,8 +203,10 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         getDataFromDatabase(false);
         Map<String, Supplier> supplierListDate = new HashMap<>();
         Map<String, Map<String, Order>> supplierMapDate= new HashMap<>();
+
         Date after = new Date(from.getTime() - 1000 * 60 * 60 * 24);
         Date before = new Date(to.getTime() + 1000 * 60 * 60 * 24);
+
         synchronized (this)
         {
             for (String supplierID : supplierMap.keySet())
@@ -265,6 +271,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         return suppliers;
     }
 
+    /**
+     * {@link AllDao#getState()}
+     */
     public State getState()
     {
         return state;

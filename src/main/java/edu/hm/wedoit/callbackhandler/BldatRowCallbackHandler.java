@@ -19,7 +19,6 @@ public class BldatRowCallbackHandler implements RowCallbackHandler
         this.map = map;
     }
 
-
     @Override
     public void processRow(ResultSet resultSet) throws SQLException
     {

@@ -103,7 +103,9 @@ public class SupplierController implements Observer
 
     /**
      * Returns the state of the connection to the database
-     * @return the state of the connection to the database
+     * Blocks if the connection isn't changing
+     * Can be used for long polling requests
+     * @return The state of the connection to the database
      */
     @RequestMapping("/connection")
     public AllDao.State getConnectionInfo()
