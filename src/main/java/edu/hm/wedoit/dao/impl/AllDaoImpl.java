@@ -5,6 +5,7 @@ import edu.hm.wedoit.callbackhandler.BldatRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.EbelnRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SlfdtRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SupplierRowCallbackHandler;
+import edu.hm.wedoit.comparators.ClassificationScoreComparator;
 import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
@@ -138,23 +139,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 suppliers = new ArrayList(s);
             }
 
-            Collections.sort(suppliers, new Comparator<Supplier>()
-            {
-                @Override
-                public int compare(Supplier o1, Supplier o2)
-                {
-                    String c1 = ((Supplier) o1).getClassification();
-                    String c2 = ((Supplier) o2).getClassification();
+            Collections.sort(suppliers, new ClassificationScoreComparator());
 
-                    int sComp = c1.compareTo(c2) *(-1);
-
-                    if (sComp != 0) {
-                        return sComp;
-                    } else {
-                        return Double.compare(o1.getScore(), o2.getScore()) * (-1);
-                    }
-                }
-            });
         }
         return suppliers;
     }
@@ -274,23 +260,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             suppliers = new ArrayList(s);
         }
 
-        Collections.sort(suppliers, new Comparator<Supplier>()
-        {
-            @Override
-            public int compare(Supplier o1, Supplier o2)
-            {
-                String c1 = ((Supplier) o1).getClassification();
-                String c2 = ((Supplier) o2).getClassification();
+        Collections.sort(suppliers, new ClassificationScoreComparator());
 
-                int sComp = c1.compareTo(c2) *(-1);
-
-                if (sComp != 0) {
-                    return sComp;
-                } else {
-                    return Double.compare(o1.getScore(), o2.getScore()) * (-1);
-                }
-            }
-        });
         return suppliers;
     }
 
