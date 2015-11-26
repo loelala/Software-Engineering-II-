@@ -1,5 +1,6 @@
 package edu.hm.wedoit.dao;
 
+import edu.hm.wedoit.model.Classification;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 
@@ -48,6 +49,8 @@ public interface AllDao
      * @return The list of all supplieres with their orders between the date-range
      */
     List<Supplier> getAllSuppliersDate(Date from, Date to);
+
+    List<Supplier> getAllSuppliersClassificationDate(Classification classification, Date fromDate, Date toDate);
 
     /**
      * A blocking method for returning the current state of the database-connection

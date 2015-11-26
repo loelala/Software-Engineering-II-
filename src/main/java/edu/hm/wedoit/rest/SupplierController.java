@@ -1,6 +1,7 @@
 package edu.hm.wedoit.rest;
 
 import edu.hm.wedoit.dao.AllDao;
+import edu.hm.wedoit.model.Classification;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 import org.slf4j.Logger;
@@ -53,6 +54,7 @@ public class SupplierController implements Observer
         return allDao.getAllSuppliersWithScore();
     }
 
+
     /**
      *
      * @param id of the supplier
@@ -84,7 +86,9 @@ public class SupplierController implements Observer
      * @return suppliers with score based on a time interval
      */
     @RequestMapping("/all/between/{from}/{to}")
-    public List<Supplier> getAllSuppliersDate(@PathVariable(value="from") String from, @PathVariable(value="to") String to)
+    public List<Supplier> getAllSuppliersDate(
+            @PathVariable(value="from") String from,
+            @PathVariable(value="to") String to)
     {
         logger.debug("getAllSuppliersDate( + " + from + ", " + to + " )");
         DateFormat format = new SimpleDateFormat("ddMMyyyy");
@@ -101,6 +105,33 @@ public class SupplierController implements Observer
         }
 
         return allDao.getAllSuppliersDate(fromDate, toDate);
+    }
+
+    @RequestMapping("/all/{classification}/between/{from}/{to}")
+    public List<Supplier> getAllSuppliersClassificationDate(
+            @PathVariable(value="classification") String classification,
+            @PathVariable(value="from") String from,
+            @PathVariable(value="to") String to)
+    {
+        logger.debug("getAllSuppliersClassificationDate({}, {}, {})", classification, from, to);
+
+        DateFormat format = new SimpleDateFormat("ddMMyyyy");
+        Date fromDate;
+        Date toDate;
+        try
+        {
+            fromDate = new Date(format.parse(from).getTime());
+            toDate = new Date(format.parse(to).getTime());
+        }
+        catch (ParseException e)
+        {
+            throw new IllegalArgumentException();
+        }
+
+        Classification c = Classification.NORMAL;
+        //todo: string classification to Classification
+
+        return allDao.getAllSuppliersClassificationDate(c, fromDate, toDate);
     }
 
     /**

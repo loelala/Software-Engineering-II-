@@ -44,7 +44,12 @@ public class Supplier
         return score;
     }
 
-    public String getClassification()
+    public Classification getClassification()
+    {
+        return classification;
+    }
+
+    public String getClassificationAsString()
     {
         return classification.toString();
     }

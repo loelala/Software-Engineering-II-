@@ -88,7 +88,62 @@ public class Order
 
             int dayCount = (int) diff / (24 * 60 * 60 * 1000);
 
-            switch (dayCount) {
+            // 0 or -1
+            int pMin100 = 0;
+            int pMax100 = 0;
+            int nMin100 = -1;
+            int nMax100 = -1;
+
+            // 1 - 3 or -2
+            int pMin90 = pMax100 +1;
+            int pMax90 = 3;
+            int nMin90 = -2;
+            int nMax90 = nMin100 -1;
+
+            // 4 - 7 or -3
+            int pMin80 = pMax90 +1;
+            int pMax80 = 7;
+            int nMin80 = -3;
+            int nMax80 = nMin80 -1;
+
+            // 8 - 14 or -4 - -7
+            int pMin60 = pMax80 + 1;
+            int pMax60 = 14;
+            int nMin60 = -7;
+            int nMax60 = nMin80 -1;
+
+            // 15 - 28 or -8 - -10
+            int pMin40 = pMax60 +1;
+            int pMax40 = 28;
+            int nMin40 = -10;
+            int nMax40 = nMin60 -1;
+
+            if(checkScoreRange(dayCount, pMin100, pMax100, nMin100, nMax100))
+            {
+                orderScore = 100;
+            }
+            else if(checkScoreRange(dayCount, pMin90, pMax90, nMin90, nMax90))
+            {
+                orderScore = 90;
+            }
+            else if(checkScoreRange(dayCount, pMin80, pMax80, nMin80, nMax80))
+            {
+                orderScore = 80;
+            }
+            else if(checkScoreRange(dayCount, pMin60, pMax60, nMin60, nMax60))
+            {
+                orderScore = 60;
+            }
+            else if(checkScoreRange(dayCount, pMin40, pMax40, nMin40, nMax40))
+            {
+                orderScore = 40;
+            }
+            else
+            {
+                orderScore = 0;
+            }
+
+/*            switch (dayCount) {
                 //0 or -1
                 case 0:
                 case -1:
@@ -152,13 +207,16 @@ public class Order
                 default:
                     orderScore = 0;
                     break;
-            }
+            }*/
         }
         else
         {
             orderScore = 0;
         }
+    }
 
-        return;
+    private boolean checkScoreRange(int dayCount, int pMin, int pMax, int nMin, int nMax)
+    {
+        return (dayCount >= pMin && dayCount <= pMax) || (dayCount >= nMin && dayCount <= nMax);
     }
 }
