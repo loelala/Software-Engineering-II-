@@ -7,9 +7,9 @@
     angular.module('index', [])
         .controller('IndexCtrl', IndexCtrl);
 
-    IndexCtrl.$inject = ['$scope','$state', 'loginInformationHolderService'];
+    IndexCtrl.$inject = ['$scope', 'loginInformationHolderService'];
 
-    function IndexCtrl  ($scope,$state, loginInformationHolderService) {
+    function IndexCtrl  ($scope, loginInformationHolderService) {
         var vm = this;
 
         vm.actualUser = loginInformationHolderService.actualUser();
@@ -18,16 +18,10 @@
         $scope.isLoggedIn = loginInformationHolderService.isLoggedIn();
         $scope.$watch(loginInformationHolderService.isAdmin,function(){
             $scope.isAdmin = loginInformationHolderService.isAdmin();
-            //console.log("watcher!!!! func share" + loginInformationHolderService.isAdmin())
-            //console.log("watcher!!!! share" + loginInformationHolderService.isAdmin);
-            //console.log("watcher!!!! " + $scope.isAdmin);
 
         });
         $scope.$watch(loginInformationHolderService.isLoggedIn,function(){
             $scope.isLoggedIn = loginInformationHolderService.isLoggedIn();
-            //console.log("watcher!!!! func share" + loginInformationHolderService.isLoggedIn())
-            //console.log("watcher!!!! share" + loginInformationHolderService.isLoggedIn);
-            //console.log("watcher!!!! " + $scope.isLoggedIn);
 
         });
 
@@ -37,8 +31,6 @@
 
         vm.logout = function(){
             console.log("user logging out!");
-            //localStorage.removeItem('isLoggedIn');
-            //localStorage.removeItem('isAdmin');
             loginInformationHolderService.updateIsAdmin(false);
             loginInformationHolderService.updateIsLoggedIn(false);
             loginInformationHolderService.updateActualUser('');

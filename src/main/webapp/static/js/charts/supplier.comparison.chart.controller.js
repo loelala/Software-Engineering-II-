@@ -22,17 +22,21 @@
             vm.supplierNameArray = [];
             vm.selectedRow = [];
 
-            vm.goToSupplierList = function(){
+            vm.goToSupplierList = goToSupplierList;
+
+            function goToSupplierList(){
                 $state.go('supplier');
             }
 
-            var j = 0;
+            var j;
+
             for(j = 0 ; j < vm.rawData.length ;j++)
             {
                 vm.selectedRow[j] = true;
             }
 
             buildDisplayData();
+
             function buildDisplayData()
             {
                 console.log("building Display DAta");
@@ -112,7 +116,7 @@
             }
             recreate();
             buildDisplayData();
-        }
+        };
 
         function recreate()
         {
@@ -127,5 +131,5 @@
                 }
             }
         }
-    };
+    }
 })();

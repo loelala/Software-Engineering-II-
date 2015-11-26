@@ -45,103 +45,31 @@
 
         };
 
-        //var addSupplier = function(supplier) {
-            //    if(supplierList.length >= 4)
-            //    {
-            //        console.log("not adding supplier, cant have more than 4");
-            //        return false;
-            //    }
-            //    else
-            //    {
-            //        console.log("trying to add new Supplier" + supplier);
-            //        var i = 0;
-            //        var index = -1;
-            //        for(i = 0 ; i < supplierList.length ; i++)
-            //        {
-            //            console.log(supplierList[i]);
-            //            if(supplier["id"] == supplierList[i]["id"])
-            //            {
-            //                index = i;
-            //            }
-            //
-            //        }
-            //        if(index == -1)
-            //        {
-            //            supplierList.push(supplier);
-            //            console.log("current size of supplerList in datashareservice is: " + supplierList.length)
-            //            return true;
-            //        }
-            //        else
-            //        {
-            //            console.log("did not add the supplier for reasons");
-            //            return false;
-            //        }
-            //
-            //    }
-            //
-            //};
-
-        //var getSuppliers = function(){
-        //    return supplierList;
-        //};
-
         var getSuppliersByDate = function() {
             return supplierListByDate;
         };
 
-        //var eraseList = function(){
-        //    console.log("erased list");
-        //    supplierList = [];
-        //};
         var eraseListByDate = function() {
             console.log('erased list by date');
             supplierListByDate = [];
         };
 
-        //var removeSupplier = function(supplier)
-        //{
-        //    var i = 0;
-        //    var index = -1;
-        //    for(i = 0 ; i < supplierList.length ; i++)
-        //    {
-        //        console.log(supplierList[i]["id"] + " ==? " +supplier["id"]);
-        //        if(supplier["id"] == supplierList[i]["id"])
-        //        {
-        //            console.log("found supplier at array index " + i);
-        //            index = i;
-        //        }
-        //
-        //    }
-        //    if(index != -1)
-        //    {
-        //        console.log("splicing out " + supplier);
-        //        supplierList.splice(index, 1);
-        //    }
-        //    else
-        //    {
-        //        console.log("did not splice out anything! should not happen")
-        //    }
-        //
-        //};
-            var removeSupplierByDate = function(supplier)
-            {
-                var i = 0;
-                var index = -1;
-                for(i = 0 ; i < supplierListByDate.length ; i++)
-                {
-                    console.log(supplierListByDate[i]);
-                    if(supplier["id"] == supplierListByDate[i]["id"])
-                    {
-                        index = i;
-                    }
-
-                }
-                if(index != -1)
-                {
-                    supplierListByDate.splice(index, 1);
+        var removeSupplierByDate = function(supplier) {
+            var i = 0;
+            var index = -1;
+            for(i = 0 ; i < supplierListByDate.length ; i++) {
+                console.log(supplierListByDate[i]);
+                if(supplier["id"] == supplierListByDate[i]["id"]) {
+                     index = i;
                 }
 
-            };
+            }
+
+            if(index != -1) {
+              supplierListByDate.splice(index, 1);
+            }
+
+        };
 
 
         return {
