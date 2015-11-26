@@ -49,14 +49,6 @@ public class UserManagementImpl implements UserManagement
         if(userdbFile.exists())
         {
             users = loadUsers();
-        }
-        else
-        {
-            createDefault();
-        }
-        if(userdbFile.exists())
-        {
-            users = loadUsers();
             if(users.size() == 0)
             {
                 createDefault();
