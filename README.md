@@ -76,6 +76,9 @@ A document explaining the code needs to be done in pdf.
 ### 2.2.2	User manual
 A user manual needs to be done for the customer as a pdf. It should explain how to use the software.
 
+### 2.2.3	Coding standards (done)
+The coding standards needs to be decided and written down.
+
 ### 2.3	Software-Quality
 To guarantee a minimum of software-quality unit-tests must be implemented.
 
