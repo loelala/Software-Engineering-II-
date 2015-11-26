@@ -3,10 +3,11 @@ package edu.hm.wedoit.rest;
 import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -27,6 +28,7 @@ import java.util.concurrent.Semaphore;
 @RequestMapping("/api/supplier")
 public class SupplierController implements Observer
 {
+    private final static Logger logger = LoggerFactory.getLogger(SupplierController.class);
 
     private Semaphore sem = new Semaphore(1);
     private AllDao.State newState;
@@ -47,7 +49,7 @@ public class SupplierController implements Observer
     @RequestMapping("/all")
     public List<Supplier> getAllSuppliers()
     {
-        System.out.println("getAllSuppliers Rest");
+        logger.debug("getAllSuppliers()");
         return allDao.getAllSuppliersWithScore();
     }
 
@@ -59,7 +61,7 @@ public class SupplierController implements Observer
     @RequestMapping("/{id}")
     public Supplier getSupplierById(@PathVariable(value="id") String id)
     {
-        System.out.println("getSupplierById " + id + " Rest");
+        logger.debug("getSupplierById( + " + id + " )");
         return allDao.getSupplierById(id);
     }
 
@@ -71,7 +73,7 @@ public class SupplierController implements Observer
     @RequestMapping("/{id}/orders")
     public List<Order> getOrdersForId(@PathVariable(value="id") String id)
     {
-        System.out.println("getOrdersForId " + id + " Rest");
+        logger.debug("getOrdersForId( + " + id + " )");
         return allDao.getAllOrdersForId(id);
     }
 
@@ -84,7 +86,7 @@ public class SupplierController implements Observer
     @RequestMapping("/all/between/{from}/{to}")
     public List<Supplier> getAllSuppliersDate(@PathVariable(value="from") String from, @PathVariable(value="to") String to)
     {
-        System.out.println("getAllSuppliersDate Rest");
+        logger.debug("getAllSuppliersDate( + " + from + ", " + to + " )");
         DateFormat format = new SimpleDateFormat("ddMMyyyy");
         Date fromDate;
         Date toDate;
@@ -95,7 +97,7 @@ public class SupplierController implements Observer
         }
         catch (ParseException e)
         {
-            return null;
+            throw new IllegalArgumentException();
         }
 
         return allDao.getAllSuppliersDate(fromDate, toDate);
@@ -103,12 +105,14 @@ public class SupplierController implements Observer
 
     /**
      * Returns the state of the connection to the database
-     * @return the state of the connection to the database
+     * Blocks if the connection isn't changing
+     * Can be used for long polling requests
+     * @return The state of the connection to the database
      */
     @RequestMapping("/connection")
     public AllDao.State getConnectionInfo()
     {
-        System.out.println("getConnectionInfo Rest");
+        logger.debug("getConnectionInfo()");
         while(true)
         {
             try
@@ -138,5 +142,12 @@ public class SupplierController implements Observer
     void releaseDao()
     {
         allDao.deleteObserver(this);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleAppException(IllegalArgumentException ex)
+    {
+        return ex.getMessage();
     }
 }

@@ -12,6 +12,9 @@ import java.util.Observer;
  */
 public interface AllDao
 {
+    /**
+     * Enum for the connection to the database
+     */
     enum State
     {
         CONNECTED, CACHE_ONLY, NO_CONNECTION_AND_CACHE;
@@ -37,11 +40,23 @@ public interface AllDao
      */
     Supplier getSupplierById(String id);
 
+    /**
+     * Returns a list of all suppliers with filtered orders.
+     * Only orders between the given date-range are processed
+     * @param from The beginning of the date-range
+     * @param to The ending of the date-range
+     * @return The list of all supplieres with their orders between the date-range
+     */
     List<Supplier> getAllSuppliersDate(Date from, Date to);
 
+    /**
+     * A blocking method for returning the current state of the database-connection
+     * Can be used for long polling, to check the db-connection
+     * @return the State-Enum representing the current connection state
+     */
     State getState();
 
-     void addObserver(Observer o);
+    void addObserver(Observer o);
 
     void deleteObserver(Observer o);
 }

@@ -3,13 +3,13 @@ package edu.hm.wedoit.model;
 import java.util.Date;
 
 /**
- * Created by Joncn on 02.11.2015.
+ * One order for a supplier
  */
-public class Order {
+public class Order
+{
     private Date promisedDate;
     private Date deliveryDate;
     private String ebeln;
-
     private int orderScore = -1;
 
     public Order(String ebeln, Date promisedDate, Date deliveryDate)

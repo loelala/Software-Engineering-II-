@@ -3,7 +3,7 @@ package edu.hm.wedoit.model;
 import java.io.Serializable;
 
 /**
- * Created by B3rni on 31.10.2015.
+ * One User for this application
  */
 public class User implements Serializable
 {
@@ -35,6 +35,4 @@ public class User implements Serializable
     {
         this.password = password;
     }
-
-
 }

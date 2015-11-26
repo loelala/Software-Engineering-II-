@@ -1,7 +1,7 @@
 package edu.hm.wedoit.model;
 
 /**
- * Created by Joncn on 16.11.2015.
+ * Enum for the classifications for the suppliers
  */
 public enum Classification
 {

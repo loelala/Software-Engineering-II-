@@ -8,8 +8,7 @@ import javax.sql.DataSource;
 import java.util.Observable;
 
 /**
- * Created by B3rni on 25.10.2015.
- * implements the basedao interface, we dont have to do it in every upcoming dao
+ * implements the basedao interface, we don't have to do it in every upcoming dao
  */
 public abstract class AbstractDao extends Observable implements BaseDao
 
