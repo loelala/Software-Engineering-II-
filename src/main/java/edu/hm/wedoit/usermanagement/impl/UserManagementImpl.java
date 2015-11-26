@@ -34,16 +34,16 @@ public class UserManagementImpl implements UserManagement
 
 
 
-    private Environment springenv;
+    private Environment springEnv;
 
     /**
      * {@inheritDoc}
      */
-    public UserManagementImpl(String rootDir, Environment springenv) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, InvalidParameterSpecException, InvalidAlgorithmParameterException, FileNotFoundException
+    public UserManagementImpl(String rootDir, Environment springEnv) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, InvalidParameterSpecException, InvalidAlgorithmParameterException, FileNotFoundException
     {
-        logger.debug("UserManagementImpl({}, {})", rootDir, springenv);
+        logger.debug("UserManagementImpl({}, {})", rootDir, springEnv);
         this.rootDir = rootDir;
-        this.springenv = springenv;
+        this.springEnv = springEnv;
         userdbFile = new File(this.rootDir + File.separator+ USER_DB_FILE);
 
         if(userdbFile.exists())
@@ -185,8 +185,8 @@ public class UserManagementImpl implements UserManagement
     {
         logger.debug("createDefault()");
         users = new HashMap<>();
-        String defaultAdmin = springenv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
-        String defaultAdminPW = springenv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
+        String defaultAdmin = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
+        String defaultAdminPW = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
 
         User defaultAdminUser = new User(defaultAdmin,defaultAdminPW);
         users.put(defaultAdmin,defaultAdminUser);
