@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.util.List;
 
 /**
@@ -61,7 +63,7 @@ public class UserController
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password)
     {
-        logger.debug("received a login request with username: {} and password: {}",username,password );
+        logger.debug("login({}, {})", username, password);
         if(userService.loginOK(username,password))
         {
             ResponseEntity<String> responseEntity;
@@ -69,7 +71,6 @@ public class UserController
             if(username.equals("admin"))
             {
                 logger.debug("is admin");
-
                 responseHeaders.set("wedoit-admin", "true");
                 responseEntity = new ResponseEntity<String>(null,responseHeaders, HttpStatus.OK);
 
@@ -99,7 +100,7 @@ public class UserController
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response)
     {
-        logger.debug("received a create user request with username: {} and password: {}",username,password );
+        logger.debug("newUser({}, {})",username,password );
         if (userService.createUser(username, password))
         {
             logger.debug("created {}",username);

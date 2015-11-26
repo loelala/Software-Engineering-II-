@@ -8,7 +8,6 @@ import sun.misc.BASE64Decoder;
 import java.io.IOException;
 
 /**
- * Created by B3rni on 04.11.2015.
  * This class extends the DriverManagerDataSource to decrypt the password. which is stored securely
  */
 public class SecureDriverManagerDataSource extends DriverManagerDataSource
@@ -16,20 +15,21 @@ public class SecureDriverManagerDataSource extends DriverManagerDataSource
     private final static Logger logger = LoggerFactory.getLogger(SecureDriverManagerDataSource.class);
 
     @Override
-    public String getPassword(){
+    public String getPassword()
+    {
+        logger.debug("getPassword()");
         final String hashedPassword = super.getPassword();
-        logger.debug("getPassword " + hashedPassword);
         return decode(hashedPassword);
     }
 
     private String decode(String hashedPassword)
     {
+        logger.debug("decode({})", hashedPassword);
         String result = "";
         BASE64Decoder decoder = new BASE64Decoder();
         try
         {
             result = new String(decoder.decodeBuffer(hashedPassword));
-            logger.debug("decode Result " + result);
         }
         catch(IOException e)
         {

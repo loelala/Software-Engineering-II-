@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public class SupplierRowCallbackHandler implements RowCallbackHandler
 {
-
     private Map<String, Map<String, Order>> map;
     private Map<String, Supplier> suppliers;
 

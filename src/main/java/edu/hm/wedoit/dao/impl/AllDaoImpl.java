@@ -9,6 +9,8 @@ import edu.hm.wedoit.comparators.ClassificationScoreComparator;
 import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
 import java.util.*;
@@ -18,11 +20,12 @@ import java.util.*;
  */
 public class AllDaoImpl extends AbstractDao implements AllDao
 {
+    private final static Logger logger = LoggerFactory.getLogger(AllDaoImpl.class);
+
     private Map<String, Supplier> supplierList;
     private Map<String, Map<String, Order>> supplierMap;
     private long cacheTime = 0;
     private State state = State.CONNECTED;
-
 
     /**
      * This method retrieves the data from the database and fills the supplierList and the supplierMap.
@@ -31,14 +34,15 @@ public class AllDaoImpl extends AbstractDao implements AllDao
      */
     private void getDataFromDatabase(boolean forceUpdate)
     {
+        logger.debug("getDataFromDatabase({})", forceUpdate);
         if (forceUpdate || supplierMap == null || (System.currentTimeMillis() - cacheTime) > 60000 * 5)
         {
-            System.out.println("Fetching suppliers and their orders");
+            logger.debug("Fetching suppliers and their orders");
 
             Map<String, Map<String, Order>> supplierMap = new HashMap<>();
-
             Map<String, Supplier> supplierList = new HashMap<>();
 
+            //get data from DB and fill the two maps
             try
             {
                 final String supplierQuery = "SELECT NAME1, LIFNR FROM sap_emulation.lfa1;";
@@ -55,6 +59,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             }
             catch (Exception e)
             {
+                logger.debug("No Cache and no Database connection");
                 state = State.NO_CONNECTION_AND_CACHE;
             }
 
@@ -86,12 +91,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             }
             else if(this.supplierMap.isEmpty() || this.supplierList.isEmpty())
             {
-                System.out.println("No Cache and no Database connection");
+                logger.debug("No Cache and no Database connection");
                 state = State.NO_CONNECTION_AND_CACHE;
             }
             else
             {
-                System.out.println("Cache is in use");
+                logger.debug("Cache only");
                 state = State.CACHE_ONLY;
             }
             setChanged();
@@ -105,13 +110,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                     try
                     {
                         Thread.sleep(1000 * 60 * 1);
-                        System.out.println("Updating cache");
+                        logger.debug("Updating cache");
                         getDataFromDatabase(true);
-                        System.out.println("Cache is now up to date");
                     }
                     catch (InterruptedException e)
                     {
-                        System.out.println("UpdateThread was interrupted");
+                        logger.debug("Updating cache was interrupted");
                     }
                 }
             }).start();
@@ -119,12 +123,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     }
 
     /**
-     * {@link AllDao#getAllSuppliersWithScore()}
+     * {@inheritDoc}
      */
     @Override
     public List<Supplier> getAllSuppliersWithScore()
     {
-        System.out.println("getAllSuppliers called");
+        logger.debug("getAllSuppliersWithScore()");
         getDataFromDatabase(false);
         List<Supplier> suppliers;
         synchronized (this)
@@ -147,12 +151,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
 
 
     /**
-     * {@link AllDao#getAllOrdersForId(String)}
+     * {@inheritDoc}
      */
     @Override
     public List<Order> getAllOrdersForId(String id)
     {
-        System.out.println("getAllOrdersForId " + id + " called");
+        logger.debug("getAllOrdersForId({})", id);
         getDataFromDatabase(false);
         synchronized (this)
         {
@@ -175,12 +179,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     }
 
     /**
-     * {@link AllDao#getSupplierById(String)}
+     * {@inheritDoc}
      */
     @Override
     public Supplier getSupplierById(String id)
     {
-        System.out.println("getSupplierById " + id + " called");
+        logger.debug("getSupplierById({})", id);
         getDataFromDatabase(false);
         synchronized (this)
         {
@@ -193,13 +197,12 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     }
 
     /**
-     *
-     * {@link AllDao#getAllSuppliersDate(Date, Date)}
+     * {@inheritDoc}
      */
     @Override
     public List<Supplier> getAllSuppliersDate(java.sql.Date from, java.sql.Date to)
     {
-        System.out.println("getAllSuppliersDate from " + from + " to " + to + " called");
+        logger.debug("getAllSuppliersDate({}, {})", from, to);
         getDataFromDatabase(false);
         Map<String, Supplier> supplierListDate = new HashMap<>();
         Map<String, Map<String, Order>> supplierMapDate= new HashMap<>();
@@ -220,8 +223,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                     {
                         continue;
                     }
-                    if (order.getDeliveryDate().after(after) && order.getDeliveryDate().before(before)
-                            || order.getPromisedDate().after(after) && order.getPromisedDate().before(before))
+                    if ((order.getDeliveryDate().after(after) && order.getDeliveryDate().before(before))
+                            && (order.getPromisedDate().after(after) && order.getPromisedDate().before(before)))
                     {
                         Order newOrder = new Order(order);
                         newOrders.put(orderID, newOrder);
@@ -272,7 +275,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     }
 
     /**
-     * {@link AllDao#getState()}
+     * {@inheritDoc}
      */
     public State getState()
     {

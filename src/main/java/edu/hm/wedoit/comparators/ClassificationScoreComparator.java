@@ -5,7 +5,7 @@ import edu.hm.wedoit.model.Supplier;
 import java.util.Comparator;
 
 /**
- * Created by Joncn on 24.11.2015.
+ * Used to sort a list of suppliers by classification and then by score
  */
 public class ClassificationScoreComparator implements Comparator<Supplier>
 {

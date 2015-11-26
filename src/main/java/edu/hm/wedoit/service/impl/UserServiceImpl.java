@@ -6,16 +6,19 @@ import edu.hm.wedoit.usermanagement.UserManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
 
 /**
- * Created by B3rni on 01.11.2015.
+ * Implementation of the UserService
+ * see {@link edu.hm.wedoit.service.UserService }
  */
 public class UserServiceImpl implements UserService
 {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     UserManagement userManagement;
 
@@ -25,7 +28,7 @@ public class UserServiceImpl implements UserService
     @Override
     public boolean loginOK(String username, String passwordHash)
     {
-        logger.debug("LoginOK - received a login request user: {} password: {}",username,passwordHash);
+        logger.debug("loginOK ({}, {})",username, passwordHash);
         return userManagement.loginOK(username, passwordHash);
     }
 
@@ -35,7 +38,8 @@ public class UserServiceImpl implements UserService
     @Override
     public boolean createUser(String username, String password)
     {
-        return userManagement.createUser(username,password);
+        logger.debug("createUser ({}, {})",username, password);
+        return userManagement.createUser(username, password);
     }
 
     /**
@@ -44,7 +48,7 @@ public class UserServiceImpl implements UserService
     @Override
     public boolean removeUser(String username)
     {
-
+        logger.debug("removeUser ({})",username);
         return userManagement.removeUser(username);
     }
 
@@ -54,7 +58,8 @@ public class UserServiceImpl implements UserService
     @Override
     public User getUser(String username)
     {
-        return null;
+        logger.debug("getUser ({})",username);
+        throw new NotImplementedException();
     }
 
     /**
@@ -63,6 +68,7 @@ public class UserServiceImpl implements UserService
     @Override
     public List<User> getAllUser()
     {
+        logger.debug("getAllUser ()");
         return userManagement.getAllUser();
     }
 }

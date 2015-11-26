@@ -4,7 +4,7 @@ package edu.hm.wedoit.model;
 import java.util.List;
 
 /**
- * Created by Joncn on 31.10.2015.
+ * One Supplier with score, orders and classification
  */
 public class Supplier
 {
