@@ -3,6 +3,7 @@ package edu.hm.wedoit.usermanagement.impl;
 import edu.hm.wedoit.config.Constants;
 import edu.hm.wedoit.model.User;
 import edu.hm.wedoit.usermanagement.UserManagement;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -64,11 +65,13 @@ public class UserManagementImpl implements UserManagement
      * {@inheritDoc}
      */
     @Override
-    public boolean loginOK(String username, String passwordHash)
+    public boolean loginOK(String username, String password)
     {
-        logger.debug("loginOK({}, {})", username, passwordHash);
+        logger.debug("loginOK({}, {})", username, password);
         if(users.containsKey(username))
         {
+            String passwordHash = DigestUtils.sha256Hex(password);
+            logger.debug("comapring hash " + passwordHash);
             if(users.get(username).getPassword().equals(passwordHash))
             {
                 return true;
@@ -99,7 +102,10 @@ public class UserManagementImpl implements UserManagement
         {
             if(password.length() != 0)
             {
-                User newUser = new User(username,password);
+
+                String passwordHash = DigestUtils.sha256Hex(password);
+                logger.debug("passwordHash " + passwordHash);
+                User newUser = new User(username,passwordHash);
                 users.put(username,newUser);
                 try
                 {
@@ -180,8 +186,8 @@ public class UserManagementImpl implements UserManagement
         String defaultAdmin = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
         String defaultAdminPW = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
 
-        User defaultAdminUser = new User(defaultAdmin,defaultAdminPW);
-        users.put(defaultAdmin,defaultAdminUser);
+        createUser(defaultAdmin,defaultAdminPW);
+
         saveUsers();
 
     }
