@@ -34,7 +34,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i
-                                class="fa fa-user"></i> Admin <span class="caret"></span></a>
+                                class="fa fa-user"></i> {{vm.actualUser}} <span class="caret"></span></a>
                         <ul id="g-account-menu" class="dropdown-menu" role="menu">
                             <li><a href="#">My Profile</a></li>
                         </ul>
@@ -62,11 +62,11 @@
 
                     <hr>
 
-                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i>All Suppliers</a>
+                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i>Suppliers</a>
                     </li>
 
 
-                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-industry"></i>Users administration</a>
+                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a>
                     </li>
 
                 </ul>
@@ -103,10 +103,7 @@
 <script src="static/js/datashareservice/data.share.service.js"></script>
 <script src="static/js/datashareservice/login.information.service.js"></script>
 <script src="static/js/user/user.controller.js"></script>
-<!--<script src="static/js/supplier/supplier.details.controller.js"></script>-->
-<!--<script src="static/js/supplier/supplier.controller.js"></script>-->
-<!--<script src="static/js/supplier/supplier.list.controller.js"></script>-->
-<!--<script src="static/js/supplier/supplier.resource.service.js"></script>-->
+<script src="static/js/supplier/supplier.resource.service.js"></script>
 <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
 <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
 <script src="static/js/authentication/authentication.service.js"></script>
@@ -115,6 +112,7 @@
 <script src="static/js/index/index.controller.js"></script>
 <script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
 <script src="static/js/supplier/dateRange.directive.js"></script>
+<script src="static/js/supplier/datepicker.directive.js"></script>
 <script src="static/js/module.js"></script>
 </body>
 

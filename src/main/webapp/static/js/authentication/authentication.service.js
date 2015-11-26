@@ -6,9 +6,9 @@
         .service('AuthenticationService', AuthenticationService)
         .factory('Base64', Base64);
 
-    AuthenticationService.$inject = ['$http', '$state'];
+    AuthenticationService.$inject = ['$http'];
 
-    function AuthenticationService ($http, $state) {
+    function AuthenticationService ($http) {
 
         var service = {};
 

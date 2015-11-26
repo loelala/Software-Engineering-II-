@@ -13,24 +13,16 @@ angular.module('WeDoIt', [
     'toastr',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
-    // module for all suppliers (controller)
-    //'supplier',
-    //'supplierList',
     'supplierListByDate',
-    // module for a specific supplier (controller)
-    //'supplierDetails',
-    // module for connect to the backend (service)
-    //'supplierservice',
+    'supplierservice',
     'supplierserviceByDate',
-    // module for authentication (service)
     'authenticationservice',
-    // module for user (service)
     'userservice',
-    // module for login (controller)
     'login',
     'index',
     'newuser',
     'barChartModule',
+    'datepicker.directive',
     'dateRange.directive',
     'loginInformationHolderModule'
 
@@ -42,8 +34,8 @@ angular.module('WeDoIt')
     .run(run);
 
 
-    config.$inject = ['$locationProvider','$stateProvider', '$urlRouterProvider','toastrConfig'];
-    function config($locationProvider,$stateProvider, $urlRouterProvider,toastrConfig) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
+    function config($stateProvider, $urlRouterProvider,toastrConfig) {
 
         angular.extend(toastrConfig, {
             autoDismiss: true,
@@ -97,33 +89,28 @@ angular.module('WeDoIt')
 
     }
 
-    run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http','loginInformationHolderService'];
+    run.$inject = ['$state', '$rootScope','loginInformationHolderService'];
 
-    function run($state, $rootScope,$location,$cookieStore,$http,loginInformationHolderService) {
+    function run($state, $rootScope,loginInformationHolderService) {
 
         $state.transitionTo('login');
 
-        $rootScope.$on("$stateChangeStart",function(event, toState, toParams, fromState, fromParams){
+        $rootScope.$on("$stateChangeStart",function(event, toState){
 
             if(toState.name == "login")
             {
                 console.log("$stateChangeStart - no login chainning! returning now");
-                return
             }
             else
             {
                 console.log("is logged in status from loginInformationHolerService" + loginInformationHolderService.isLoggedIn());
                 if(!loginInformationHolderService.isLoggedIn())
                 {
-                    console.log("tostate name " + toState.name)
+                    console.log("tostate name " + toState.name);
                     console.log("stateChangeSTart - IF");
                     event.preventDefault();
                     $state.go('login');
                 }
-                //else
-                //{
-                //    //console.log("The User is Logged in? " + localStorage.isLoggedIn);
-                //}
             }
 
         });

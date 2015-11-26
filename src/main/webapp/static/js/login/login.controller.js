@@ -5,8 +5,8 @@
         .module('login', [])
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', 'AuthenticationService','loginInformationHolderService'];
-    function LoginController($state, AuthenticationService,loginInformationHolderService) {
+    LoginController.$inject = ['$state', 'AuthenticationService','loginInformationHolderService', 'toastr'];
+    function LoginController($state, AuthenticationService,loginInformationHolderService, toastr) {
         var vm = this;
 
         vm.username = '';
@@ -51,12 +51,15 @@
                 }
                 $state.transitionTo('home');
                 vm.error = null;
+                    console.log('you are logged in:  update user to: ', username);
+                loginInformationHolderService.updateActualUser(username);
+                    console.log('used function to update: ', loginInformationHolderService.actualUser());
 
 
 
-            }, function() { //error
+            }, function() {
                 console.log('error by login');
-                vm.error = 'Username or password is incorrect!';
+                toastr.error('Username or password incorrect');
             });
         };
     }

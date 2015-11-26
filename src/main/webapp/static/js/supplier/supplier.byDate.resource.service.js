@@ -18,7 +18,7 @@
                 isArray: true
             }
         });
-        
+
         return service;
     }
 
