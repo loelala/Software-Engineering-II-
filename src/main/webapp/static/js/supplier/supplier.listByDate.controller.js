@@ -85,6 +85,7 @@
             }
 
         }
+
         function removeSelected(index, selectedSupplier) {
             console.log("removing index: "+ index + " object:  "  + selectedSupplier);
             dataShareService.removeSupplierByDate(selectedSupplier);
