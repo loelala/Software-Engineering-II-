@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public class BldatRowCallbackHandler implements RowCallbackHandler
 {
-    private Map<String, Map<String, Order>> map;
+    private Map<String, Map<String, Order>> supplierMap;
 
     public BldatRowCallbackHandler(Map<String, Map<String, Order>> map)
     {
-        this.map = map;
+        this.supplierMap = map;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class BldatRowCallbackHandler implements RowCallbackHandler
         while(resultSet.next())
         {
             String ebeln = resultSet.getString("EBELN");
-            for(Map<String, Order> m : map.values())
+            for(Map<String, Order> m : supplierMap.values())
             {
                 if(m.containsKey(ebeln))
                 {

@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public class EbelnRowCallbackHandler implements RowCallbackHandler
 {
-    private Map<String, Map<String, Order>> map;
+    private Map<String, Map<String, Order>> supplierMap;
 
     public EbelnRowCallbackHandler(Map<String, Map<String, Order>> map)
     {
-        this.map = map;
+        this.supplierMap = map;
     }
 
 
@@ -27,9 +27,9 @@ public class EbelnRowCallbackHandler implements RowCallbackHandler
         {
             String ebeln = resultSet.getString("EBELN");
             String lifnr = resultSet.getString("LIFNR");
-            if(map.containsKey(lifnr))
+            if(supplierMap.containsKey(lifnr))
             {
-                map.get(resultSet.getString("LIFNR")).put(ebeln, new Order(ebeln));
+                supplierMap.get(resultSet.getString("LIFNR")).put(ebeln, new Order(ebeln));
             }
         }
     }
