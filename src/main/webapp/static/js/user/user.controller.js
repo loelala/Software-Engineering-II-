@@ -30,6 +30,7 @@
                 .then(function() {
                     console.log("creating a new user successfully");
                     toastr.success('Added \"' + username + '\" to Database, you can now log in with this user');
+                    $state.go('useradmin');
                 }, function() {
                     vm.error = "can not create a new user!!";
                     toastr.error('Could not creater user! No Duplicates, No Empty Passwords!');
@@ -43,6 +44,7 @@
         function allUsers() {
             vm.isAllUsers = vm.isAllUsers !== true;
         }
+
 
     }
 

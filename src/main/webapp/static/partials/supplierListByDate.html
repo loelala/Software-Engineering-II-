@@ -12,50 +12,45 @@
         <hr>
 
     <div class="row">
-        <!--row datepicker / comparison-->
-        <div class="col-md-12 col-lg-12">
-            <h4>Select the time:</h4>
+        <p>Selected Date From: {{vm.from}}</p>
 
-            <p> Selected Date From: {{vm.from | date: 'fullDate'}}</p>
-            <p> Selected Date To: {{vm.to | date: 'fullDate'}}</p>
-
-            <div class="col-md-3 col-lg-3">
-                <p class="input-group">
-                    <label for="from">From: </label>
-                    <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                           ng-model="vm.from"
-                           is-open="vm.status.openfrom"
-                           min-date="vm.minDateFrom"
-                           max-date="vm.maxDateFrom"
-                           datepicker-options="vm.dateOptionsFrom"
-                           date-disabled="vm.disabledFrom(date, mode)" close-text="Close">
-                    <div class="input-group-btn">
+        <div class="col-md-3 col-lg-3">
+            <p class="input-group">
+                <label for="from">From: </label>
+                <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                       ng-model="vm.from"
+                       is-open="vm.status.openFrom"
+                       min-date="vm.minDateFrom"
+                       max-date="vm.maxDateFrom"
+                       datepicker-options="vm.dateOptionsFrom"
+                       date-disabled="vm.disabledFrom(date, mode)" close-text="Close"/>
+                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
                             <i class="glyphicon glyphicon-calendar"></i>
                         </button>
-                    </div>
-                </p>
-            </div>
-
-            <div class="col-md-3 col-lg-3">
-                <p class="input-group">
-                    <label for="to">To: </label>
-                    <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                           ng-model="vm.to"
-                           is-open="vm.status.openedto"
-                           min-date="vm.minDateTo"
-                           max-date="vm.maxDateTo"
-                           datepicker-options="vm.dateOptionsTo"
-                           date-disabled="vm.disabledTo(date, mode)"
-                           close-text="Close">
-            </div>
+                    </span>
+            </p>
         </div>
-    </div><!-- ./ row datepicker / comparison-->
+
+        <div class="col-md-3 col-lg-3">
+            <p class="input-group">
+                <label for="to">To: </label>
+                <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
+                       ng-model="vm.to"
+                       is-open="vm.status.openedTo"
+                       min-date="vm.minDateTo"
+                       max-date="vm.maxDateTo"
+                       datepicker-options="vm.dateOptionsTo"
+                       date-disabled="vm.disabledTo(date, mode)"
+                       close-text="Close">
+            </p>
+        </div>
+    </div>
 
     <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
             <button class="btn btn-default" style="margin-left: 16px" type="button"
-                    ng-click='vm.byDateQuery(vm.from,vm.to)' ng-disable="vm.dateIsSelected()">
+                    ng-click='vm.byDateQuery(vm.from,vm.to)' ng-disable="vm.dateIsSelected">
                 Show all Suppliers by Date
             </button>
         </div>
@@ -87,10 +82,6 @@
             </table>
         </div>
     </div>
-    </div>
-
-    <div class="alert alert-danger" role="alert" ng-show="vm.error">
-        <strong>Error!</strong> {{vm.error}}
     </div>
 
     <div class="row">

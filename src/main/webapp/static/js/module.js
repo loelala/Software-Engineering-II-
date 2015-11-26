@@ -31,6 +31,7 @@ angular.module('WeDoIt', [
     'index',
     'newuser',
     'barChartModule',
+    'datepicker.directive',
     'dateRange.directive',
     'loginInformationHolderModule'
 

@@ -14,18 +14,20 @@
     function SupplierListByDateCtrl ($filter,$state,supplierserviceByDate, supplierservice, dataShareService,toastr) {
 
         var vm = this;
-        const formatString = "ddMMyyyy";
+        var formatString = "ddMMyyyy";
 
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
         vm.selectedSuppliers = dataShareService.getSuppliersByDate();
         vm.isTimeSelected = true;
         vm.isDateValid = false;
+        vm.from = null;
 
         vm.select = select;
         vm.removeSelected = removeSelected;
         vm.byDateQuery = byDateQuery;
         vm.dateIsSelected = dateIsSelected;
+        vm.goToComparison = goToComparison;
 
         dataShareService.eraseListByDate();
 
@@ -38,9 +40,9 @@
             toastr.error('Couldn\'t connect to the database','Database connection error!');
         });
 
-        vm.goToComparison = function(){
+        function goToComparison(){
             $state.go('comparison');
-        };
+        }
 
         function byDateQuery(from, to) {
             var fromToPost = $filter('date')(from,formatString);
@@ -94,72 +96,11 @@
 
         // ========= DATEPICKER STUFF =============
 
-        // Today for the To date selection
-        vm.today = function() {
-            vm.to = new Date();
-        };
-
-        vm.fromDate = function() {
-            vm.isDateValid = true;
-            vm.form = new Date();
-        };
-
-        vm.today();
-        vm.fromDate();
-
-        vm.clear = function() {
-            vm.from = null;
-            vm.to = null;
-        };
-
-        // disable weekend selection
-        vm.disableTo = function(date, mode) {
-            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-        };
-        vm.disableFrom = function(date, mode) {
-            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-        };
 
         vm.maxDateFrom = new Date(2020, 5, 22);
         vm.maxDateTo = new Date(2020,5,22);
-        vm.opens = [];
-
-        /*$scope.$watch(function () {
-         return vm.status.open;
-         },function(value){
-         vm.opens.push("valuationDatePickerIsOpen: " + value + " at: " + new Date());
-         });*/
-
-
-        vm.openFrom = function($event) {
-
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-            }
-
-            vm.status.openfrom = true;
-        };
-
-        vm.openTo = function($event) {
-
-            if ($event) {
-                $event.preventDefault();
-                $event.stopPropagation();
-            }
-
-            vm.status.opento = true;
-        };
-
-        vm.setDateTo = function(year, month, day) {
-            vm.to = new Date(year, month, day);
-        };
-
-        vm.setDateFrom = function(year, month, day) {
-            vm.from = new Date(year, month, day);
-        };
-
-        vm.dateOptionsFrom = {
+        vm.opens = []
+        ;vm.dateOptionsFrom = {
             formatYear: 'yy',
             startingDay: 1
         };
@@ -173,8 +114,63 @@
         vm.format = vm.formats[0];
 
         vm.status = {
-            opento: false,
-            openfrom: false
+            openTo: false,
+            openFrom: false
+        };
+
+        vm.today = today();
+        vm.fromDate = fromDate();
+        vm.clear = clear;
+        vm.disableWeekendTo = disableWeekendTo;
+        vm.disableWeekendFrom = disableWeekendFrom;
+        vm.dateIsSelected = false;
+
+            /**
+         * Set the date of TO to the date today.
+         */
+        function today() {
+            vm.to = new Date();
+        }
+
+        function fromDate() {
+            vm.dateIsSelected = true;
+            vm.form = new Date();
+        }
+
+        /**
+         * Set the dates to null
+         */
+        function clear() {
+            vm.from = null;
+            vm.to = null;
+        }
+
+        // disable weekend selection
+        function disableWeekendTo(date, mode) {
+            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+        }
+        function disableWeekendFrom(date, mode) {
+            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+        }
+
+        vm.openFrom = function($event) {
+
+            if ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+            }
+
+            vm.status.openFrom = true;
+        };
+
+        vm.openTo = function($event) {
+
+            if ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+            }
+
+            vm.status.openTo = true;
         };
 
         var tomorrow = new Date();
@@ -192,6 +188,21 @@
                 status: 'partially'
             }
         ];
+
+        //====== NEW DATEPICKER =======
+
+        /*vm.formData      = {
+            formDate: '',
+            toDate: 'hallo'
+        };
+        vm.openedTo = false;
+        vm.openedFrom = false;
+
+        //Datepicker
+        vm.dateOptions = {
+            'year-format': "'yy'",
+            'show-weeks' : false
+        };*/
 
     }
 
