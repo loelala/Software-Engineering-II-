@@ -12,8 +12,6 @@
         <hr>
 
     <div class="row">
-        <p>Selected Date From: {{vm.from}}</p>
-
         <div class="col-md-3 col-lg-3">
             <p class="input-group">
                 <label for="from">From: </label>
@@ -24,11 +22,12 @@
                        max-date="vm.maxDateFrom"
                        datepicker-options="vm.dateOptionsFrom"
                        date-disabled="vm.disabledFrom(date, mode)" close-text="Close"/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>
-                    </span>
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+
             </p>
         </div>
 
@@ -115,7 +114,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.supplierList | limitTo: 50"
+                <tr ng-repeat="row in vm.supplierList"
                     ng-class="{'selected':$index == vm.selectedRow}"
                     ng-click="vm.select($index,row)">
 

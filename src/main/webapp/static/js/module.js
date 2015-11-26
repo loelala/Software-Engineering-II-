@@ -34,7 +34,7 @@ angular.module('WeDoIt')
     .run(run);
 
 
-    config.$inject = ['$locationProvider','$stateProvider', '$urlRouterProvider','toastrConfig'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
     function config($stateProvider, $urlRouterProvider,toastrConfig) {
 
         angular.extend(toastrConfig, {
@@ -89,7 +89,7 @@ angular.module('WeDoIt')
 
     }
 
-    run.$inject = ['$state', '$rootScope', '$location', '$cookieStore', '$http','loginInformationHolderService'];
+    run.$inject = ['$state', '$rootScope','loginInformationHolderService'];
 
     function run($state, $rootScope,loginInformationHolderService) {
 

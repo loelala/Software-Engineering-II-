@@ -18,6 +18,7 @@
 
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
+        dataShareService.eraseListByDate();
         vm.selectedSuppliers = dataShareService.getSuppliersByDate();
         vm.isTimeSelected = true;
         vm.isDateValid = false;
@@ -29,7 +30,7 @@
         vm.dateIsSelected = dateIsSelected;
         vm.goToComparison = goToComparison;
 
-        dataShareService.eraseListByDate();
+
 
         var allSuppliers = supplierservice.query();
         allSuppliers.$promise.then(function(data) {
