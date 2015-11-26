@@ -22,7 +22,7 @@
 
     <bean name="userManagement" class="edu.hm.wedoit.usermanagement.impl.UserManagementImpl">
         <constructor-arg name="rootDir" value="${wedoithome}"/>
-        <constructor-arg name="springenv" ref="environment"/>
+        <constructor-arg name="springEnv" ref="environment"/>
     </bean>
     
     <bean name="userService" class="edu.hm.wedoit.service.impl.UserServiceImpl">
