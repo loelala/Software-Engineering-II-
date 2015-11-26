@@ -78,7 +78,7 @@ public Cat getAllCatsByColor(String color) {
 __Rules for working with code repositroy__
 
 * Every team member works on his own branch
- <br> Naming:   wedoit- [first letter name][fist letter surname] _(example:   wedoit-hm   for Hans Meier)_ 
+ <br> Naming:   [first letter name][fist letter surname]-wedoit  _(example:   hm-wedoit   for Hans Meier)_ 
 * There are no feature branches 
 * Merging to master only on __Thursday before class__, because there could be conflicts! 
 
