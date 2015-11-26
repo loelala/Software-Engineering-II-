@@ -1,6 +1,16 @@
-<div ng-controller="SupplierListByDateCtrl as vm">
-    <h3><i class="fa fa-industry"></i> All Suppliers</h3>
-    <hr>
+<div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
+                <hr>
+                <div class="col-md-12 col-lg-12">
+                    <h1>Suppliers</h1>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
     <div class="row">
         <!--row datepicker / comparison-->
         <div class="col-md-12 col-lg-12">
@@ -19,11 +29,12 @@
                            max-date="vm.maxDateFrom"
                            datepicker-options="vm.dateOptionsFrom"
                            date-disabled="vm.disabledFrom(date, mode)" close-text="Close">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </div>
+                </p>
             </div>
 
             <div class="col-md-3 col-lg-3">
@@ -41,18 +52,18 @@
         </div>
     </div><!-- ./ row datepicker / comparison-->
 
-    <div class="row">
+    <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
             <button class="btn btn-default" style="margin-left: 16px" type="button"
-                    ng-click='vm.byDateQuery(vm.from,vm.to)'>
-                Show all Suppliers
+                    ng-click='vm.byDateQuery(vm.from,vm.to)' ng-disable="vm.dateIsSelected()">
+                Show all Suppliers by Date
             </button>
         </div>
     </div>
 
     <hr>
 
-    <div class="row" ng-show="!vm.timeIsSelected">
+    <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -82,7 +93,7 @@
         <strong>Error!</strong> {{vm.error}}
     </div>
 
-    <div class="row" ng-show="!vm.timeIsSelected">
+    <div class="row">
         <div class="col-md-2 col-lg-2">
             <button style="margin-left: 16px" type="button"
                     ng-click='vm.goToComparison()'
@@ -98,7 +109,7 @@
 <hr/>
 
 <!-- row table all supplier -->
-<div class="row" ng-show="!vm.timeIsSelected">
+<div class="row">
     <div class="col-md-12">
         <div class="panle panle-default">
             <table st-table="vm.supplierList" class="table table-hover">

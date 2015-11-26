@@ -3,6 +3,7 @@
  * Information holt:
  *  - is the user logged in?
  *  - is the user a admin user?
+ *  - the actual user
  */
 (function() {
     'use strict';
@@ -12,6 +13,7 @@
             var loginInformationHolder = {};
             loginInformationHolder.admin = false;
             loginInformationHolder.isLoggedIn = false;
+            loginInformationHolder.actualUser = '';
 
             return {
                 isAdmin :  function(){
@@ -21,6 +23,9 @@
                 isLoggedIn :  function(){
                     //console.log("returning admin "+ loginInformationHolder.isLoggedIn);
                     return loginInformationHolder.isLoggedIn;
+                },
+                actualUser : function() {
+                    return loginInformationHolder.actualUser;
                 },
 
                 updateIsAdmin : function(isAdminLocal) {
@@ -32,6 +37,10 @@
                     //console.log("updateIsAdmin to " + isLoggedIn);
                     loginInformationHolder.isLoggedIn = isLoggedIn;
                     //console.log("updateIsAdmin to (After)" + loginInformationHolder.isLoggedIn);
+                },
+                updateActualUser : function(user) {
+                    console.log('update admin to: ', user);
+                    loginInformationHolder.actualUser = user;
                 }
             };
         })

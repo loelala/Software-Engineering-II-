@@ -9,39 +9,54 @@
     angular.module('supplierListByDate', [])
         .controller('SupplierListByDateCtrl', SupplierListByDateCtrl);
 
-    SupplierListByDateCtrl.$inject = ['$filter','$state','supplierserviceByDate','dataShareService','toastr'];
+    SupplierListByDateCtrl.$inject = ['$filter','$state','supplierserviceByDate', 'supplierservice','dataShareService','toastr'];
 
-    function SupplierListByDateCtrl ($filter,$state,supplierserviceByDate,dataShareService,toastr) {
+    function SupplierListByDateCtrl ($filter,$state,supplierserviceByDate, supplierservice, dataShareService,toastr) {
+
         var vm = this;
         const formatString = "ddMMyyyy";
-        vm.select = select;
-        vm.removeSelected = removeSelected;
+
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
-        dataShareService.eraseListByDate();
         vm.selectedSuppliers = dataShareService.getSuppliersByDate();
         vm.isTimeSelected = true;
+        vm.isDateValid = false;
+
+        vm.select = select;
+        vm.removeSelected = removeSelected;
+        vm.byDateQuery = byDateQuery;
+        vm.dateIsSelected = dateIsSelected;
+
+        dataShareService.eraseListByDate();
+
+        var allSuppliers = supplierservice.query();
+        allSuppliers.$promise.then(function(data) {
+            vm.supplierList = data;
+            console.log('get all suppliers');
+        }, function(error) {
+            console.log("some error occurred!", error);
+            toastr.error('Couldn\'t connect to the database','Database connection error!');
+        });
 
         vm.goToComparison = function(){
             $state.go('comparison');
         };
 
-        vm.byDateQuery = function(from, to) {
+        function byDateQuery(from, to) {
             var fromToPost = $filter('date')(from,formatString);
             var toToPost = $filter('date')(to,formatString);
             console.log(fromToPost);
             console.log(toToPost);
             vm.isTimeSelected = false;
-            var allSuppliers = supplierserviceByDate.query({from:fromToPost,to:toToPost});
-            allSuppliers.$promise.then(function(data) {
+            var allSuppliersByDate = supplierserviceByDate.query({from:fromToPost,to:toToPost});
+            allSuppliersByDate.$promise.then(function(data) {
                 console.log('get all suppliers by date', data);
                 vm.supplierList = data;
             }, function(error) {
                 console.log('some error occurred', error);
-                errorFunction(error);
                 toastr.error('Couldn\'t connect to the database','Database connection error!');
             });
-        };
+        }
 
         function select(index, selectedSupplier) {
             vm.selectedRow = index;
@@ -73,12 +88,8 @@
             dataShareService.removeSupplierByDate(selectedSupplier);
         }
 
-
-        function errorFunction(error) {
-            if(error.status === 500 && error.statusText === 'Internal Server Error') {
-                vm.errorMail = 'help@wedoit.com';
-                vm.error = 'There is no connection to the server! Please send an email to ' + vm.errorMail;
-            }
+        function dateIsSelected() {
+            return vm.isDateValid === true;
         }
 
         // ========= DATEPICKER STUFF =============
@@ -89,6 +100,7 @@
         };
 
         vm.fromDate = function() {
+            vm.isDateValid = true;
             vm.form = new Date();
         };
 

@@ -20,7 +20,7 @@ angular.module('WeDoIt', [
     // module for a specific supplier (controller)
     //'supplierDetails',
     // module for connect to the backend (service)
-    //'supplierservice',
+    'supplierservice',
     'supplierserviceByDate',
     // module for authentication (service)
     'authenticationservice',
