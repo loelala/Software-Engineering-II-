@@ -37,7 +37,7 @@ A time interval must be chooseable for the whole application, so that the compar
 ### 1.3	Authentication (done)
 A dynamic login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
 
-### 1.3.1	User control
+### 1.3.1	User control (done)
 There should be 1 admin user, who can create, delete and manage users for the system.
 
 ### 1.4	Export reports as PDF 
@@ -70,11 +70,14 @@ The client-company allows read-only access to the MySQL-Database over a remote S
 ### 2.2	Documentation
 A documentation of the software is needed and must be handed over to the client-company
 
-### 2.2.1	Code documentation
+### 2.2.1	Code documentation (in progress)
 A document explaining the code needs to be done in pdf.
 
 ### 2.2.2	User manual
 A user manual needs to be done for the customer as a pdf. It should explain how to use the software.
+
+### 2.2.3	Coding standards (done)
+The coding standards needs to be decided and written down.
 
 ### 2.3	Software-Quality
 To guarantee a minimum of software-quality unit-tests must be implemented.

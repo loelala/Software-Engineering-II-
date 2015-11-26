@@ -14,12 +14,12 @@ import java.util.Map;
  */
 public class SupplierRowCallbackHandler implements RowCallbackHandler
 {
-    private Map<String, Map<String, Order>> map;
+    private Map<String, Map<String, Order>> supplierMap;
     private Map<String, Supplier> suppliers;
 
-    public SupplierRowCallbackHandler(Map<String, Supplier> suppliers, Map<String, Map<String, Order>> map)
+    public SupplierRowCallbackHandler(Map<String, Supplier> suppliers, Map<String, Map<String, Order>> supplierMap)
     {
-        this.map = map;
+        this.supplierMap = supplierMap;
         this.suppliers = suppliers;
     }
 
@@ -35,7 +35,7 @@ public class SupplierRowCallbackHandler implements RowCallbackHandler
             s.setName(resultSet.getString("NAME1").trim());
 
             suppliers.put(lifnr, s);
-            map.put(s.getId(), new HashMap<String, Order>());
+            supplierMap.put(s.getId(), new HashMap<String, Order>());
         }
     }
 }
