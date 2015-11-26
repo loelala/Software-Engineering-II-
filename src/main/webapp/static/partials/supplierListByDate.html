@@ -113,7 +113,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.supplierList | limitTo: 50"
+                <tr ng-repeat="row in vm.supplierList"
                     ng-class="{'selected':$index == vm.selectedRow}"
                     ng-click="vm.select($index,row)">
 
