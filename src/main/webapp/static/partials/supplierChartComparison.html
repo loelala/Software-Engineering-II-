@@ -35,11 +35,22 @@
 <div class="col-md-8"> <!-- Chart Div -->
 
     <canvas id="bar" class="chart chart-bar"
-            chart-data="vm.data" chart-labels="vm.labels" colours="vm.colours">
+            chart-data="vm.data" chart-labels="vm.labels"chart-colours="vm.colours" chart-series="vm.series">
     </canvas>
 
 </div>
 <div class="col-md-4"></div>
 </div>
+
+    <div class="row">
+        <div class="col-md-8"> <!-- Chart2 Div -->
+
+            <canvas id="bar2" class="chart chart-bar"
+                    chart-data="vm.data_detail" chart-labels="vm.labels_detail" chart-colours="vm.colours_detail" chart-series="vm.series_detail">
+            </canvas>
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 
 </div>

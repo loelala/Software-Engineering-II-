@@ -19,8 +19,22 @@
             var displayData = vm.rawData.slice();
 
             vm.dataArray = [];
+            vm.dataArrayDetail = [];
             vm.supplierNameArray = [];
+            vm.supplierNameArrayDetail = [];
             vm.selectedRow = [];
+
+            var colorArray = [{
+                fillColor: 'rgba(220,0,0,0.5)' //red
+            },
+            {
+                fillColor: 'rgba(0,220,0,0.5)' //green
+            },
+            {
+                fillColor: 'rgba(0,0,220,0.5)' //blue
+            },{
+                fillColor: 'rgba(255,215,0,0.5)' //gold
+            }]
 
             vm.goToSupplierList = goToSupplierList;
 
@@ -36,7 +50,7 @@
             }
 
             buildDisplayData();
-
+            buildDisplayDataDetail();
             function buildDisplayData()
             {
                 console.log("building Display DAta");
@@ -58,13 +72,49 @@
 
                 vm.labels = vm.supplierNameArray;
                 vm.series = ['Score'];
-                vm.colours = [{
-                    fillColor: 'rgba(220,0,0,0.5)'
-                }];
+                var i = 0;
+                for(i = 0; i < colorArray.length ; i++)
+                {
+                    vm.colours[i] = colorArray[i];
+                }
+                //vm.colours = [{
+                //    fillColor: 'rgba(220,0,0,0.5)'
+                //}];
                 vm.data = [
                     vm.dataArray
                 ];
             }
+
+        function buildDisplayDataDetail()
+        {
+            console.log("building Display DAta");
+            vm.dataArrayDetail = [];
+            vm.supplierNameArrayDetail = [];
+            displayData.forEach(function(entry) {
+                if(isNaN(entry["score"]))
+                {
+                    vm.dataArrayDetail.push(0);
+                    vm.supplierNameArrayDetail.push(entry["name"]);
+                }
+                else
+                {
+                    vm.dataArrayDetail.push(entry["score"]);
+                    vm.supplierNameArrayDetail.push(entry["name"]);
+                }
+
+            });
+
+            vm.labels_detail = vm.supplierNameArrayDetail;
+            //vm.series_detail = ['Score'];
+
+            for(i = 0; i < colorArray.length ; i++)
+            {
+                vm.colours[i] = colorArray[i];
+            }
+            vm.data_detail = [
+                vm.dataArray
+            ];
+        }
 
             console.log("raw data" + dataShareService.getSuppliers());
 
