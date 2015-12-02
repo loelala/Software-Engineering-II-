@@ -14,6 +14,7 @@ public class Supplier
     private int numberOfOrders;
     private double score = -1;
     private Classification classification;
+    private int[] deliveryDifferences;
 
     public String getId()
     {
@@ -44,6 +45,11 @@ public class Supplier
         return score;
     }
 
+    public int[] getDeliveryDifferences()
+    {
+        return deliveryDifferences;
+    }
+
     public Classification getClassification()
     {
         return classification;
@@ -69,6 +75,7 @@ public class Supplier
         this.orders = orders;
         this.numberOfOrders = this.orders.size();
         this.classification = calculateClassification();
+        calculateDifferences();
     }
 
     public void setScore(double score)
@@ -79,6 +86,35 @@ public class Supplier
     public void setClassification(Classification classification)
     {
         this.classification = classification;
+    }
+
+    private void calculateDifferences()
+    {
+        deliveryDifferences = new int[DeliveryDifference.COUNT];
+        for(Order o : orders)
+        {
+            switch(o.getDeliveryDifference())
+            {
+                case MUCH_TOO_EARLY:
+                    deliveryDifferences[DeliveryDifference.MUCH_TOO_EARLY.ordinal()]++;
+                    break;
+                case TOO_EARLY:
+                    deliveryDifferences[DeliveryDifference.TOO_EARLY.ordinal()]++;
+                    break;
+                case ON_TIME:
+                    deliveryDifferences[DeliveryDifference.ON_TIME.ordinal()]++;
+                    break;
+                case TOO_LATE:
+                    deliveryDifferences[DeliveryDifference.TOO_LATE.ordinal()]++;
+                    break;
+                case MUCH_TOO_LATE:
+                    deliveryDifferences[DeliveryDifference.MUCH_TOO_LATE.ordinal()]++;
+                    break;
+                case NOT_CALCULATED:
+                    deliveryDifferences[DeliveryDifference.NOT_CALCULATED.ordinal()]++;
+                    break;
+            }
+        }
     }
 
     private void calculateScore()

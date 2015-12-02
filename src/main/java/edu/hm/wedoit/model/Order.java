@@ -11,6 +11,7 @@ public class Order
     private Date deliveryDate;
     private String ebeln;
     private int orderScore = -1;
+    private DeliveryDifference deliveryDifference;
 
     public Order(String ebeln, Date promisedDate, Date deliveryDate)
     {
@@ -52,9 +53,18 @@ public class Order
     {
         if(orderScore == -1)
         {
-            calculateScore();
+            calculateScoreAndDeliveryDifference();
         }
         return orderScore;
+    }
+
+    public DeliveryDifference getDeliveryDifference()
+    {
+        if(deliveryDifference == null)
+        {
+            calculateScoreAndDeliveryDifference();
+        }
+        return deliveryDifference;
     }
 
     public void setPromisedDate(Date promisedDate)
@@ -62,7 +72,7 @@ public class Order
         this.promisedDate = promisedDate;
         if(deliveryDate != null)
         {
-            calculateScore();
+            calculateScoreAndDeliveryDifference();
         }
     }
 
@@ -71,13 +81,76 @@ public class Order
         this.deliveryDate = deliveryDate;
         if(promisedDate != null)
         {
-            calculateScore();
+            calculateScoreAndDeliveryDifference();
         }
+    }
+
+    public void setDeliveryDifference(DeliveryDifference deliveryDifference)
+    {
+        this.deliveryDifference = deliveryDifference;
     }
 
     public void setEbeln(String ebeln)
     {
         this.ebeln = ebeln;
+    }
+
+    private void calculateScoreAndDeliveryDifference()
+    {
+        calculateScore();
+        calculateDifference();
+    }
+
+    private void calculateDifference()
+    {
+        if(deliveryDate != null && promisedDate != null)
+        {
+            long diff = deliveryDate.getTime() - promisedDate.getTime();
+            int dayCount = (int) diff / (24 * 60 * 60 * 1000);
+
+            // -1 <= x = 0
+            int minOnTime = -1;
+            int maxOnTime = 0;
+
+            // 0 < x <= 5
+            int minLate = maxOnTime +1;
+            int maxLate = 5;
+
+            // -5 <= x < -1
+            int minEarly = -5;
+            int maxEarly = minOnTime -1;
+
+
+            if(dayCount >= minOnTime && dayCount <= maxOnTime)
+            {
+                deliveryDifference = DeliveryDifference.ON_TIME;
+            }
+            else if(dayCount >= minLate && dayCount <= maxLate)
+            {
+                deliveryDifference = DeliveryDifference.TOO_LATE;
+            }
+            else if(dayCount >= minEarly && dayCount <= maxEarly)
+            {
+                deliveryDifference = DeliveryDifference.TOO_EARLY;
+            }
+            else if(dayCount > maxLate)
+            {
+                deliveryDifference = DeliveryDifference.MUCH_TOO_LATE;
+            }
+            else if(dayCount < minEarly)
+            {
+                deliveryDifference = DeliveryDifference.MUCH_TOO_EARLY;
+            }
+            else
+            {
+                deliveryDifference = DeliveryDifference.NOT_CALCULATED;
+            }
+
+        }
+        else
+        {
+            deliveryDifference = DeliveryDifference.NOT_CALCULATED;
+        }
     }
 
     private void calculateScore()
@@ -142,72 +215,6 @@ public class Order
             {
                 orderScore = 0;
             }
-
-/*            switch (dayCount) {
-                //0 or -1
-                case 0:
-                case -1:
-                    orderScore = 100;
-                    break;
-
-                //1 - 3 or -2
-                case 1:
-                case 2:
-                case 3:
-                case -2:
-                    orderScore = 90;
-                    break;
-
-                //4 - 7 or -3
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case -3:
-                    orderScore = 80;
-                    break;
-
-                //8 - 14 or -4 - -7
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case -4:
-                case -5:
-                case -6:
-                case -7:
-                    orderScore = 60;
-                    break;
-
-                //15 - 28 or -8 - -10
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                case 21:
-                case 22:
-                case 23:
-                case 24:
-                case 25:
-                case 26:
-                case 27:
-                case 28:
-                case -8:
-                case -9:
-                case -10:
-                    orderScore = 40;
-                    break;
-
-                //29 - ~ or -11 - ~
-                default:
-                    orderScore = 0;
-                    break;
-            }*/
         }
         else
         {
