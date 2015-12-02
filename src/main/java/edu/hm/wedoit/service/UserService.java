@@ -23,7 +23,7 @@ public interface UserService
      * @param password
      * @return wether the user was created or not
      */
-    boolean createUser(String username, String password);
+    boolean createUser(String username, String password, String email, String surname);
 
     /**
      * passes the user deletion request to the business logic

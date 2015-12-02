@@ -1,56 +1,65 @@
 <div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
-                <hr>
-                <div class="col-md-12 col-lg-12">
-                    <h1>Suppliers</h1>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
     <div class="row">
-        <div class="col-md-3 col-lg-3">
-            <p class="input-group">
-                <label for="from">From: </label>
-                <input id="from" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                       ng-model="vm.from"
-                       is-open="vm.status.openFrom"
-                       min-date="vm.minDateFrom"
-                       max-date="vm.maxDateFrom"
-                       datepicker-options="vm.dateOptionsFrom"
-                       date-disabled="vm.disabledFrom(date, mode)" close-text="Close"/>
-                <span class="input-group-btn">
-                    <button  type="button" class="btn btn-default" ng-click="vm.openFrom($event)">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </span>
-
-            </p>
-        </div>
-
-        <div class="col-md-3 col-lg-3">
-            <p class="input-group">
-                <label for="to">To: </label>
-                <input id="to" type="text" class="form-control" uib-datepicker-popup="{{vm.format}}"
-                       ng-model="vm.to"
-                       is-open="vm.status.openedTo"
-                       min-date="vm.minDateTo"
-                       max-date="vm.maxDateTo"
-                       datepicker-options="vm.dateOptionsTo"
-                       date-disabled="vm.disabledTo(date, mode)"
-                       close-text="Close">
-            </p>
+        <div class="col-md-12 col-lg-12">
+            <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <h1>Suppliers</h1>
+            </div>
         </div>
     </div>
 
+    <hr>
+
+
+    <div class="row">
+        <!--datepicker-->
+        <div class="col-md-6 col-lg-6">
+            <div class="form-group">
+                <label for="datepicker"> Select a daterange: </label>
+                <input date-range-picker id="datepicker" name="datepicker" class="form-control date-picker" type="text"
+                        ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
+            </div>
+        </div>
+        <!-- .datepicker -->
+
+        <!-- classification TOP, NORMAL, ONE_OFF, NONE -->
+        <div class="col-md-6 col-lg-6">
+            <label>Classification of supplier: </label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="classification" value="NORMAL" ng-model="vm.formData.classification">
+                    NORMAL
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="classification" value="TOP" ng-model="vm.formData.classification">
+                    TOP
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="classification" value="ONE_OFF" ng-model="vm.formData.classification">
+                    ONE_OFF
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="classification" value="NONE" ng-model="vm.formData.classification">
+                    NONE
+                </label>
+            </div>
+        </div> <!-- classification -->
+    </div>
+
+
     <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
-            <button class="btn btn-default" style="margin-left: 16px" type="button"
-                    ng-click='vm.byDateQuery(vm.from,vm.to)' ng-disable="vm.dateIsSelected">
-                Show all Suppliers by Date
+            <button class="btn btn-default" style="margin-left: 9px" type="button"
+                    ng-click="vm.byDateQuery(vm.date.startDate ,vm.date.endDate, vm.formData.classification)"
+                    ng-disable="vm.dateIsSelected">
+                Show all suppliers by date and classification
             </button>
         </div>
     </div>

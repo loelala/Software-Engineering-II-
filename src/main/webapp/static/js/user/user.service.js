@@ -10,8 +10,8 @@
 
         var service = {};
 
-        service.createNew = function (username, password) {
-            return $http.post('../api/user/new', {username: username, password: password}, {
+        service.createNew = function (username, password, email, name) {
+            return $http.post('../api/user/new', {username: username, password: password, email: email, surname: name}, {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 transformRequest: function (obj) {
                     var str = [];
@@ -19,7 +19,7 @@
                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: {username: username, password: password}
+                data: {username: username, password: password, email: email, surname: name}
             });
         };
 

@@ -11,6 +11,7 @@ angular.module('WeDoIt', [
     'ngAnimate',
     'ui.bootstrap',
     'toastr',
+    'daterangepicker',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
     'supplierListByDate',
@@ -18,6 +19,7 @@ angular.module('WeDoIt', [
     'supplierserviceByDate',
     'authenticationservice',
     'userservice',
+    'alluserservice',
     'login',
     'index',
     'newuser',
@@ -84,8 +86,6 @@ angular.module('WeDoIt')
         });
         $urlRouterProvider.otherwise("/login");
 
-        // needed for our urls -- no # in front of our states
-        //$locationProvider.html5Mode(true);
 
     }
 
@@ -103,7 +103,9 @@ angular.module('WeDoIt')
             }
             else
             {
-                console.log("is logged in status from loginInformationHolerService" + loginInformationHolderService.isLoggedIn());
+                console.log("is logged in status from loginInformationHolerService"
+                    + loginInformationHolderService.isLoggedIn());
+
                 if(!loginInformationHolderService.isLoggedIn())
                 {
                     console.log("tostate name " + toState.name);

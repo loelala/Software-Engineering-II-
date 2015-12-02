@@ -7,54 +7,52 @@
 (function() {
     'use strict';
     angular.module("barChartModule", ["chart.js"])
-        .controller("barChartController", BarChartController);
+        .controller("BarChartController", BarChartController);
 
     BarChartController.$inject = ['$state','dataShareService','toastr'];
 
-    function BarChartController($state,dataShareService,toastr)
-    {
-            var vm = this;
+    function BarChartController($state,dataShareService,toastr) {
+        var vm = this;
 
-            vm.rawData = dataShareService.getSuppliersByDate();
-            var displayData = vm.rawData.slice();
+        vm.rawData = dataShareService.getSuppliersByDate();
+        var displayData = vm.rawData.slice();
 
+        vm.dataArray = [];
+        vm.supplierNameArray = [];
+        vm.selectedRow = [];
+
+        vm.goToSupplierList = goToSupplierList;
+        vm.removeSelected = removeSelected;
+
+        function goToSupplierList(){
+            $state.go('supplier');
+        }
+
+        var j;
+
+        for(j = 0 ; j < vm.rawData.length ;j++)
+        {
+                vm.selectedRow[j] = true;
+        }
+
+        buildDisplayData();
+
+        function buildDisplayData() {
+            console.log("building Display DAta");
             vm.dataArray = [];
             vm.supplierNameArray = [];
-            vm.selectedRow = [];
+            displayData.forEach(function(entry) {
 
-            vm.goToSupplierList = goToSupplierList;
+                if(isNaN(entry["score"])) {
+                    vm.dataArray.push(0);
+                    vm.supplierNameArray.push(entry["name"]);
+                }
+                else {
+                    vm.dataArray.push(entry["score"]);
+                    vm.supplierNameArray.push(entry["name"]);
+                }
 
-            function goToSupplierList(){
-                $state.go('supplier');
-            }
-
-            var j;
-
-            for(j = 0 ; j < vm.rawData.length ;j++)
-            {
-                vm.selectedRow[j] = true;
-            }
-
-            buildDisplayData();
-
-            function buildDisplayData()
-            {
-                console.log("building Display DAta");
-                vm.dataArray = [];
-                vm.supplierNameArray = [];
-                displayData.forEach(function(entry) {
-                    if(isNaN(entry["score"]))
-                    {
-                        vm.dataArray.push(0);
-                        vm.supplierNameArray.push(entry["name"]);
-                    }
-                    else
-                    {
-                        vm.dataArray.push(entry["score"]);
-                        vm.supplierNameArray.push(entry["name"]);
-                    }
-
-                })
+                });
 
                 vm.labels = vm.supplierNameArray;
                 vm.series = ['Score'];
@@ -66,12 +64,9 @@
                 ];
             }
 
-            console.log("raw data" + dataShareService.getSuppliers());
+        console.log("raw data" + dataShareService.getSuppliersByDate());
 
-
-
-
-        vm.removeSelected = function removeSelected(index, selectedSupplier) {
+        function removeSelected(index, selectedSupplier) {
             console.log("remove Selected from View " + selectedSupplier);
             var i = 0;
             var check = -1;
@@ -116,10 +111,9 @@
             }
             recreate();
             buildDisplayData();
-        };
+        }
 
-        function recreate()
-        {
+        function recreate() {
             displayData = [];
             var i = 0;
 
