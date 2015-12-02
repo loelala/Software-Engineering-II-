@@ -79,7 +79,7 @@ angular.module('WeDoIt')
         {
             url:'/comparison',
             templateUrl: 'static/partials/supplierChartComparison.html',
-            controller: 'BarChartController',
+            controller: 'barChartController',
             controllerAs: 'vm'
         });
         $urlRouterProvider.otherwise("/login");
