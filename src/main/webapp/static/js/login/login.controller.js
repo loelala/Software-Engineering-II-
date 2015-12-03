@@ -12,6 +12,9 @@
         vm.username = '';
         vm.password = '';
 
+        vm.login = login;
+        vm.isLoggedIn = isLoggedIn;
+
         var getCookie= function(name) {
             var cookiename = name + "=";
             var ca = document.cookie.split(';');
@@ -23,12 +26,11 @@
             return null;
         };
 
-        vm.isLoggedIn = function()
-        {
+        function isLoggedIn() {
             return getCookie("userid")!=null;
-        };
+        }
 
-        vm.login = function(username, password){
+        function login(username, password){
             AuthenticationService.login(username, password)
                 .then(function(data) { //success
                 console.log('Login sucesss!');
@@ -61,7 +63,7 @@
                 console.log('error by login');
                 toastr.error('Username or password incorrect');
             });
-        };
+        }
     }
 
 })();

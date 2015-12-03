@@ -8,7 +8,6 @@
     angular.module("DataShareServiceModule",[])
         .service('dataShareService', function() {
 
-        //var supplierList = [];
         var supplierListByDate = [];
 
         var addSupplierByDate = function(supplier) {
@@ -73,13 +72,9 @@
 
 
         return {
-            //addSupplier: addSupplier,
             addSupplierByDate: addSupplierByDate,
-            //getSuppliers: getSuppliers,
             getSuppliersByDate: getSuppliersByDate,
-            //eraseList : eraseList,
             eraseListByDate: eraseListByDate,
-            //removeSupplier : removeSupplier,
             removeSupplierByDate : removeSupplierByDate
         };
 

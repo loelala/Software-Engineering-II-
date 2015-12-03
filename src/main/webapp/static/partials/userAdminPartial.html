@@ -10,14 +10,14 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 20px">
         <div class="col-lg-3 col-md-3">
             <button type="button" class="btn btn-default" ng-click="vm.newUser()">
                 <i class="fa fa-plus"></i> Create a new user
             </button>
         </div>
         <div class="col-lg-3 col-md-3">
-            <button type="button" class="btn btn-default" ng-click="vm.allUseres()">
+            <button type="button" class="btn btn-default" ng-click="vm.allUsers()">
                 <i class="fa fa-users"></i> Show all users
             </button>
         </div>
@@ -27,32 +27,54 @@
         <div class="col-lg-12 col-md-12">
             <h2>Create a new User</h2>
             <form role="form" name="newUser">
-                <div class="form-group" ng-class="{ 'has-error': newUser.name.$dirty }">
+                <div class="form-group" ng-class="{ 'has-error': newUser.name.$dirty && newUser.name.$error.required }">
                     <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter the name" ng-model="vm.newUser.name">
-                    <span ng-show="newUser.name.$dirty" class="help-block">Please enter a valid name! A - Z / a- z is allowed</span>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter the name" ng-model="vm.name" required>
+                    <span ng-show="newUser.name.$dirty && newUser.name.$error.required" class="help-block">Please enter a valid name! A - Z / a- z is allowed</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': newUser.email.$dirty && newUser.email.$error.required }">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Enter the email address" ng-model="vm.newUser.email" required>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Enter the email address" ng-model="vm.email" required>
                     <span class="help-block" ng-show="newUser.email.$dirty && newUser.email.$error.required">Please enter a valid email address!</span>
                 </div>
                 <hr>
-                <div class="form-group" ng-class="{ 'has-error': form.newUsername.$dirty && form.newUsername.$error.required }">
+                <div class="form-group" ng-class="{ 'has-error': newUser.newUsername.$dirty && form.newUsername.$error.required }">
                     <label for="newUsername">Username</label>
-                    <input class="form-control" type="text" name="new_username" id="newUsername" placeholder="Enter the username" ng-model="vm.newUser.username" autofocus required>
+                    <input class="form-control" type="text" name="new_username" id="newUsername" placeholder="Enter the username" ng-model="vm.un" required>
                     <span ng-show="newUser.username.$dirty && newUser.username.$error.required" class="help-block">Username is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.newPassword.$dirty && form.newPpassword.$error.required }">
+                <div class="form-group" ng-class="{ 'has-error': newUser.newPassword.$dirty && form.newPpassword.$error.required }">
                     <label for="newPassword">Password</label>
-                    <input class="form-control" type="password" name="new_password" id="newPassword" placeholder="Enter a password" ng-model="vm.newUser.password" required>
+                    <input class="form-control" type="password" name="new_password" id="newPassword" placeholder="Enter a password" ng-model="vm.p" required>
                     <span ng-show="newUser.password.$dirty && newUser.password.$error.required" class="help-block">Password is required</span>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-success" ng-click="vm.create(vm.newUser.username, vm.newUser.password)"
-                            ng-show="newUser.$invalid">Create a new user</button>
+                    <button type="button" class="btn btn-success" ng-click="vm.create(vm.un, vm.p, vm.email, vm.name)"
+                            ng-show="newUser.$valid">Create a new user</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="row" ng-show="vm.isAllUsers">
+        <div class="col-lg-12 col-md-12">
+            <h2>All current users</h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in vm.userList">
+                    <td>{{user.name}}</td>
+                    <td>{{user.surname}}</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

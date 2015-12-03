@@ -17,11 +17,9 @@
 
             return {
                 isAdmin :  function(){
-                    //console.log("returning admin "+ loginInformationHolder.admin);
                     return loginInformationHolder.admin;
                 },
                 isLoggedIn :  function(){
-                    //console.log("returning admin "+ loginInformationHolder.isLoggedIn);
                     return loginInformationHolder.isLoggedIn;
                 },
                 actualUser : function() {
@@ -29,17 +27,12 @@
                 },
 
                 updateIsAdmin : function(isAdminLocal) {
-                    //console.log("updateIsAdmin to " + isAdminLocal);
                     loginInformationHolder.admin = isAdminLocal;
-                    //console.log("updateIsAdmin to (After)" + loginInformationHolder.admin);
                 },
                 updateIsLoggedIn : function(isLoggedIn) {
-                    //console.log("updateIsAdmin to " + isLoggedIn);
                     loginInformationHolder.isLoggedIn = isLoggedIn;
-                    //console.log("updateIsAdmin to (After)" + loginInformationHolder.isLoggedIn);
                 },
                 updateActualUser : function(user) {
-                    console.log('update admin to: ', user);
                     loginInformationHolder.actualUser = user;
                 }
             };

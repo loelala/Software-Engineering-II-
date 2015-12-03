@@ -40,7 +40,7 @@ public class UserController
     public User getExample()
     {
         logger.debug("received a request to get a example user");
-        return new User("example","example");
+        return new User("example","example","test@test.de", "example");
     }
 
     /**
@@ -98,10 +98,11 @@ public class UserController
      * @return wether the user was created or not
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
-    public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response)
+    public ResponseEntity<String> newUser(@RequestParam String username, @RequestParam String password
+            ,@RequestParam String email, @RequestParam String surname, HttpServletRequest request, HttpServletResponse response)
     {
         logger.debug("newUser({}, {})",username,password );
-        if (userService.createUser(username, password))
+        if (userService.createUser(username, password, email, surname))
         {
             logger.debug("created {}",username);
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.CREATED);

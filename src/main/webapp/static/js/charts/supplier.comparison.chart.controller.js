@@ -37,14 +37,6 @@
             }
             var deliveryDifference = ["Much too early", "too early", "on time", "too late", "much too late", "not calculated"];
 
-
-            var colorArray = [];
-            colorArray.push({fillColor: 'rgba(220,0,0,0.5)'});
-            colorArray.push({fillColor: 'rgba(0,220,0,0.5)'});
-            colorArray.push({fillColor: 'rgba(0,0,220,0.5)'});
-            colorArray.push({fillColor: 'rgba(255,215,0,0.5)'});
-
-
             vm.goToSupplierList = goToSupplierList;
 
             function goToSupplierList(){
@@ -59,14 +51,12 @@
             }
 
             buildDisplayData();
-            buildDisplayDataDetail();
+
             function buildDisplayData()
             {
-                console.log("building Display Data");
+                console.log("building Display DAta");
                 vm.dataArray = [];
                 vm.supplierNameArray = [];
-                vm.colours = [];
-
                 displayData.forEach(function(entry) {
                     if(isNaN(entry["score"]))
                     {
@@ -78,6 +68,7 @@
                         vm.dataArray.push(entry["score"]);
                         vm.supplierNameArray.push(entry["name"]);
                     }
+
                 })
 
                 vm.labels = vm.supplierNameArray;
@@ -94,65 +85,10 @@
                 ];
             }
 
-        function buildDisplayDataDetail()
-        {
+            console.log("raw data" + dataShareService.getSuppliers());
 
-            var i;
-            console.log("building Display Data detail");
-            vm.dataArrayDetail = [];
-            vm.labels_detail = [];
-            vm.series_detail = [];
-            vm.colours_detail = [];
-            vm.data_detail = [];
 
-            for(i = 0; i < displayData.length ; i++)
-            {
-                console.log("adding color " + colorArray[i]);
-                vm.colours_detail.push(colorArray[i]);
-            }
 
-            for(i = 0 ; i < displayData.length ; i++)
-            {
-                vm.series_detail.push(displayData[i]["name"]); //supplier
-                console.log("series push detail " + displayData[i]["name"]);
-            }
-            for(i = 0 ; i < deliveryDifference.length ; i++)
-            {
-                console.log("labelpushdetail" + deliveryDifference[i]);
-                vm.labels_detail.push(deliveryDifference[i]); //supplier
-            }
-
-            console.log("deliverydifference.length: " + deliveryDifference.length);
-            console.log("displaydata.length: " + displayData.length);
-
-            for(i = 0 ; i < displayData.length ; i++)
-            {
-                var tmpArray = [];
-                for( j = 0 ; j < deliveryDifference.length ; j++)
-                {
-                    tmpArray.push(displayData[i]["deliveryDifferences"][j]);
-                    console.log("deliveryDifferencesdetail" + displayData[i]["deliveryDifferences"][j])
-
-                }
-                vm.dataArrayDetail.push(tmpArray);
-
-            }
-            console.log("dataArrayDetail length " + vm.dataArrayDetail.length);
-            for(i = 0 ; i < vm.dataArrayDetail.length ; i++)
-            {
-                var k=0;
-                console.log("dataArrayDetail length nested " + i + " " + vm.dataArrayDetail[i].length);
-                for(k = 0 ; k < vm.dataArrayDetail[i].length ; k++)
-                {
-                    console.log(vm.dataArrayDetail[i][k]);
-                }
-            }
-
-            for(i = 0 ; i < vm.dataArrayDetail.length ; i++)
-            {
-                vm.data_detail.push(vm.dataArrayDetail[i]);
-            }
-        }
 
         vm.removeSelected = function removeSelected(index, selectedSupplier) {
             console.log("remove Selected from View " + selectedSupplier);
@@ -199,7 +135,6 @@
             }
             recreate();
             buildDisplayData();
-            buildDisplayDataDetail();
         };
 
         function recreate()
