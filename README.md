@@ -30,6 +30,7 @@ If a supplier is clicked, a detailed view of this supplier should appear. In thi
 
 #### 1.1.3	Comparing some suppliers (maximum of 4)(Done)
 An optional feature is to compare multiple suppliers by selecting more than one supplier in the 1.1.2 - view. Then a new view should show something similar to 1.1.3 comparing all checked suppliers. The Label should say the suppliers classification next to it's name.
+Also a graph is shown, showing the numbers of orders which are too late, too early, etc. for all choosen suppliers.
 
 ### 1.2	Chooseable time interval (done)
 A time interval must be chooseable for the whole application, so that the comparing is done for this interval.
@@ -55,7 +56,7 @@ There should be a possibility to categorise suppliers by the amount of orders.
 ### 1.7.1 Category management
 The admin should be able to change the category requirements.
 
-### 1.7.2 Category selection
+### 1.7.2 Category selection (done)
 Allow the user to select all the users in a category.
 
 ### 1.8 Scoring management
