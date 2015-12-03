@@ -12,12 +12,12 @@ public class ClassificationLimits
 {
     private Map<String, Integer> classificationLimits;
 
+    public ClassificationLimits(Map<String, Integer> classificationLimits)
+    {
+        this.classificationLimits = classificationLimits;
+    }
     public Map<String, Integer> getClassificationLimits()
     {
-        if(classificationLimits == null)
-        {
-            return getDefaultClassificationLimits();
-        }
         return classificationLimits;
     }
 
@@ -26,12 +26,4 @@ public class ClassificationLimits
         classificationLimits = limits;
     }
 
-    private Map<String, Integer> getDefaultClassificationLimits()
-    {
-        Map<String, Integer> map = new HashMap<>();
-        map.put(Classification.TOP.toString(), 20);
-        map.put(Classification.NORMAL.toString(), 3);
-        map.put(Classification.ONE_OFF.toString(), 1);
-        return map;
-    }
 }
