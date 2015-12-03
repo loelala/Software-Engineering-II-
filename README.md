@@ -28,7 +28,7 @@ One view must give the overview of all suppliers containing the average of them.
 #### 1.1.2	Detailed View for each supplier 
 If a supplier is clicked, a detailed view of this supplier should appear. In this view a bar chart should show the deliveries of the supplier and if they were in time or not. It should give a nice overview of all deliveries of this single supplier
 
-#### 1.1.3	Comparing some suppliers (maximum of 4)(party "missing category labels")
+#### 1.1.3	Comparing some suppliers (maximum of 4)(Done)
 An optional feature is to compare multiple suppliers by selecting more than one supplier in the 1.1.2 - view. Then a new view should show something similar to 1.1.3 comparing all checked suppliers. The Label should say the suppliers classification next to it's name.
 
 ### 1.2	Chooseable time interval (done)
