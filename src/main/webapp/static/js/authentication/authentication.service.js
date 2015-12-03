@@ -3,8 +3,8 @@
 
     angular
         .module('authenticationservice', [] )
-        .service('AuthenticationService', AuthenticationService)
-        .factory('Base64', Base64);
+        .service('AuthenticationService', AuthenticationService);
+
 
     AuthenticationService.$inject = ['$http'];
 

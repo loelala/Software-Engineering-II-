@@ -95,7 +95,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                     state = State.CONNECTED;
                 }
             }
-            else if(this.supplierMap.isEmpty() || this.supplierList.isEmpty())
+            else if((supplierMap.isEmpty() || supplierList.isEmpty()) && this.supplierMap == null)
             {
                 logger.debug("No Cache and no Database connection");
                 state = State.NO_CONNECTION_AND_CACHE;

@@ -14,7 +14,7 @@
     function SupplierListByDateCtrl ($scope,$filter,$state,supplierserviceByDate, supplierservice, dataShareService,toastr) {
 
         var vm = this;
-        var formatString = "ddMMyyyy";
+        var formatString = "DDMMYYYY";
 
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
@@ -72,8 +72,9 @@
         }
 
         function byDateQuery(from, to, classification) {
-            var fromToPost = $filter('date')(from._i,formatString);
-            var toToPost = $filter('date')(to._i,formatString);
+
+            var fromToPost = from.format(formatString);
+            var toToPost = to.format(formatString);
             console.log('From: ',fromToPost);
             console.log('To:', toToPost);
             console.log('Classification: ', classification);

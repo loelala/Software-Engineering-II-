@@ -18,12 +18,24 @@
             vm.rawData = dataShareService.getSuppliersByDate();
             var displayData = vm.rawData.slice();
 
+<<<<<<< Temporary merge branch 1
             vm.dataArray = [];
             vm.dataArrayDetail = [];
             vm.supplierNameArray = [];
             vm.supplierNameArrayDetail = [];
             vm.selectedRow = [];
-
+            vm.toggleChart = toggleChart;
+            vm.displayScoreChart = true;
+            function toggleChart(){
+                if(vm.displayScoreChart)
+                {
+                    vm.displayScoreChart = false;
+                }
+                else
+                {
+                    vm.displayScoreChart = true;
+                }
+            }
             var deliveryDifference = ["Much too early", "too early", "on time", "too late", "much too late", "not calculated"];
 
 
@@ -46,6 +58,7 @@
             {
                 vm.selectedRow[j] = true;
             }
+
 
             buildDisplayData();
             buildDisplayDataDetail();
