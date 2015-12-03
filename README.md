@@ -59,6 +59,9 @@ The admin should be able to change the category requirements.
 ### 1.7.2 Category selection (done)
 Allow the user to select all the users in a category.
 
+### 1.7.3 Category graphs (done)
+A graph comparing all the suppliers in a specific category.
+
 ### 1.8 Scoring management
 The admin should be able to change the scoring algorithm.
 
