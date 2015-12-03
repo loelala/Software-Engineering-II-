@@ -16,9 +16,15 @@ public class ClassificationLimits
     {
         this.classificationLimits = classificationLimits;
     }
+
     public Map<String, Integer> getClassificationLimits()
     {
         return classificationLimits;
+    }
+
+    public int getClassificationLimit(Classification c)
+    {
+        return classificationLimits.get(c.toString());
     }
 
     public void setClassificationLimits(Map<String, Integer> limits)

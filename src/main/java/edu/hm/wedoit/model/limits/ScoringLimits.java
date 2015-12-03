@@ -40,10 +40,13 @@ public class ScoringLimits
         return scoringLimits;
     }
 
+    public int getScoreLimit(Limits l)
+    {
+        return scoringLimits.get(l.toString());
+    }
+
     public void setScoringLimits(Map<String, Integer> limits)
     {
         scoringLimits = limits;
     }
-
-
 }

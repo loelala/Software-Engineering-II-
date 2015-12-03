@@ -2,6 +2,7 @@ package edu.hm.wedoit.model;
 
 import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.utils.OrderUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -10,6 +11,8 @@ import java.util.Date;
  */
 public class Order
 {
+    private OrderUtils ou = OrderUtils.getInstance();
+
     private Date promisedDate;
     private Date deliveryDate;
     private String ebeln;
@@ -100,9 +103,7 @@ public class Order
 
     private void calculateScoreAndDeliveryDifference()
     {
-        orderScore = OrderUtils.calculateScore(deliveryDate, promisedDate);
-        deliveryDifference = OrderUtils.calculateDifference(deliveryDate, promisedDate);
+        orderScore = ou.calculateScore(deliveryDate, promisedDate);
+        deliveryDifference = ou.calculateDifference(deliveryDate, promisedDate);
     }
-
-
 }

@@ -3,6 +3,7 @@ package edu.hm.wedoit.model;
 
 import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.utils.SupplierUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
  */
 public class Supplier
 {
+    private SupplierUtils su = SupplierUtils.getInstance();
+
     private String id;
     private String name;
     private List<Order> orders;
@@ -43,7 +46,7 @@ public class Supplier
     {
         if(score == -1)
         {
-            score = SupplierUtils.calculateScore(orders);
+            score = su.calculateScore(orders);
         }
         return score;
     }
@@ -72,8 +75,8 @@ public class Supplier
     {
         this.orders = orders;
         numberOfOrders = this.orders.size();
-        classification = SupplierUtils.calculateClassification(numberOfOrders);
-        deliveryDifferences = SupplierUtils.calculateDifferences(orders);
+        classification = su.calculateClassification(numberOfOrders);
+        deliveryDifferences = su.calculateDifferences(orders);
     }
 
     public void setScore(double score)

@@ -3,6 +3,9 @@ package edu.hm.wedoit.utils;
 import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.model.Order;
+import edu.hm.wedoit.model.limits.ClassificationLimits;
+import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,7 +14,32 @@ import java.util.List;
  */
 public class SupplierUtils
 {
-    public static int[] calculateDifferences(List<Order> orders)
+    @Autowired
+    SettingsManagement sm;
+
+    private static volatile SupplierUtils instance;
+
+    private SupplierUtils()
+    {
+
+    }
+
+    public static SupplierUtils getInstance()
+    {
+        if(instance == null)
+        {
+            synchronized (SupplierUtils.class)
+            {
+                if(instance == null)
+                {
+                    instance = new SupplierUtils();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public int[] calculateDifferences(List<Order> orders)
     {
         int[] deliveryDifferences = new int[DeliveryDifference.COUNT];
         for(Order o : orders)
@@ -41,7 +69,7 @@ public class SupplierUtils
         return deliveryDifferences;
     }
 
-    public static double calculateScore(List<Order> orders)
+    public double calculateScore(List<Order> orders)
     {
         double score;
         if(orders != null && orders.size() != 0)
@@ -59,21 +87,19 @@ public class SupplierUtils
         return score;
     }
 
-    public static Classification calculateClassification(int numberOfOrders)
+    public Classification calculateClassification(int numberOfOrders)
     {
-        int minTop = 20;
-        int minNormal = 3;
-        int minOneOff = 1;
+        ClassificationLimits cl = sm.getClassificationLimits();
 
-        if(numberOfOrders >= minTop)
+        if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
         {
             return Classification.TOP;
         }
-        else if(numberOfOrders < minTop && numberOfOrders >= minNormal)
+        else if(numberOfOrders < cl.getClassificationLimit(Classification.TOP) && numberOfOrders >= cl.getClassificationLimit(Classification.NORMAL))
         {
             return Classification.NORMAL;
         }
-        else if(numberOfOrders < minNormal && numberOfOrders >= minOneOff)
+        else if(numberOfOrders < cl.getClassificationLimit(Classification.NORMAL) && numberOfOrders >= cl.getClassificationLimit(Classification.ONE_OFF))
         {
             return Classification.ONE_OFF;
         }

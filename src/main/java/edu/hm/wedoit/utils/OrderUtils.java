@@ -2,6 +2,8 @@ package edu.hm.wedoit.utils;
 
 import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.model.limits.ScoringLimits;
+import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -10,7 +12,32 @@ import java.util.Date;
  */
 public class OrderUtils
 {
-    public static DeliveryDifference calculateDifference(Date deliveryDate, Date promisedDate)
+    @Autowired
+    private SettingsManagement sm;
+
+    private static volatile OrderUtils instance;
+
+    private OrderUtils()
+    {
+
+    }
+
+    public static OrderUtils getInstance()
+    {
+        if(instance == null)
+        {
+            synchronized (OrderUtils.class)
+            {
+                if(instance == null)
+                {
+                    instance = new OrderUtils();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public DeliveryDifference calculateDifference(Date deliveryDate, Date promisedDate)
     {
         DeliveryDifference deliveryDifference;
         if(deliveryDate != null && promisedDate != null)
@@ -63,7 +90,7 @@ public class OrderUtils
         return deliveryDifference;
     }
 
-    public static int calculateScore(Date deliveryDate, Date promisedDate)
+    public int calculateScore(Date deliveryDate, Date promisedDate)
     {
         int orderScore;
         if(deliveryDate != null && promisedDate != null)
@@ -72,34 +99,31 @@ public class OrderUtils
 
             int dayCount = (int) diff / (24 * 60 * 60 * 1000);
 
-            // 0 or -1
-            int pMin100 = 0;
-            int pMax100 = 0;
-            int nMin100 = -1;
-            int nMax100 = -1;
+            ScoringLimits sl = sm.getScoringLimits();
 
-            // 1 - 3 or -2
+            int pMin100 = sl.getScoreLimit(ScoringLimits.Limits.PMIN100);
+            int pMax100 = sl.getScoreLimit(ScoringLimits.Limits.PMAX100);
+            int nMin100 = sl.getScoreLimit(ScoringLimits.Limits.NMIN100);
+            int nMax100 = sl.getScoreLimit(ScoringLimits.Limits.NMAX100);
+
             int pMin90 = pMax100 +1;
-            int pMax90 = 3;
-            int nMin90 = -2;
+            int pMax90 = sl.getScoreLimit(ScoringLimits.Limits.PMAX90);
+            int nMin90 = sl.getScoreLimit(ScoringLimits.Limits.NMIN90);
             int nMax90 = nMin100 -1;
 
-            // 4 - 7 or -3
             int pMin80 = pMax90 +1;
-            int pMax80 = 7;
-            int nMin80 = -3;
+            int pMax80 = sl.getScoreLimit(ScoringLimits.Limits.PMAX80);
+            int nMin80 = sl.getScoreLimit(ScoringLimits.Limits.NMIN80);
             int nMax80 = nMin80 -1;
 
-            // 8 - 14 or -4 - -7
             int pMin60 = pMax80 + 1;
-            int pMax60 = 14;
-            int nMin60 = -7;
+            int pMax60 = sl.getScoreLimit(ScoringLimits.Limits.PMAX60);
+            int nMin60 = sl.getScoreLimit(ScoringLimits.Limits.NMIN60);
             int nMax60 = nMin80 -1;
 
-            // 15 - 28 or -8 - -10
             int pMin40 = pMax60 +1;
-            int pMax40 = 28;
-            int nMin40 = -10;
+            int pMax40 = sl.getScoreLimit(ScoringLimits.Limits.PMAX40);
+            int nMin40 = sl.getScoreLimit(ScoringLimits.Limits.NMIN40);
             int nMax40 = nMin60 -1;
 
             if(checkScoreRange(dayCount, pMin100, pMax100, nMin100, nMax100))
@@ -134,7 +158,7 @@ public class OrderUtils
         return orderScore;
     }
 
-    private static boolean checkScoreRange(int dayCount, int pMin, int pMax, int nMin, int nMax)
+    private boolean checkScoreRange(int dayCount, int pMin, int pMax, int nMin, int nMax)
     {
         return (dayCount >= pMin && dayCount <= pMax) || (dayCount >= nMin && dayCount <= nMax);
     }
