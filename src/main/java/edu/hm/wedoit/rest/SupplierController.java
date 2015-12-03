@@ -144,7 +144,7 @@ public class SupplierController implements Observer
         {
             fromDate = new Date(format.parse(from).getTime());
             toDate = new Date(format.parse(to).getTime());
-            c = Classification.valueOf(classification);
+            c = Classification.valueOf(classification.toUpperCase());
         }
         catch (Exception e)
         {
