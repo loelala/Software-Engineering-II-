@@ -43,7 +43,7 @@ public class Supplier
     {
         if(score == -1)
         {
-            SupplierUtils.calculateScore(orders);
+            score = SupplierUtils.calculateScore(orders);
         }
         return score;
     }
