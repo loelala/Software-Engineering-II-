@@ -1,6 +1,6 @@
 package edu.hm.wedoit.dao;
 
-import edu.hm.wedoit.model.Classification;
+import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 

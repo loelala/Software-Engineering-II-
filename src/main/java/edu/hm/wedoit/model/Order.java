@@ -1,5 +1,6 @@
 package edu.hm.wedoit.model;
 
+import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.utils.OrderUtils;
 
 import java.util.Date;

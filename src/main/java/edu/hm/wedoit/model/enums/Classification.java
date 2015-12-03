@@ -1,4 +1,4 @@
-package edu.hm.wedoit.model;
+package edu.hm.wedoit.model.enums;
 
 /**
  * Enum for the classifications for the suppliers

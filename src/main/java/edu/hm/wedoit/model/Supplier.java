@@ -1,6 +1,7 @@
 package edu.hm.wedoit.model;
 
 
+import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.utils.SupplierUtils;
 
 import java.util.List;

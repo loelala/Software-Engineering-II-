@@ -1,7 +1,7 @@
 package edu.hm.wedoit.utils;
 
-import edu.hm.wedoit.model.Classification;
-import edu.hm.wedoit.model.DeliveryDifference;
+import edu.hm.wedoit.model.enums.Classification;
+import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.model.Order;
 
 import java.util.List;
@@ -61,15 +61,19 @@ public class SupplierUtils
 
     public static Classification calculateClassification(int numberOfOrders)
     {
-        if(numberOfOrders >= 20)
+        int minTop = 20;
+        int minNormal = 3;
+        int minOneOff = 1;
+
+        if(numberOfOrders >= minTop)
         {
             return Classification.TOP;
         }
-        else if(numberOfOrders < 20 && numberOfOrders > 2)
+        else if(numberOfOrders < minTop && numberOfOrders >= minNormal)
         {
             return Classification.NORMAL;
         }
-        else if(numberOfOrders == 1 || numberOfOrders == 2)
+        else if(numberOfOrders < minNormal && numberOfOrders >= minOneOff)
         {
             return Classification.ONE_OFF;
         }

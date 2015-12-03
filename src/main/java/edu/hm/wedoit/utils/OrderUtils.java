@@ -1,6 +1,7 @@
 package edu.hm.wedoit.utils;
 
-import edu.hm.wedoit.model.DeliveryDifference;
+import edu.hm.wedoit.model.enums.DeliveryDifference;
+import edu.hm.wedoit.model.limits.ScoringLimits;
 
 import java.util.Date;
 

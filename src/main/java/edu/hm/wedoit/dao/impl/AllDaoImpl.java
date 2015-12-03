@@ -7,7 +7,7 @@ import edu.hm.wedoit.callbackhandler.SlfdtRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SupplierRowCallbackHandler;
 import edu.hm.wedoit.comparators.ClassificationScoreComparator;
 import edu.hm.wedoit.dao.AllDao;
-import edu.hm.wedoit.model.Classification;
+import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 import org.slf4j.Logger;
