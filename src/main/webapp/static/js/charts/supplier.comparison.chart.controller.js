@@ -18,7 +18,6 @@
             vm.rawData = dataShareService.getSuppliersByDate();
             var displayData = vm.rawData.slice();
 
-<<<<<<< Temporary merge branch 1
             vm.dataArray = [];
             vm.dataArrayDetail = [];
             vm.supplierNameArray = [];
