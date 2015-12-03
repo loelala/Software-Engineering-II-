@@ -25,7 +25,14 @@ public interface AllDao
      * Returns a list of all suppliers
      * @return The list of the suppliers
      */
-    List<Supplier> getAllSuppliersWithScore();
+    List<Supplier> getAllSuppliers();
+
+    /**
+     * Returns a list of all suppliers of the given classification
+     * @param classification the classification to filter for
+     * @return the list of all suppliers of the given classification
+     */
+    List<Supplier> getAllSuppliersClassification(Classification classification);
 
     /**
      * Returns a list of orders for one supplier
@@ -50,6 +57,15 @@ public interface AllDao
      */
     List<Supplier> getAllSuppliersDate(Date from, Date to);
 
+    /**
+     * Returns a list of all suppliers with given classification and filtered orders.
+     * Only orders between the given date-range are processed, for suppliers with the
+     * given classification
+     * @param classification the classification to filter for
+     * @param fromDate The beginning of the date-range
+     * @param toDate The ending of the date-range
+     * @return
+     */
     List<Supplier> getAllSuppliersClassificationDate(Classification classification, Date fromDate, Date toDate);
 
     /**

@@ -55,11 +55,6 @@ public class Supplier
         return classification;
     }
 
-    public String getClassificationAsString()
-    {
-        return classification.toString();
-    }
-
     public void setId(String id)
     {
         this.id = id;
