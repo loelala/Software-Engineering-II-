@@ -28,6 +28,11 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     private long cacheTime = 0;
     private State state = State.CONNECTED;
 
+    private void initData()
+    {
+        getDataFromDatabase(true);
+    }
+
     /**
      * This method retrieves the data from the database and fills the supplierList and the supplierMap.
      * This is only done, if the cacheTime is older then 5 minutes or if forceUpdate is set to true
