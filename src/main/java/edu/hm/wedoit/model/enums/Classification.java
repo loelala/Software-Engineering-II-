@@ -1,4 +1,4 @@
-package edu.hm.wedoit.model;
+package edu.hm.wedoit.model.enums;
 
 
 /**
