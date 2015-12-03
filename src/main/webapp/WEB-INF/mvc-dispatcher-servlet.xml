@@ -24,7 +24,11 @@
         <constructor-arg name="rootDir" value="${wedoithome}"/>
         <constructor-arg name="springEnv" ref="environment"/>
     </bean>
-    
+
+    <bean name="settingsManagement" class="edu.hm.wedoit.settingsmanagement.impl.SettingsManagementImpl">
+        <constructor-arg name="rootDir" value="${wedoithome}"/>
+    </bean>
+
     <bean name="userService" class="edu.hm.wedoit.service.impl.UserServiceImpl">
 
     </bean>
