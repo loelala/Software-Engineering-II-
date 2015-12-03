@@ -91,7 +91,7 @@ public class UserManagementImpl implements UserManagement
      * {@inheritDoc}
      */
     @Override
-    public boolean createUser(String username, String password)
+    public boolean createUser(String username, String password, String email, String surname)
     {
         logger.debug("createUser({}, {})", username, password);
         if(users.containsKey(username))
@@ -105,7 +105,7 @@ public class UserManagementImpl implements UserManagement
 
                 String passwordHash = DigestUtils.sha256Hex(password);
                 logger.debug("passwordHash " + passwordHash);
-                User newUser = new User(username,passwordHash);
+                User newUser = new User(username,passwordHash, email, surname);
                 users.put(username,newUser);
                 try
                 {
@@ -186,7 +186,7 @@ public class UserManagementImpl implements UserManagement
         String defaultAdmin = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
         String defaultAdminPW = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
 
-        createUser(defaultAdmin,defaultAdminPW);
+        createUser(defaultAdmin,defaultAdminPW, "admin@wedoit.com", "Admin");
 
         saveUsers();
 

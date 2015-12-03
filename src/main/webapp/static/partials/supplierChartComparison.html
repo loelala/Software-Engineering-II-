@@ -1,45 +1,65 @@
 <div ng-controller="barChartController as vm">
 
 
-<div class="row">
-    <div class="col-md-2">
-        <button type="button" ng-click='vm.goToSupplierList()' class="btn btn-success" >
-            Back to supplierlist
-        </button>
-    </div>
-    <div class="col-md-6">
-        <p>Your selected suppliers:</p>
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" ng-click='vm.goToSupplierList()' class="btn btn-success">
+                Back to supplierlist
+            </button>
+        </div>
+        <div class="col-md-6">
+            <p>Your selected suppliers:</p>
 
-        <table st-table="vm.rawData" class="table table-hover">
-            <thead>
-            <tr>
-                <th st-sort="name">Name</th>
-                <th st-sort="name">Score</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="row in vm.rawData"
-                ng-class="{'success': vm.selectedRow[$index], 'active':!vm.selectedRow[$index]}"
-                ng-click="vm.removeSelected($index,row)">
-                <td>{{row.name}}</td>
-                <td>{{row.score}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-2">
-        <!-- currently empty -->
-    </div>
-</div>
-<div class="row">
-<div class="col-md-8"> <!-- Chart Div -->
+            <table st-table="vm.rawData" class="table table-hover">
+                <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="name">Score</th>
+                    <th st-sort="name">Classification</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in vm.rawData"
+                    ng-class="{'success': vm.selectedRow[$index], 'active':!vm.selectedRow[$index]}"
+                    ng-click="vm.removeSelected($index,row)">
+                    <td>{{row.name}}</td>
+                    <td>{{row.score}}</td>
+                    <td>{{row.classification}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="vm.toggleChart()">
+                    <span ng-show="vm.displayScoreChart"> Delivery delays</span>
+                    <span ng-hide="vm.displayScoreChart"> Score</span>
+                </button>
+            </span>
 
-    <canvas id="bar" class="chart chart-bar"
-            chart-data="vm.data" chart-labels="vm.labels" colours="vm.colours">
-    </canvas>
+        </div>
+    </div>
+    <div class="row" ng-show="vm.displayScoreChart">
+        <div class="col-md-10"> <!-- Chart Div -->
 
-</div>
-<div class="col-md-4"></div>
-</div>
+            <canvas id="bar" class="chart chart-bar" width="600" height="320"
+                    chart-data="vm.data" chart-labels="vm.labels" chart-colours="vm.colours" chart-series="vm.series">
+            </canvas>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row" ng-hide="vm.displayScoreChart">
+        <div class="col-md-10"> <!-- Chart2 Div -->
+
+            <canvas id="bar2" class="chart chart-bar" width="600" height="320"
+                    chart-data="vm.data_detail" chart-labels="vm.labels_detail" chart-colours="vm.colours_detail"
+                    chart-series="vm.series_detail">
+            </canvas>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 
 </div>

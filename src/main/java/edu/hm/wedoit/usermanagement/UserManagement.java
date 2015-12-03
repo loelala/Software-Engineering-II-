@@ -23,7 +23,7 @@ public interface UserManagement
      * @param password
      * @return true if user was created
      */
-    boolean createUser(String username, String password);
+    boolean createUser(String username, String password, String email, String surname);
 
     /**
      * deletes a user

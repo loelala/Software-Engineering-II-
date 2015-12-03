@@ -1,6 +1,10 @@
 package edu.hm.wedoit.model;
 
 
+import edu.hm.wedoit.model.enums.Classification;
+import edu.hm.wedoit.utils.SupplierUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 /**
@@ -8,12 +12,15 @@ import java.util.List;
  */
 public class Supplier
 {
+    private SupplierUtils su = SupplierUtils.getInstance();
+
     private String id;
     private String name;
     private List<Order> orders;
     private int numberOfOrders;
     private double score = -1;
     private Classification classification;
+    private int[] deliveryDifferences;
 
     public String getId()
     {
@@ -39,19 +46,19 @@ public class Supplier
     {
         if(score == -1)
         {
-            calculateScore();
+            score = su.calculateScore(orders);
         }
         return score;
+    }
+
+    public int[] getDeliveryDifferences()
+    {
+        return deliveryDifferences;
     }
 
     public Classification getClassification()
     {
         return classification;
-    }
-
-    public String getClassificationAsString()
-    {
-        return classification.toString();
     }
 
     public void setId(String id)
@@ -67,8 +74,9 @@ public class Supplier
     public void setOrders(List<Order> orders)
     {
         this.orders = orders;
-        this.numberOfOrders = this.orders.size();
-        this.classification = calculateClassification();
+        numberOfOrders = this.orders.size();
+        classification = su.calculateClassification(numberOfOrders);
+        deliveryDifferences = su.calculateDifferences(orders);
     }
 
     public void setScore(double score)
@@ -79,43 +87,6 @@ public class Supplier
     public void setClassification(Classification classification)
     {
         this.classification = classification;
-    }
-
-    private void calculateScore()
-    {
-        if(orders != null && orders.size() != 0)
-        {
-            int tmpScore = 0;
-            for (Order o : orders) {
-                tmpScore += o.getOrderScore();
-            }
-            this.score = Math.round((((double) tmpScore) / orders.size()) * 100) / 100;
-        }
-        else
-        {
-            this.score = 0;
-        }
-        return;
-    }
-
-    private Classification calculateClassification()
-    {
-        if(numberOfOrders >= 20)
-        {
-            return Classification.TOP;
-        }
-        else if(numberOfOrders < 20 && numberOfOrders > 2)
-        {
-            return Classification.NORMAL;
-        }
-        else if(numberOfOrders == 1 || numberOfOrders == 2)
-        {
-            return Classification.ONE_OFF;
-        }
-        else
-        {
-            return Classification.NONE;
-        }
     }
 
     @Override

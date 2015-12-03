@@ -12,8 +12,8 @@ public class ClassificationScoreComparator implements Comparator<Supplier>
     @Override
     public int compare(Supplier o1, Supplier o2)
     {
-        String c1 = ((Supplier) o1).getClassificationAsString();
-        String c2 = ((Supplier) o2).getClassificationAsString();
+        String c1 = ((Supplier) o1).getClassification().toString();
+        String c2 = ((Supplier) o2).getClassification().toString();
 
         int sComp = c1.compareTo(c2) *(-1);
 

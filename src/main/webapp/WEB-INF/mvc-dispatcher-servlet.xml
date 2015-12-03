@@ -24,16 +24,23 @@
         <constructor-arg name="rootDir" value="${wedoithome}"/>
         <constructor-arg name="springEnv" ref="environment"/>
     </bean>
-    
-    <bean name="userService" class="edu.hm.wedoit.service.impl.UserServiceImpl">
 
+    <bean name="settingsManagement" class="edu.hm.wedoit.settingsmanagement.impl.SettingsManagementImpl">
+        <constructor-arg name="rootDir" value="${wedoithome}"/>
     </bean>
+
+    <bean name="userService" class="edu.hm.wedoit.service.impl.UserServiceImpl"/>
+
+    <bean name="orderUtils" class="edu.hm.wedoit.utils.OrderUtils" factory-method="getInstance"/>
+
+    <bean name="supplierUtils" class="edu.hm.wedoit.utils.SupplierUtils" factory-method="getInstance"/>
 
     <bean id="allDao"
-          class="edu.hm.wedoit.dao.impl.AllDaoImpl">
-        <property name="dataSource"  ref="dataSource" />
+          class="edu.hm.wedoit.dao.impl.AllDaoImpl"
+          init-method="initData"
+            depends-on="settingsManagement, supplierUtils, orderUtils">
+        <property name="dataSource"  ref="dataSource"/>
     </bean>
-
 
     <mvc:resources mapping="/res/**" location="/static/" />
     <mvc:default-servlet-handler />

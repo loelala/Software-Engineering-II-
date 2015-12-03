@@ -16,6 +16,7 @@
     <link href="static/bower_components/angular-chart/dist/angular-chart.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css"/>
     <link rel="stylesheet" href="static/bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
+    <link rel="stylesheet" href="static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 <body>
 
 <!-- header -->
@@ -49,7 +50,7 @@
 
     <!-- Main -->
     <div class="container-fluid">
-        <div class="row col-lg-12 col-md-12">
+        <div class="row">
             <!-- Left column -->
             <!-- Left column -->
             <div ng-if="isLoggedIn" class="col-md-3 col-lg-3">
@@ -62,7 +63,7 @@
 
                     <hr>
 
-                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i>Suppliers</a>
+                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i> Suppliers</a>
                     </li>
 
 
@@ -95,24 +96,37 @@
 <script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="static/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
 <script src="static/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<script src="static/js/Chart.min.js"></script>
-<script src="static/js/angular-chart.min.js"></script>
-<script src="static/js/ui-bootstrap-tpls-0.14.3.js"></script>
-<script type="text/javascript" src="/static/js/angular-toastr.tpls.min.js"></script>
-<script type="text/javascript" src="/static/js/angular-animate.min.js"></script>
+<script src="static/bower_components/moment/moment.js"></script>
+<script src="static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="static/bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+<script src="static/bower_components/Chart.min.js"></script>
+<script src="static/bower_components/angular-chart/angular-chart.js"></script>
+<script src="static/bower_components/ui-bootstrap-tpls-0.14.3.js"></script>
+<script src="static/bower_components/angular-toastr.tpls.min.js"></script>
+<script src="static/bower_components/angular-animate/angular-animate.min.js"></script>
+
 <script src="static/js/datashareservice/data.share.service.js"></script>
 <script src="static/js/datashareservice/login.information.service.js"></script>
-<script src="static/js/user/user.controller.js"></script>
+
 <script src="static/js/supplier/supplier.resource.service.js"></script>
 <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
 <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
-<script src="static/js/authentication/authentication.service.js"></script>
-<script src="static/js/user/user.service.js"></script>
-<script src="static/js/login/login.controller.js"></script>
-<script src="static/js/index/index.controller.js"></script>
-<script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
 <script src="static/js/supplier/dateRange.directive.js"></script>
+<script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
+
+<script src="static/js/authentication/authentication.service.js"></script>
+
+<script src="static/js/user/user.controller.js"></script>
+<script src="static/js/user/user.service.js"></script>
+<script src="static/js/user/user.allUser.service.js"></script>
+
+<script src="static/js/login/login.controller.js"></script>
+
+<script src="static/js/index/index.controller.js"></script>
+
+
 <script src="static/js/supplier/datepicker.directive.js"></script>
+
 <script src="static/js/module.js"></script>
 </body>
 

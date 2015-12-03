@@ -7,7 +7,7 @@ import edu.hm.wedoit.callbackhandler.SlfdtRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SupplierRowCallbackHandler;
 import edu.hm.wedoit.comparators.ClassificationScoreComparator;
 import edu.hm.wedoit.dao.AllDao;
-import edu.hm.wedoit.model.Classification;
+import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.Supplier;
 import org.slf4j.Logger;
@@ -27,6 +27,11 @@ public class AllDaoImpl extends AbstractDao implements AllDao
     private Map<String, Map<String, Order>> supplierMap;
     private long cacheTime = 0;
     private State state = State.CONNECTED;
+
+    private void initData()
+    {
+        getDataFromDatabase(true);
+    }
 
     /**
      * This method retrieves the data from the database and fills the supplierList and the supplierMap.
@@ -127,7 +132,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
      * {@inheritDoc}
      */
     @Override
-    public List<Supplier> getAllSuppliersWithScore()
+    public List<Supplier> getAllSuppliers()
     {
         logger.debug("getAllSuppliersWithScore()");
         getDataFromDatabase(false);
@@ -148,6 +153,24 @@ public class AllDaoImpl extends AbstractDao implements AllDao
 
         }
         return suppliers;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Supplier> getAllSuppliersClassification(Classification classification)
+    {
+        List<Supplier> oldSuppliers = getAllSuppliers();
+        List<Supplier> filteredSuppliers = new ArrayList<>();
+        for(Supplier s : oldSuppliers)
+        {
+            if(s.getClassification() == classification)
+            {
+                filteredSuppliers.add(s);
+            }
+        }
+        return filteredSuppliers;
     }
 
 
@@ -275,6 +298,9 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         return suppliers;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Supplier> getAllSuppliersClassificationDate(Classification classification, Date fromDate, Date toDate)
     {

@@ -9,12 +9,12 @@
     angular.module('supplierListByDate', [])
         .controller('SupplierListByDateCtrl', SupplierListByDateCtrl);
 
-    SupplierListByDateCtrl.$inject = ['$filter','$state','supplierserviceByDate', 'supplierservice','dataShareService','toastr'];
+    SupplierListByDateCtrl.$inject = ['$scope','$filter','$state','supplierserviceByDate', 'supplierservice','dataShareService','toastr'];
 
-    function SupplierListByDateCtrl ($filter,$state,supplierserviceByDate, supplierservice, dataShareService,toastr) {
+    function SupplierListByDateCtrl ($scope,$filter,$state,supplierserviceByDate, supplierservice, dataShareService,toastr) {
 
         var vm = this;
-        var formatString = "ddMMyyyy";
+        var formatString = "DDMMYYYY";
 
         vm.selectedRow = null;
         vm.selectedSupplierRow = null;
@@ -23,6 +23,32 @@
         vm.isTimeSelected = true;
         vm.isDateValid = false;
         vm.from = null;
+        vm.isCollapsed = true;
+
+        vm.date = {
+            // from
+            startDate: moment().subtract(1,"days"),
+            // to
+            endDate: moment()
+        };
+
+        vm.dataOptions = {
+            locale: {
+                applyClass: 'btn-green',
+                applyLabel: "Apply",
+                fromLabel: "From",
+                format: "DD-MM-YYYY",
+                toLabel: "To",
+                cancelLabel: 'Cancel',
+                customRangeLabel: 'Custom range'
+            },
+            ranges: {
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+            }
+        };
+
+        vm.formData = {};
 
         vm.select = select;
         vm.removeSelected = removeSelected;
@@ -45,13 +71,16 @@
             $state.go('comparison');
         }
 
-        function byDateQuery(from, to) {
-            var fromToPost = $filter('date')(from,formatString);
-            var toToPost = $filter('date')(to,formatString);
-            console.log(fromToPost);
-            console.log(toToPost);
+        function byDateQuery(from, to, classification) {
+
+            var fromToPost = from.format(formatString);
+            var toToPost = to.format(formatString);
+            console.log('From: ',fromToPost);
+            console.log('To:', toToPost);
+            console.log('Classification: ', classification);
             vm.isTimeSelected = false;
-            var allSuppliersByDate = supplierserviceByDate.query({from:fromToPost,to:toToPost});
+            // TODO add classification to the query params here and in the service
+            var allSuppliersByDate = supplierserviceByDate.query({classification: classification,from:fromToPost, to:toToPost});
             allSuppliersByDate.$promise.then(function(data) {
                 console.log('get all suppliers by date', data);
                 vm.supplierList = data;
@@ -95,6 +124,11 @@
         function dateIsSelected() {
             return vm.isDateValid === true;
         }
+
+        //Watch for date changes
+        $scope.$watch('vm.date', function(newDate) {
+            console.log('New date set: ', newDate);
+        }, false);
 
         // ========= DATEPICKER STUFF =============
 

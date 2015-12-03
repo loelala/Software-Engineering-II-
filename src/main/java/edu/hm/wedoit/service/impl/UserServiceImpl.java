@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService
      * {@inheritDoc}
      */
     @Override
-    public boolean createUser(String username, String password)
+    public boolean createUser(String username, String password, String email, String surname)
     {
         logger.debug("createUser ({}, {})",username, password);
-        return userManagement.createUser(username, password);
+        return userManagement.createUser(username, password, email, surname);
     }
 
     /**
