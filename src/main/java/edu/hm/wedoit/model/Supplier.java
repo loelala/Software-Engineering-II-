@@ -1,6 +1,9 @@
 package edu.hm.wedoit.model;
 
 
+import edu.hm.wedoit.model.enums.Classification;
+import edu.hm.wedoit.utils.SupplierUtils;
+
 import java.util.List;
 
 /**
@@ -40,7 +43,7 @@ public class Supplier
     {
         if(score == -1)
         {
-            calculateScore();
+            SupplierUtils.calculateScore(orders);
         }
         return score;
     }
@@ -53,11 +56,6 @@ public class Supplier
     public Classification getClassification()
     {
         return classification;
-    }
-
-    public String getClassificationAsString()
-    {
-        return classification.toString();
     }
 
     public void setId(String id)
@@ -73,9 +71,9 @@ public class Supplier
     public void setOrders(List<Order> orders)
     {
         this.orders = orders;
-        this.numberOfOrders = this.orders.size();
-        this.classification = calculateClassification();
-        calculateDifferences();
+        numberOfOrders = this.orders.size();
+        classification = SupplierUtils.calculateClassification(numberOfOrders);
+        deliveryDifferences = SupplierUtils.calculateDifferences(orders);
     }
 
     public void setScore(double score)
@@ -86,72 +84,6 @@ public class Supplier
     public void setClassification(Classification classification)
     {
         this.classification = classification;
-    }
-
-    private void calculateDifferences()
-    {
-        deliveryDifferences = new int[DeliveryDifference.COUNT];
-        for(Order o : orders)
-        {
-            switch(o.getDeliveryDifference())
-            {
-                case MUCH_TOO_EARLY:
-                    deliveryDifferences[DeliveryDifference.MUCH_TOO_EARLY.ordinal()]++;
-                    break;
-                case TOO_EARLY:
-                    deliveryDifferences[DeliveryDifference.TOO_EARLY.ordinal()]++;
-                    break;
-                case ON_TIME:
-                    deliveryDifferences[DeliveryDifference.ON_TIME.ordinal()]++;
-                    break;
-                case TOO_LATE:
-                    deliveryDifferences[DeliveryDifference.TOO_LATE.ordinal()]++;
-                    break;
-                case MUCH_TOO_LATE:
-                    deliveryDifferences[DeliveryDifference.MUCH_TOO_LATE.ordinal()]++;
-                    break;
-                case NOT_CALCULATED:
-                    deliveryDifferences[DeliveryDifference.NOT_CALCULATED.ordinal()]++;
-                    break;
-            }
-        }
-    }
-
-    private void calculateScore()
-    {
-        if(orders != null && orders.size() != 0)
-        {
-            int tmpScore = 0;
-            for (Order o : orders) {
-                tmpScore += o.getOrderScore();
-            }
-            this.score = Math.round((((double) tmpScore) / orders.size()) * 100) / 100;
-        }
-        else
-        {
-            this.score = 0;
-        }
-        return;
-    }
-
-    private Classification calculateClassification()
-    {
-        if(numberOfOrders >= 20)
-        {
-            return Classification.TOP;
-        }
-        else if(numberOfOrders < 20 && numberOfOrders > 2)
-        {
-            return Classification.NORMAL;
-        }
-        else if(numberOfOrders == 1 || numberOfOrders == 2)
-        {
-            return Classification.ONE_OFF;
-        }
-        else
-        {
-            return Classification.NONE;
-        }
     }
 
     @Override

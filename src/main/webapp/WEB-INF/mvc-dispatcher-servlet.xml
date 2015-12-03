@@ -30,8 +30,9 @@
     </bean>
 
     <bean id="allDao"
-          class="edu.hm.wedoit.dao.impl.AllDaoImpl">
-        <property name="dataSource"  ref="dataSource" />
+          class="edu.hm.wedoit.dao.impl.AllDaoImpl"
+          init-method="initData">
+        <property name="dataSource"  ref="dataSource"/>
     </bean>
 
 
