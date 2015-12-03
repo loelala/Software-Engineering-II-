@@ -25,7 +25,7 @@ VPN: username with #
 #### 1.1.1	Overview of all suppliers (done)
 One view must give the overview of all suppliers containing the average of them. The suppliers should be ordered to show the best supplier on top of the list. It should also be possible to search for a supplier by name.
 
-#### 1.1.2	Detailed View for each supplier 
+#### 1.1.2	Detailed View for each supplier (done)
 If a supplier is clicked, a detailed view of this supplier should appear. In this view a bar chart should show the deliveries of the supplier and if they were in time or not. It should give a nice overview of all deliveries of this single supplier
 
 #### 1.1.3	Comparing some suppliers (maximum of 4)(Done)
