@@ -5,7 +5,7 @@ import edu.hm.wedoit.callbackhandler.BldatRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.EbelnRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SlfdtRowCallbackHandler;
 import edu.hm.wedoit.callbackhandler.SupplierRowCallbackHandler;
-import edu.hm.wedoit.comparators.ClassificationScoreComparator;
+import edu.hm.wedoit.comparators.SupplierComparator;
 import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.Order;
@@ -149,7 +149,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 suppliers = new ArrayList(s);
             }
 
-            Collections.sort(suppliers, new ClassificationScoreComparator());
+            Collections.sort(suppliers, new SupplierComparator());
 
         }
         return suppliers;
@@ -293,7 +293,7 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             suppliers = new ArrayList(s);
         }
 
-        Collections.sort(suppliers, new ClassificationScoreComparator());
+        Collections.sort(suppliers, new SupplierComparator());
 
         return suppliers;
     }
