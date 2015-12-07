@@ -7,8 +7,8 @@
     angular.module('newuser', [])
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$state','UserService','AllUserService','toastr'];
-    function UserController($state,UserService,AllUserService,toastr) {
+    UserController.$inject = ['$state','UserService','AllUserService','toastr', '$uibModal'];
+    function UserController($state,UserService,AllUserService,toastr, $uibModal) {
         var vm = this;
 
         vm.isNewUser = false;
@@ -19,6 +19,7 @@
         vm.newUser = newUser;
         vm.allUsers = allUsers;
         vm.showAllCurrentUsers = showAllUsers;
+        vm.editUser = editUser;
 
         function create (username, password, email, name){
             UserService.createNew(username,password, email, name)
@@ -60,6 +61,30 @@
                 }
             )
         }
+
+        function editUser(user) {
+
+            var modalInstance = $uibModal.open({
+                animation: vm.animationsEnabled,
+                templateUrl: 'static/partials/editUser.html',
+                controller: 'EditUserCtrl as vm',
+                resolve: {
+                    user: function () {
+                        return user;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                vm.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+        vm.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
 
 
 

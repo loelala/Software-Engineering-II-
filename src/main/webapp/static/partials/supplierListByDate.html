@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
+            <p class="wedoit-page-info"><strong><i class="fa fa-coffee"></i> Suppliers </strong></p>
             <hr>
             <div class="col-md-12 col-lg-12">
                 <h1>Suppliers</h1>
@@ -9,10 +9,7 @@
         </div>
     </div>
 
-    <hr>
-
-
-    <div class="row">
+    <div class="row" style="margin-top: 20px">
         <!--datepicker-->
         <div class="col-md-6 col-lg-6">
             <div class="form-group">
@@ -56,7 +53,7 @@
 
     <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
-            <button class="btn btn-default" style="margin-left: 9px" type="button"
+            <button class="btn wedoit-button" style="margin-left: 9px" type="button"
                     ng-click="vm.byDateQuery(vm.date.startDate ,vm.date.endDate, vm.formData.classification)"
                     ng-disable="vm.dateIsSelected">
                 Show all suppliers by date and classification
@@ -98,7 +95,7 @@
                     ng-click='vm.goToComparison()'
                     ng-disabled="vm.selectedSuppliers.length <= 1"
                     ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
-                                        'btn btn-success':vm.selectedSuppliers.length > 1}" >
+                                        'btn wedoit-button':vm.selectedSuppliers.length > 1}" >
                 Compare
             </button>
         </div>

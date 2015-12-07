@@ -21,7 +21,7 @@
 
 <!-- header -->
 <div ng-controller="IndexCtrl as vm">
-    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div id="top-nav" class="navbar navbar-static-top navbar-wedoit">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -51,21 +51,20 @@
             <!-- Left column -->
             <!-- Left column -->
             <div ng-if="isLoggedIn" class="col-md-3 col-lg-3">
-                <a><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
+                <p class="wedoit-page-info"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></p>
 
-                <hr>
+                <hr class="wedoit-page-info">
 
                 <ul class="nav nav-stacked">
                     <li class="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
 
                     <hr>
 
-                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i> Suppliers</a>
-                    </li>
+                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i> Suppliers</a></li>
 
+                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a></li>
 
-                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a>
-                    </li>
+                    <li><a ui-sref="settings"><i class="fa fa-bell"></i> Settings</a></li>
 
                 </ul>
 
