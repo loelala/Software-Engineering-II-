@@ -20,6 +20,7 @@
         vm.allUsers = allUsers;
         vm.showAllCurrentUsers = showAllUsers;
         vm.editUser = editUser;
+        vm.deleteUser = deleteUser;
 
         function create (username, password, email, name){
             UserService.createNew(username,password, email, name)
@@ -62,12 +63,14 @@
             )
         }
 
+
+
         function editUser(user) {
 
             var modalInstance = $uibModal.open({
-                animation: vm.animationsEnabled,
+                animation: true,
                 templateUrl: 'static/partials/editUser.html',
-                controller: 'EditUserCtrl as vm',
+                controller: 'EditUserCtrl',
                 resolve: {
                     user: function () {
                         return user;
@@ -78,13 +81,33 @@
             modalInstance.result.then(function (selectedItem) {
                 vm.selected = selectedItem;
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                console.log('Modal dismissed at: ' + new Date());
             });
         }
 
-        vm.toggleAnimation = function () {
-            $scope.animationsEnabled = !$scope.animationsEnabled;
-        };
+
+        function deleteUser(user) {
+
+            console.log('Modal for User: ', user);
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'static/partials/deleteUser.html',
+                controller: 'DeleteUserCtrl',
+                resolve: {
+                    user: function () {
+                        return user;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                vm.selected = selectedItem;
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        }
+
 
 
 

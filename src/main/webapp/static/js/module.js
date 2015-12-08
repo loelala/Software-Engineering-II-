@@ -23,6 +23,8 @@ angular.module('WeDoIt', [
     'login',
     'index',
     'newuser',
+    'editUser',
+    'deleteUser',
     'barChartModule',
     'datepicker.directive',
     'dateRange.directive',
@@ -37,7 +39,7 @@ angular.module('WeDoIt')
 
 
     config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
-    function config($stateProvider, $urlRouterProvider,toastrConfig) {
+    function config($stateProvider, $urlRouterProvider, toastrConfig) {
 
         angular.extend(toastrConfig, {
             autoDismiss: true,
@@ -75,6 +77,12 @@ angular.module('WeDoIt')
             url: '/login',
             templateUrl: 'static/partials/loginPage.html',
             controller: 'LoginController',
+            controllerAs: 'vm'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'static/partials/settings.html',
+            controller: 'SettingController',
             controllerAs: 'vm'
         })
         .state('comparison',
