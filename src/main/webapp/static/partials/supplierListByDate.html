@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm"  xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <p class="wedoit-page-info"><strong><i class="fa fa-coffee"></i> Suppliers </strong></p>
@@ -19,21 +19,6 @@
             </div>  <!-- .datepicker -->
         </div>
 
-        <div class="col-md-6 col-lg-6">
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label for="input1" class="control-label">Search by suppliers name</label>
-                    <input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">
-                </div>
-                <div class="form-group">
-                    <label for="input2" class="control-label">Search by classification</label>
-                    <select id="input2" class="form-control" ng-model="filter.classifications">
-                        <option value="">All classifications</option>
-                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>
-                    </select>
-                </div>
-            </form>
-        </div>
     </div>
 
 
@@ -63,7 +48,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.selectedSuppliers | filter: filter"
+                <tr ng-repeat="row in vm.selectedSuppliers"
                     ng-class="{'selected':$index == vm.selectedSupplierRow}"
                     ng-click="vm.removeSelected($index,row)">
                     <td>{{row.name}}</td>
@@ -94,7 +79,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panle panle-default">
-            <table st-table="vm.supplierList" class="table table-hover">
+            <table st-table="vm.displayedCollection" st-safe-src="vm.supplierList" class="table table-striped table-bordered">
                 <thead>
                 <tr>
 
@@ -104,9 +89,22 @@
                     <th>Score</th>
                     <th>Classification</th>
                 </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <input st-search="name" placeholder="search for name" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        <select st-input-event="change" st-search="classification"
+                                class="form-control" id="classification" ng-model="vm.classifications" ng-options="classification for classification in vm.classifications">
+                        </select>
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.supplierList"
+                <tr ng-repeat="row in vm.displayedCollection | filter: supplierFilter"
                     ng-class="{'selected':$index == vm.selectedRow}"
                     ng-click="vm.select($index,row)">
 
@@ -118,9 +116,11 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                <td colspan="5" class="text-center">
-                    <div st-times-by-page="30" st-pagination=""></div>
-                </td>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
                 </tfoot>
             </table>
         </div>
