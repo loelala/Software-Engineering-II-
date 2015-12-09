@@ -2,6 +2,7 @@ package edu.hm.wedoit.usermanagement;
 
 import edu.hm.wedoit.model.User;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public interface UserManagement
      * @param username
      * @return true if the user could be deleted
      */
-    boolean removeUser(String username);
+    boolean removeUser(String username) throws FileNotFoundException;
 
     /**
      * gets the username

@@ -137,7 +137,7 @@ public class UserManagementImpl implements UserManagement
      * {@inheritDoc}
      */
     @Override
-    public boolean removeUser(String username)
+    public boolean removeUser(String username) throws FileNotFoundException
     {
         logger.debug("removeUser({})", username);
         boolean result = false;
@@ -146,6 +146,7 @@ public class UserManagementImpl implements UserManagement
             if(users.remove(username) != null)
             {
                 result = true;
+                saveUsers();
             }
             else
             {

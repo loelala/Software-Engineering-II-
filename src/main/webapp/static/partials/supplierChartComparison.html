@@ -7,7 +7,7 @@
                 Back to supplierlist
             </button>
         </div>
-        <div class="col-md-6">
+        <div id="suppliertable" class="col-md-6">
             <p>Your selected suppliers:</p>
 
             <table st-table="vm.rawData" class="table table-hover">
@@ -30,34 +30,43 @@
             </table>
         </div>
         <div class="col-md-3">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-success" ng-click="vm.toggleChart()">
-                    <span ng-show="vm.displayScoreChart"> Delivery delays</span>
-                    <span ng-hide="vm.displayScoreChart"> Score</span>
+            <span>
+                <button type="button" ng-class="{'btn btn-default':vm.displayScoreChart,'btn btn-success':!vm.displayScoreChart}" ng-click="vm.toggleScoreChart()">
+                    <span> Score Chart</span>
+                </button>
+                </span>
+                <br/>
+                <button type="button" ng-class="{'btn btn-default':vm.displayDetailChart,'btn btn-success':!vm.displayDetailChart}" ng-click="vm.toggleDetailChart()">
+                    <span> Delivery Delay</span>
                 </button>
             </span>
-
+            <br/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="vm.generatePdf()">
+                    <span> Produce PDF</span>
+                </button>
+            </span>
         </div>
     </div>
     <div class="row" ng-show="vm.displayScoreChart">
         <div class="col-md-10"> <!-- Chart Div -->
-
-            <canvas id="bar" class="chart chart-bar" width="600" height="320"
-                    chart-data="vm.data" chart-labels="vm.labels" chart-colours="vm.colours" chart-series="vm.series">
-            </canvas>
-
+            <div id="bar">
+                <canvas  class="chart chart-bar" width="600" height="320"
+                        chart-data="vm.data" chart-legend="true" chart-labels="vm.labels" chart-colours="vm.colours" chart-series="vm.series">
+                </canvas>
+            </div>
         </div>
         <div class="col-md-2"></div>
     </div>
 
-    <div class="row" ng-hide="vm.displayScoreChart">
+    <div class="row" ng-show="vm.displayDetailChart">
         <div class="col-md-10"> <!-- Chart2 Div -->
-
-            <canvas id="bar2" class="chart chart-bar" width="600" height="320"
-                    chart-data="vm.data_detail" chart-labels="vm.labels_detail" chart-colours="vm.colours_detail"
-                    chart-series="vm.series_detail">
-            </canvas>
-
+            <div id="bar2">
+                <canvas  class="chart chart-bar" width="600" height="320"
+                        chart-data="vm.data_detail" chart-legend="true" chart-labels="vm.labels_detail" chart-colours="vm.colours_detail"
+                        chart-series="vm.series_detail">
+                </canvas>
+            </div>
         </div>
         <div class="col-md-2"></div>
     </div>

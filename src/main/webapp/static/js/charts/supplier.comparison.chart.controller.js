@@ -23,9 +23,20 @@
             vm.supplierNameArray = [];
             vm.supplierNameArrayDetail = [];
             vm.selectedRow = [];
-            vm.toggleChart = toggleChart;
+            vm.toggleScoreChart = toggleScoreChart;
+            vm.toggleDetailChart = toggleDetailChart;
+            vm.generatePdf = generatePdf;
+            vm.legend = true;
+
             vm.displayScoreChart = true;
-            function toggleChart(){
+            vm.displayDetailChart = false;
+            var doc = {};
+            vm.validityCounterMax = -1;
+            vm.validityCount = 0;
+            var barchartCanvas;
+            var delaybarChartCanvas;
+            var chartsToProcess = [];
+            function toggleScoreChart(){
                 if(vm.displayScoreChart)
                 {
                     vm.displayScoreChart = false;
@@ -33,6 +44,16 @@
                 else
                 {
                     vm.displayScoreChart = true;
+                }
+            }
+            function toggleDetailChart(){
+                if(vm.displayDetailChart)
+                {
+                    vm.displayDetailChart = false;
+                }
+                else
+                {
+                    vm.displayDetailChart = true;
                 }
             }
             var deliveryDifference = ["Much too early", "too early", "on time", "too late", "much too late", "not calculated"];
@@ -57,6 +78,89 @@
             {
                 vm.selectedRow[j] = true;
             }
+
+            function generatePdf(){
+                vm.validityCounterMax = 0;
+                vm.validityCount = 0;
+                chartsToProcess = [];
+                console.log("MAX " + vm.validityCounterMax);
+                vm.validityCounterMax = vm.validityCounterMax + (vm.displayScoreChart ? 1 : 0);
+                vm.validityCounterMax = vm.validityCounterMax + (vm.displayDetailChart ? 1 : 0);
+                console.log("vm.displayScoreChart " + vm.displayScoreChart);
+                console.log("vm.displayDetailChart " +vm.displayDetailChart);
+                console.log("MAX after " + vm.validityCounterMax);
+
+                var toProcess = [];
+                doc = new jsPDF('p', 'pt');
+                if(vm.displayScoreChart)
+                {
+                    console.log("toProcess added bar");
+                    toProcess.push(document.getElementById("bar"));
+                }
+                if(vm.displayDetailChart)
+                {
+                    console.log("toProcess added bar2");
+                    toProcess.push(document.getElementById("bar2"))
+                }
+                var i=0;
+                function step(){
+                    i++;
+                    console.log("i is " + i);
+                    console.log("toProcess.length " + toProcess.length);
+                    if(i > toProcess.length)
+                    {
+                        console.log("returning");
+                        return;
+                    }
+                    toProcess[i-1].style.backgroundColor = "#ffffff";
+                    html2canvas(toProcess[i-1], {
+                        onrendered: function (canvas) {
+                            chartsToProcess.push(canvas.toDataURL('image/jpeg'));
+                            console.log(i+ ". added "+chartsToProcess[chartsToProcess.length-1])
+                            vm.validityCount++;
+                            console.log("validity count " + vm.validityCount);
+                            console.log("validity countmax " + vm.validityCounterMax);
+                            step();
+                            console.log(vm.validityCount + " == " + vm.validityCounterMax);
+                            if(vm.validityCount == vm.validityCounterMax)
+                            {
+                                var offset = 0;
+                                var columns = ["Name","Score","Classification"];
+                                var rows = [];
+                                displayData.forEach(function(entry){
+                                    var row = [];
+                                    row.push(entry["name"]);
+                                    row.push(entry["score"]);
+                                    row.push(entry["classification"]);
+                                    rows.push(row);
+                                });
+                                doc.autoTable(columns, rows);
+                                offset = doc.autoTableEndPosY() + 15;
+                                console.log("length of chartsToProcess " + chartsToProcess.length);
+                                for(i = 0;i < chartsToProcess.length ;i++)
+                                {
+                                    console.log("adding from chartstoProcess " + chartsToProcess[i] + " offset: " + offset);
+                                    doc.addImage(chartsToProcess[i],"JPEG",15,offset,525,280);
+                                    if(chartsToProcess.length > 1)
+                                    {
+                                        console.log("two pages! adding new page! recalcing offset!");
+                                        //doc.addPage();
+                                        offset = offset + 280 + 10;
+                                    }
+                                }
+
+                                doc.save('graphs.pdf');
+                            }
+                        }
+                    })
+
+
+                }
+                step();
+
+            }
+
+
 
             buildDisplayData();
             buildDisplayDataDetail();

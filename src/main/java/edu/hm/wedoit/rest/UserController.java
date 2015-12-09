@@ -115,4 +115,22 @@ public class UserController
             return responseEntity;
         }
     }
+
+    public ResponseEntity<String> deleteUser(@RequestParam String username){
+        logger.debug("deleteUser {} " + username);
+        if(userService.removeUser(username))
+        {
+            logger.debug("deleted {}",username);
+            ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+            return responseEntity;
+        }
+        else
+        {
+            logger.debug("not deleted {}",username);
+            ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.CONFLICT);
+            return responseEntity;
+        }
+    }
+
+
 }
