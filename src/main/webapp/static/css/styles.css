@@ -116,3 +116,26 @@ footer {
     color: #384341;
     background-color: #a2f3e6;
 }
+
+form[name="classification"] > div {
+    height: auto;
+    padding: 5px 0;
+}
+
+form[name="classification"] .title {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 5px;
+    vertical-align: top;
+    min-width: 90px;
+}
+
+form[name="classification"] .editable {
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: top;
+}
+
+form[name="classification"] select {
+    width: 120px;
+}

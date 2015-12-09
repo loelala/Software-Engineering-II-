@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css"/>
     <link rel="stylesheet" href="static/bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
     <link rel="stylesheet" href="static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link href="static/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 
     <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon-3.ico">
 
@@ -37,7 +38,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown"><i
                                 class="fa fa-user"></i> {{vm.actualUser}}</a>
                     </li>
                     <li><a ui-sref="login" ng-click="vm.logout()"><i class="fa fa-lock"></i> Logout</a></li>
@@ -104,6 +105,7 @@
 <script src="static/bower_components/angular-toastr.tpls.min.js"></script>
 <script src="static/bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="static/bower_components/bootstrap-ui/src/modal/modal.js"></script>
+<script src="static/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
 <script src="static/js/datashareservice/data.share.service.js"></script>
 <script src="static/js/datashareservice/login.information.service.js"></script>
@@ -111,7 +113,7 @@
 <script src="static/js/supplier/supplier.resource.service.js"></script>
 <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
 <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
-<script src="static/js/supplier/dateRange.directive.js"></script>
+<script src="static/js/supplier/supplier.filter.js"></script>
 <script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
 
 <script src="static/js/authentication/authentication.service.js"></script>
@@ -125,8 +127,7 @@
 
 <script src="static/js/index/index.controller.js"></script>
 
-
-<script src="static/js/supplier/datepicker.directive.js"></script>
+<script src="static/js/settings/setting.controller.js"></script>
 
 <script src="static/js/module.js"></script>
 </body>

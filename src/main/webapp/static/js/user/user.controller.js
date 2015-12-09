@@ -7,13 +7,14 @@
     angular.module('newuser', [])
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$state','UserService','AllUserService','toastr', '$uibModal'];
-    function UserController($state,UserService,AllUserService,toastr, $uibModal) {
+    UserController.$inject = ['$state','UserService','AllUserService','toastr', 'loginInformationHolderService'];
+    function UserController($state,UserService,AllUserService,toastr, loginInformationHolderService) {
         var vm = this;
 
         vm.isNewUser = false;
         vm.isAllUsers = false;
         vm.userList = [];
+        vm.isAdmin = loginInformationHolderService.isAdmin;
 
         vm.create = create;
         vm.newUser = newUser;
@@ -64,48 +65,16 @@
         }
 
 
-
-        function editUser(user) {
-
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'static/partials/editUser.html',
-                controller: 'EditUserCtrl',
-                resolve: {
-                    user: function () {
-                        return user;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                vm.selected = selectedItem;
-            }, function () {
-                console.log('Modal dismissed at: ' + new Date());
-            });
+        function editUser(index,user) {
+            vm.userList[index].surname = user.surname;
+            vm.userList[index].email = user.emailAddress;
+            // TODO API call to update user data
         }
 
 
-        function deleteUser(user) {
-
-            console.log('Modal for User: ', user);
-
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'static/partials/deleteUser.html',
-                controller: 'DeleteUserCtrl',
-                resolve: {
-                    user: function () {
-                        return user;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                vm.selected = selectedItem;
-            }, function () {
-                console.log('Modal dismissed at: ' + new Date());
-            });
+        function deleteUser(index) {
+            vm.userList.splice(index, 1);
+            // TODO delete user with api call
         }
 
 
