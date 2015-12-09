@@ -12,20 +12,23 @@ angular.module('WeDoIt', [
     'ui.bootstrap',
     'toastr',
     'daterangepicker',
+    'xeditable',
     /* ---- custom modules ----*/
     'DataShareServiceModule',
     'supplierListByDate',
     'supplierservice',
     'supplierserviceByDate',
+    'supplier.filter',
     'authenticationservice',
     'userservice',
     'alluserservice',
     'login',
     'index',
     'newuser',
+    'editUser',
+    'deleteUser',
+    'settings',
     'barChartModule',
-    'datepicker.directive',
-    'dateRange.directive',
     'loginInformationHolderModule'
 
 ]);
@@ -37,7 +40,7 @@ angular.module('WeDoIt')
 
 
     config.$inject = ['$stateProvider', '$urlRouterProvider','toastrConfig'];
-    function config($stateProvider, $urlRouterProvider,toastrConfig) {
+    function config($stateProvider, $urlRouterProvider, toastrConfig) {
 
         angular.extend(toastrConfig, {
             autoDismiss: true,
@@ -77,6 +80,12 @@ angular.module('WeDoIt')
             controller: 'LoginController',
             controllerAs: 'vm'
         })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'static/partials/settings.html',
+            controller: 'SettingsCtrl',
+            controllerAs: 'vm'
+        })
         .state('comparison',
         {
             url:'/comparison',
@@ -89,11 +98,13 @@ angular.module('WeDoIt')
 
     }
 
-    run.$inject = ['$state', '$rootScope','loginInformationHolderService'];
+    run.$inject = ['$state', '$rootScope','loginInformationHolderService', 'editableOptions'];
 
-    function run($state, $rootScope,loginInformationHolderService) {
+    function run($state, $rootScope,loginInformationHolderService, editableOptions) {
 
         $state.transitionTo('login');
+
+        editableOptions.theme = 'bs3';
 
         $rootScope.$on("$stateChangeStart",function(event, toState){
 

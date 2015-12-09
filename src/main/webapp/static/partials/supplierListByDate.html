@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
+            <p class="wedoit-page-info"><strong><i class="fa fa-coffee"></i> Suppliers </strong></p>
             <hr>
             <div class="col-md-12 col-lg-12">
                 <h1>Suppliers</h1>
@@ -9,54 +9,37 @@
         </div>
     </div>
 
-    <hr>
+    <div class="row" style="margin-top: 20px">
 
-
-    <div class="row">
-        <!--datepicker-->
         <div class="col-md-6 col-lg-6">
-            <div class="form-group">
+            <div class="form-group"> <!--datepicker-->
                 <label for="datepicker"> Select a daterange: </label>
                 <input date-range-picker id="datepicker" name="datepicker" class="form-control date-picker" type="text"
-                        ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
-            </div>
+                       ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
+            </div>  <!-- .datepicker -->
         </div>
-        <!-- .datepicker -->
 
-        <!-- classification TOP, NORMAL, ONE_OFF, NONE -->
         <div class="col-md-6 col-lg-6">
-            <label>Classification of supplier: </label>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="NORMAL" ng-model="vm.formData.classification">
-                    NORMAL
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="TOP" ng-model="vm.formData.classification">
-                    TOP
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="ONE_OFF" ng-model="vm.formData.classification">
-                    ONE_OFF
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="NONE" ng-model="vm.formData.classification">
-                    NONE
-                </label>
-            </div>
-        </div> <!-- classification -->
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="input1" class="control-label">Search by suppliers name</label>
+                    <input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">
+                </div>
+                <div class="form-group">
+                    <label for="input2" class="control-label">Search by classification</label>
+                    <select id="input2" class="form-control" ng-model="filter.classifications">
+                        <option value="">All classifications</option>
+                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>
+                    </select>
+                </div>
+            </form>
+        </div>
     </div>
 
 
     <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
-            <button class="btn btn-default" style="margin-left: 9px" type="button"
+            <button class="btn wedoit-button" style="margin-left: 9px" type="button"
                     ng-click="vm.byDateQuery(vm.date.startDate ,vm.date.endDate, vm.formData.classification)"
                     ng-disable="vm.dateIsSelected">
                 Show all suppliers by date and classification
@@ -75,12 +58,12 @@
             <table st-table="vm.selectedSuppliers" class="table table-hover">
                 <thead>
                 <tr>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="name">Score</th>
+                    <th>Name</th>
+                    <th>Score</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.selectedSuppliers"
+                <tr ng-repeat="row in vm.selectedSuppliers | filter: filter"
                     ng-class="{'selected':$index == vm.selectedSupplierRow}"
                     ng-click="vm.removeSelected($index,row)">
                     <td>{{row.name}}</td>
@@ -98,7 +81,7 @@
                     ng-click='vm.goToComparison()'
                     ng-disabled="vm.selectedSuppliers.length <= 1"
                     ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
-                                        'btn btn-success':vm.selectedSuppliers.length > 1}" >
+                                        'btn wedoit-button':vm.selectedSuppliers.length > 1}" >
                 Compare
             </button>
         </div>
@@ -115,11 +98,11 @@
                 <thead>
                 <tr>
 
-                    <th st-sort="id">ID</th>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="orders">Number of Orders</th>
-                    <th st-sort="score">Score</th>
-                    <th st-sort="score">classification</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Number of Orders</th>
+                    <th>Score</th>
+                    <th>Classification</th>
                 </tr>
                 </thead>
                 <tbody>

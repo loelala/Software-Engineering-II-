@@ -25,6 +25,13 @@
         vm.from = null;
         vm.isCollapsed = true;
 
+        vm.classifications = [
+            {id: 1, classType: 'TOP'},
+            {id: 2, classType: 'NORMAL'},
+            {id: 3, classType: 'ONE_OFF'},
+            {id: 3, classType: 'NONE'}
+        ];
+
         vm.date = {
             // from
             startDate: moment().subtract(1,"days"),
@@ -43,8 +50,9 @@
                 customRangeLabel: 'Custom range'
             },
             ranges: {
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'Last half year': [moment().subtract(182, 'days'), moment()],
+                'Last Year': [moment().subtract(364, 'days'), moment()]
             }
         };
 

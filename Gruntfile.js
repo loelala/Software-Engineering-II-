@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-    require('./grunt-pkggen')(grunt);
-
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -13,7 +11,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['src/main/webapp/static/js/**/*.js'],
-                tasks: ['copy:js', 'pkggen:js']
+                tasks: ['copy:js']
             },
             fonts: {
                 files: ['src/main/webapp/static/fronts/**/*'],
@@ -21,11 +19,15 @@ module.exports = function(grunt) {
             },
             partials: {
                 files: ['src/main/webapp/static/partials/**/*'],
-                tasks: ['copy:webapp']
+                tasks: ['copy:partials']
             },
             index: {
-                files: ['src/main/webapp/static/index.html'],
+                files: ['src/main/webapp/static/*.html'],
                 tasks: ['copy:index']
+            },
+            css: {
+                files: ['src/main/webapp/static/css/*.css'],
+                tasks: ['copy:css']
             }
         },
 
@@ -58,8 +60,16 @@ module.exports = function(grunt) {
                 files:[{
                     expand: true,
                     cwd: 'src/main/webapp/static',
-                    src: ['index.html'],
+                    src: ['*'],
                     dest: 'target/wedoit/static'
+                }]
+            },
+            css: {
+                files:[{
+                    expand: true,
+                    cwd: 'src/main/webapp/static/css',
+                    src: ['*'],
+                    dest: 'target/wedoit/static/css'
                 }]
             }
         },
@@ -122,33 +132,16 @@ module.exports = function(grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-scss-lint');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-newer');
-    grunt.loadNpmTasks('grunt-sass');
 
     grunt.registerTask('default', [
         'newer:sass',
         'newer:copy',
-        'pkggen:css', 'pkggen:js'
         // 'validate:js'
-    ]);
-
-    grunt.registerTask('minify', [
-        'newer:sass',
-        'newer:copy',
-        'newer:cssmin:css',
-        'newer:uglify:js',
-        'pkggen:css',
-        'pkggen:js',
-        'concat:pkggen_css',
-        'concat:pkggen_js'
     ]);
 
     grunt.registerTask('validate:js', 'javaScript validation', ['jshint', 'jscs']);

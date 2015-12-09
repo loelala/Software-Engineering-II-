@@ -1,21 +1,40 @@
-<div ng-controller="barChartController as vm">
-
+<div class="container-fluid" ng-controller="barChartController as vm">
 
     <div class="row">
-        <div class="col-md-3">
-            <button type="button" ng-click='vm.goToSupplierList()' class="btn btn-success">
-                Back to supplierlist
+        <div class="col-md-12 col-lg-12">
+            <p class="wedoit-page-info"><strong><i class="fa fa-compass"></i> Suppliers - Comparison </strong></p>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <h1>Compare Suppliers</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px; margin-bottom: 20px">
+        <div class="col-md-3 col-lg-3">
+            <button type="button" ng-click='vm.goToSupplierList()' class="btn wedoit-button">
+                <i class="fa fa-step-backward"></i> Back to supplierlist
             </button>
         </div>
-        <div id="suppliertable" class="col-md-6">
-            <p>Your selected suppliers:</p>
+        <div class="col-md-3 col-lg-3">
+            <button type="button" ng-click="vm.toggleChart()" class="btn wedoit-button" ng-show="vm.displayScoreChart">
+                <i class="fa fa-map"></i> Compare delivery delays
+            </button>
+            <button type="button" ng-click="vm.toggleChart()" class="btn wedoit-button" ng-hide="vm.displayScoreChart">
+                <i class="fa fa-compass"></i> Compare score
+            </button>
+        </div>
+    </div>
 
+
+    <div class="row" style="margin-top: 10px">
+        <div class="col-md-12 col-lg-12">
             <table st-table="vm.rawData" class="table table-hover">
                 <thead>
                 <tr>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="name">Score</th>
-                    <th st-sort="name">Classification</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Classification</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,24 +49,16 @@
             </table>
         </div>
         <div class="col-md-3">
-            <span>
-                <button type="button" ng-class="{'btn btn-default':vm.displayScoreChart,'btn btn-success':!vm.displayScoreChart}" ng-click="vm.toggleScoreChart()">
-                    <span> Score Chart</span>
-                </button>
-                </span>
-                <br/>
-                <button type="button" ng-class="{'btn btn-default':vm.displayDetailChart,'btn btn-success':!vm.displayDetailChart}" ng-click="vm.toggleDetailChart()">
-                    <span> Delivery Delay</span>
-                </button>
-            </span>
-            <br/>
             <span class="input-group-btn">
-                <button type="button" class="btn btn-success" ng-click="vm.generatePdf()">
-                    <span> Produce PDF</span>
+                <button type="button" class="btn btn-success" ng-click="vm.toggleChart()">
+                    <span ng-show="vm.displayScoreChart"> Delivery delays</span>
+                    <span ng-hide="vm.displayScoreChart"> Score</span>
                 </button>
             </span>
+
         </div>
     </div>
+
     <div class="row" ng-show="vm.displayScoreChart">
         <div class="col-md-10"> <!-- Chart Div -->
             <div id="bar">

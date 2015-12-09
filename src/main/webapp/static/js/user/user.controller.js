@@ -7,18 +7,21 @@
     angular.module('newuser', [])
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$state','UserService','AllUserService','toastr'];
-    function UserController($state,UserService,AllUserService,toastr) {
+    UserController.$inject = ['$state','UserService','AllUserService','toastr', 'loginInformationHolderService'];
+    function UserController($state,UserService,AllUserService,toastr, loginInformationHolderService) {
         var vm = this;
 
         vm.isNewUser = false;
         vm.isAllUsers = false;
         vm.userList = [];
+        vm.isAdmin = loginInformationHolderService.isAdmin;
 
         vm.create = create;
         vm.newUser = newUser;
         vm.allUsers = allUsers;
         vm.showAllCurrentUsers = showAllUsers;
+        vm.editUser = editUser;
+        vm.deleteUser = deleteUser;
 
         function create (username, password, email, name){
             UserService.createNew(username,password, email, name)
@@ -60,6 +63,20 @@
                 }
             )
         }
+
+
+        function editUser(index,user) {
+            vm.userList[index].surname = user.surname;
+            vm.userList[index].email = user.emailAddress;
+            // TODO API call to update user data
+        }
+
+
+        function deleteUser(index) {
+            vm.userList.splice(index, 1);
+            // TODO delete user with api call
+        }
+
 
 
 

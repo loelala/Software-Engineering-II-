@@ -182,7 +182,6 @@
                         vm.dataArray.push(entry["score"]);
                         vm.supplierNameArray.push(entry["name"]);
                     }
-
                 })
 
                 vm.labels = vm.supplierNameArray;
