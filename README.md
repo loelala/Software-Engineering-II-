@@ -38,7 +38,7 @@ A time interval must be chooseable for the whole application, so that the compar
 ### 1.3	Authentication (done)
 A dynamic login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
 
-### 1.3.1	User control (done)
+### 1.3.1	User control (not all is done!)
 There should be 1 admin user, who can create, delete and manage users for the system.
 
 ### 1.4	Export reports as PDF (done)
