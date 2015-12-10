@@ -68,7 +68,7 @@
 
                     <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a></li>
 
-                    <li><a ui-sref="settings"><i class="fa fa-wrench"></i> Settings</a></li>
+                    <li><a ng-if="isAdmin" ui-sref="settings"><i class="fa fa-wrench"></i> Settings</a></li>
 
                 </ul>
 
