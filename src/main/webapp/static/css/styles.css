@@ -89,6 +89,15 @@ footer {
     background-color: #77bfb2;
     border-color: #77bfb2;
 }
+
+.wedoit-button:disabled,
+.wedoit-button.disabled{
+    color: #333;
+    background-color: #ffffff;
+    border-color: #77bfb2;
+    cursor: not-allowed;
+}
+
 .wedoit-button:focus,
 .wedoit-button.focus {
     color: #333;

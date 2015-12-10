@@ -79,10 +79,10 @@
         <div class="col-md-2 col-lg-2">
             <button style="margin-left: 16px" type="button"
                     ng-click='vm.goToComparison()'
-                    ng-disabled="vm.selectedSuppliers.length <= 1"
-                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
-                                        'btn wedoit-button':vm.selectedSuppliers.length > 1}" >
-                Compare
+                    ng-disabled="vm.selectedSuppliers.length <= 0"
+                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 0,
+                                        'btn wedoit-button':vm.selectedSuppliers.length > 0}" >
+                <i class="fa fa-bar-chart"></i> {{vm.selectedSuppliers.length <= 1 ? 'Details' : 'Compare'}}
             </button>
         </div>
     </div>
