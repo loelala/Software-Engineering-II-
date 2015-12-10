@@ -65,8 +65,8 @@ public class AllDaoImpl extends AbstractDao implements AllDao
             }
             catch (Exception e)
             {
-                logger.debug("No Cache and no Database connection");
-                state = State.NO_CONNECTION_AND_CACHE;
+                logger.debug("No Database connection");
+                //state = State.NO_CONNECTION_AND_CACHE;
             }
 
             for (Supplier s : supplierList.values())
@@ -126,6 +126,13 @@ public class AllDaoImpl extends AbstractDao implements AllDao
                 }
             }).start();
         }
+    }
+
+    public void renewCache()
+    {
+        logger.debug("Set cache to null");
+        supplierList = null;
+        supplierMap = null;
     }
 
     /**

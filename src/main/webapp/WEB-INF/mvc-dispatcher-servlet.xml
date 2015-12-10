@@ -35,6 +35,10 @@
 
     <bean name="supplierUtils" class="edu.hm.wedoit.utils.SupplierUtils" factory-method="getInstance"/>
 
+    <bean name="scoringUtils" class="edu.hm.wedoit.utils.ScoringUtils" factory-method="getInstance"/>
+
+    <bean name="classificationUtils" class="edu.hm.wedoit.utils.ClassificationUtils" factory-method="getInstance"/>
+
     <bean id="allDao"
           class="edu.hm.wedoit.dao.impl.AllDaoImpl"
           init-method="initData"

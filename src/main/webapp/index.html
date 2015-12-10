@@ -17,11 +17,15 @@
     <link rel="stylesheet" type="text/css" href="/static/css/angular-toastr.min.css"/>
     <link rel="stylesheet" href="static/bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
     <link rel="stylesheet" href="static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link href="static/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/favicon-3.ico">
+
 <body>
 
 <!-- header -->
 <div ng-controller="IndexCtrl as vm">
-    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div id="top-nav" class="navbar navbar-static-top navbar-wedoit">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,11 +38,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i
-                                class="fa fa-user"></i> {{vm.actualUser}} <span class="caret"></span></a>
-                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                            <li><a href="#">My Profile</a></li>
-                        </ul>
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown"><i
+                                class="fa fa-user"></i> {{vm.actualUser}}</a>
                     </li>
                     <li><a ui-sref="login" ng-click="vm.logout()"><i class="fa fa-lock"></i> Logout</a></li>
                 </ul>
@@ -54,21 +55,20 @@
             <!-- Left column -->
             <!-- Left column -->
             <div ng-if="isLoggedIn" class="col-md-3 col-lg-3">
-                <a><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></a>
+                <p class="wedoit-page-info"><strong><i class="fa lg fa-diamond"></i> NoKloo'boutIT plc.</strong></p>
 
-                <hr>
+                <hr class="wedoit-page-info">
 
-                <ul class="nav nav-stacked">
+                <ul class="nav nav-left nav-stacked">
                     <li class="active"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
 
                     <hr>
 
-                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i> Suppliers</a>
-                    </li>
+                    <li><a ui-sref="supplier"><i class="fa fa-industry"></i> Suppliers</a></li>
 
+                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a></li>
 
-                    <li><a ng-if="isAdmin" ui-sref="useradmin"><i class="fa fa-user"></i> User Management</a>
-                    </li>
+                    <li><a ng-if="isAdmin" ui-sref="settings"><i class="fa fa-wrench"></i> Settings</a></li>
 
                 </ul>
 
@@ -104,6 +104,8 @@
 <script src="static/bower_components/ui-bootstrap-tpls-0.14.3.js"></script>
 <script src="static/bower_components/angular-toastr.tpls.min.js"></script>
 <script src="static/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="static/bower_components/bootstrap-ui/src/modal/modal.js"></script>
+<script src="static/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
 <script src="static/js/datashareservice/data.share.service.js"></script>
 <script src="static/js/datashareservice/login.information.service.js"></script>
@@ -111,7 +113,7 @@
 <script src="static/js/supplier/supplier.resource.service.js"></script>
 <script src="static/js/supplier/supplier.byDate.resource.service.js"></script>
 <script src="static/js/supplier/supplier.listByDate.controller.js"></script>
-<script src="static/js/supplier/dateRange.directive.js"></script>
+<script src="static/js/supplier/supplier.filter.js"></script>
 <script src="static/js/charts/supplier.comparison.chart.controller.js"></script>
 
 <script src="static/js/authentication/authentication.service.js"></script>
@@ -119,13 +121,16 @@
 <script src="static/js/user/user.controller.js"></script>
 <script src="static/js/user/user.service.js"></script>
 <script src="static/js/user/user.allUser.service.js"></script>
-
+<script src="static/js/user/user.edit.controller.js"></script>
+<script src="static/js/user/user.delete.controller.js"></script>
 <script src="static/js/login/login.controller.js"></script>
 
 <script src="static/js/index/index.controller.js"></script>
+<script src="static/js/settings/setting.classification.service.js"></script>
+<script src="static/js/settings/setting.scoring.service.js"></script>
 
 
-<script src="static/js/supplier/datepicker.directive.js"></script>
+<script src="static/js/settings/setting.controller.js"></script>
 <script src="static/js/jspdf.min.js"></script>
 <script src="static/js/jspdf.plugin.autotable.js"></script>
 <script src="static/js/html2canvas.js"></script>

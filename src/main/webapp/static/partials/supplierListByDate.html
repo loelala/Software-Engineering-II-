@@ -1,7 +1,7 @@
-<div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm"  xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <a><strong><i class="fa fa-coffee"></i> Suppliers </strong></a>
+            <p class="wedoit-page-info"><strong><i class="fa fa-coffee"></i> Suppliers </strong></p>
             <hr>
             <div class="col-md-12 col-lg-12">
                 <h1>Suppliers</h1>
@@ -9,57 +9,40 @@
         </div>
     </div>
 
-    <hr>
+    <div class="row" style="margin-top: 20px">
 
-
-    <div class="row">
-        <!--datepicker-->
         <div class="col-md-6 col-lg-6">
-            <div class="form-group">
+            <div class="form-group"> <!--datepicker-->
                 <label for="datepicker"> Select a daterange: </label>
                 <input date-range-picker id="datepicker" name="datepicker" class="form-control date-picker" type="text"
-                        ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
-            </div>
+                       ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
+            </div>  <!-- .datepicker -->
         </div>
-        <!-- .datepicker -->
 
-        <!-- classification TOP, NORMAL, ONE_OFF, NONE -->
-        <div class="col-md-6 col-lg-6">
-            <label>Classification of supplier: </label>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="NORMAL" ng-model="vm.formData.classification">
-                    NORMAL
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="TOP" ng-model="vm.formData.classification">
-                    TOP
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="ONE_OFF" ng-model="vm.formData.classification">
-                    ONE_OFF
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="classification" value="NONE" ng-model="vm.formData.classification">
-                    NONE
-                </label>
-            </div>
-        </div> <!-- classification -->
+        <!--<div class="col-md-6 col-lg-6">-->
+            <!--<form class="form-horizontal" role="form">-->
+                <!--<div class="form-group">-->
+                    <!--<label for="input1" class="control-label">Search by suppliers name</label>-->
+                    <!--<input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="input2" class="control-label">Search by classification</label>-->
+                    <!--<select id="input2" class="form-control" ng-model="filter.classifications">-->
+                        <!--<option value="">All classifications</option>-->
+                        <!--<option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
     </div>
 
 
     <div style="margin-top: 25px;" class="row">
         <div class="col-md-2 col-lg-2">
-            <button class="btn btn-default" style="margin-left: 9px" type="button"
-                    ng-click="vm.byDateQuery(vm.date.startDate ,vm.date.endDate, vm.formData.classification)"
+            <button class="btn wedoit-button" style="margin-left: 9px" type="button"
+                    ng-click="vm.byDateQuery(vm.date.startDate ,vm.date.endDate)"
                     ng-disable="vm.dateIsSelected">
-                Show all suppliers by date and classification
+                Show all suppliers by date
             </button>
         </div>
     </div>
@@ -75,8 +58,8 @@
             <table st-table="vm.selectedSuppliers" class="table table-hover">
                 <thead>
                 <tr>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="name">Score</th>
+                    <th>Name</th>
+                    <th>Score</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,10 +79,10 @@
         <div class="col-md-2 col-lg-2">
             <button style="margin-left: 16px" type="button"
                     ng-click='vm.goToComparison()'
-                    ng-disabled="vm.selectedSuppliers.length <= 1"
-                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
-                                        'btn btn-success':vm.selectedSuppliers.length > 1}" >
-                Compare
+                    ng-disabled="vm.selectedSuppliers.length <= 0"
+                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 0,
+                                        'btn wedoit-button':vm.selectedSuppliers.length > 0}" >
+                <i class="fa fa-bar-chart"></i> {{vm.selectedSuppliers.length <= 1 ? 'Details' : 'Compare'}}
             </button>
         </div>
     </div>
@@ -110,20 +93,36 @@
 <!-- row table all supplier -->
 <div class="row">
     <div class="col-md-12">
-        <div class="panle panle-default">
-            <table st-table="vm.supplierList" class="table table-hover">
+            <table st-table="vm.displayedCollection" st-safe-src="vm.supplierList" class="table table-striped table-bordered">
                 <thead>
                 <tr>
 
-                    <th st-sort="id">ID</th>
-                    <th st-sort="name">Name</th>
-                    <th st-sort="orders">Number of Orders</th>
-                    <th st-sort="score">Score</th>
-                    <th st-sort="score">classification</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Number of Orders</th>
+                    <th>Score</th>
+                    <th>Classification</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <input st-search="name" placeholder="search for name" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        <select st-search="classification" st-input-event="change">
+                        <option value="">All</option>
+                        <option ng-repeat="item in vm.classifications" value="{{item.name}}">{{item.name}}</option>
+                        </select>
+                        <!--<select class="form-control input-sm" id="classification" ng-model="vm.classFilter" ng-options="classification.name
+                                for classification in vm.classifications" ng-change="vm.classFunction(vm.classFilter)">
+                        </select>-->
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in vm.supplierList"
+                <tr ng-repeat="row in vm.displayedCollection"
                     ng-class="{'selected':$index == vm.selectedRow}"
                     ng-click="vm.select($index,row)">
 
@@ -135,12 +134,13 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                <td colspan="5" class="text-center">
-                    <div st-times-by-page="30" st-pagination=""></div>
-                </td>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
                 </tfoot>
             </table>
-        </div>
     </div>
 </div>
 <!--/row table all supplier -->

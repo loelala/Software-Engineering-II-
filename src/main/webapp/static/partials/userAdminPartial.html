@@ -2,8 +2,8 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <a><i class="fa fa-user"></i> User Management</a>
-            <hr>
+            <p class="wedoit-page-info"><strong><i class="fa fa-user"></i> User Management</strong></p>
+            <hr class="wedoit-hr">
             <div class="col-md-12 col-lg-12">
                 <h1>User Management</h1>
             </div>
@@ -11,13 +11,13 @@
     </div>
 
     <div class="row" style="margin-top: 20px">
-        <div class="col-lg-3 col-md-3">
-            <button type="button" class="btn btn-default" ng-click="vm.newUser()">
+        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
+            <button type="button" class="btn wedoit-button" ng-click="vm.newUser()">
                 <i class="fa fa-plus"></i> Create a new user
             </button>
         </div>
-        <div class="col-lg-3 col-md-3">
-            <button type="button" class="btn btn-default" ng-click="vm.allUsers()">
+        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
+            <button type="button" class="btn wedoit-button" ng-click="vm.allUsers()">
                 <i class="fa fa-users"></i> Show all users
             </button>
         </div>
@@ -29,7 +29,7 @@
             <form role="form" name="newUser">
                 <div class="form-group" ng-class="{ 'has-error': newUser.name.$dirty && newUser.name.$error.required }">
                     <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter the name" ng-model="vm.name" required>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter the name" ng-model="vm.name" required pattern="[A-Z]*[a-z]*" maxlength="30">
                     <span ng-show="newUser.name.$dirty && newUser.name.$error.required" class="help-block">Please enter a valid name! A - Z / a- z is allowed</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': newUser.email.$dirty && newUser.email.$error.required }">
@@ -38,19 +38,19 @@
                     <span class="help-block" ng-show="newUser.email.$dirty && newUser.email.$error.required">Please enter a valid email address!</span>
                 </div>
                 <hr>
-                <div class="form-group" ng-class="{ 'has-error': newUser.newUsername.$dirty && form.newUsername.$error.required }">
+                <div class="form-group" ng-class="{ 'has-error': newUser.newUsername.$dirty && newUser.newUsername.$error.required }">
                     <label for="newUsername">Username</label>
                     <input class="form-control" type="text" name="new_username" id="newUsername" placeholder="Enter the username" ng-model="vm.un" required>
-                    <span ng-show="newUser.username.$dirty && newUser.username.$error.required" class="help-block">Username is required</span>
+                    <span ng-show="newUser.newUsername.$dirty && newUser.newUsername.$error.required" class="help-block">Username is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': newUser.newPassword.$dirty && form.newPpassword.$error.required }">
+                <div class="form-group" ng-class="{ 'has-error': newUser.newPassword.$dirty && newUser.newPassword.$error.required }">
                     <label for="newPassword">Password</label>
-                    <input class="form-control" type="password" name="new_password" id="newPassword" placeholder="Enter a password" ng-model="vm.p" required>
-                    <span ng-show="newUser.password.$dirty && newUser.password.$error.required" class="help-block">Password is required</span>
+                    <input class="form-control" type="password" name="newPassword" id="newPassword" placeholder="Enter a password" ng-model="vm.p" required>
+                    <span ng-show="newUser.newPassword.$dirty && newUser.newPassword.$error.required" class="help-block">Password is required</span>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-success" ng-click="vm.create(vm.un, vm.p, vm.email, vm.name)"
-                            ng-show="newUser.$valid">Create a new user</button>
+                    <button type="button" class="btn wedoit-button" ng-click="vm.create(vm.un, vm.p, vm.email, vm.name)"
+                            ng-show="newUser.$valid">Create</button>
                 </div>
             </form>
         </div>
@@ -59,21 +59,41 @@
     <div class="row" ng-show="vm.isAllUsers">
         <div class="col-lg-12 col-md-12">
             <h2>All current users</h2>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Email</th>
+
+            <table class="table table-responsive table-condensed">
+                <tr style="font-weight: bold">
+                    <td style="width:35%">Username</td>
+                    <td style="width:20%">Name</td>
+                    <td style="width:20%">Email</td>
+                    <td style="width:25%">Actions</td>
                 </tr>
-                </thead>
-                <tbody>
                 <tr ng-repeat="user in vm.userList">
-                    <td>{{user.name}}</td>
-                    <td>{{user.surname}}</td>
-                    <td>{{user.email}}</td>
+                    <td>
+                        <span editable-text="user.name" e-name="name" e-form="rowform" e-disabled>
+                        {{user.name}}</span>
+                    </td>
+                    <td>
+                        <span editable-text="user.surname" e-name="surname" e-form="rowform" onbeforesave="vm.checkSurname($index, $data)" e-required> {{user.surname}}</span>
+                    </td>
+                    <td>
+                        <span editable-email="user.email" e-name="emailAddress" e-form="rowform" onbeforesave="vm.checkEmail($index, $data)" e-required> {{user.email}} </span>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <!-- form -->
+                        <form editable-form name="rowform" onbeforesave="vm.editUser($index, $data)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-default">
+                                save
+                            </button>
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                cancel
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform.$visible">
+                            <button class="btn wedoit-button" ng-click="rowform.$show()">edit</button>
+                            <button class="btn btn-danger" ng-hide="vm.isAdmin" ng-click="vm.deleteUser($index)">delete</button>
+                        </div>
+                    </td>
                 </tr>
-                </tbody>
             </table>
         </div>
     </div>

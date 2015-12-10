@@ -5,6 +5,8 @@ import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.limits.ClassificationLimits;
 import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public class SupplierUtils
 {
     @Autowired
     SettingsManagement sm;
+
+    private final static Logger logger = LoggerFactory.getLogger(SupplierUtils.class);
 
     private static volatile SupplierUtils instance;
 
@@ -89,23 +93,32 @@ public class SupplierUtils
 
     public Classification calculateClassification(int numberOfOrders)
     {
-        ClassificationLimits cl = sm.getClassificationLimits();
+        //logger.debug("calculateClassification({})", numberOfOrders);
 
-        if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
+        ClassificationLimits cl = sm.getClassificationLimits();
+        Classification c;
+
+        if(numberOfOrders <= 0)
         {
-            return Classification.TOP;
+            c = Classification.NONE;
         }
-        else if(numberOfOrders < cl.getClassificationLimit(Classification.TOP) && numberOfOrders >= cl.getClassificationLimit(Classification.NORMAL))
+        else if(numberOfOrders > 0 && numberOfOrders <= cl.getClassificationLimit(Classification.ONE_OFF))
         {
-            return Classification.NORMAL;
+            c = Classification.ONE_OFF;
         }
-        else if(numberOfOrders < cl.getClassificationLimit(Classification.NORMAL) && numberOfOrders >= cl.getClassificationLimit(Classification.ONE_OFF))
+        else if(numberOfOrders > cl.getClassificationLimit(Classification.ONE_OFF) && numberOfOrders <= cl.getClassificationLimit(Classification.NORMAL))
         {
-            return Classification.ONE_OFF;
+            c = Classification.NORMAL;
+        }
+        else if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
+        {
+            c = Classification.TOP;
         }
         else
         {
-            return Classification.NONE;
+            c = Classification.NONE;
         }
+        logger.debug("calculateClassification({}) returns {}", numberOfOrders, c);
+        return c;
     }
 }

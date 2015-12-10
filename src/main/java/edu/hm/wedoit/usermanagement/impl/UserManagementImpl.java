@@ -107,8 +107,7 @@ public class UserManagementImpl implements UserManagement
                 logger.debug("passwordHash " + passwordHash);
                 User newUser = new User(username,passwordHash, email, surname);
                 users.put(username,newUser);
-                try
-                {
+
                     boolean saveStatus = saveUsers();
                     if(saveStatus)
                     {
@@ -118,13 +117,6 @@ public class UserManagementImpl implements UserManagement
                     {
                         return false;
                     }
-
-                }
-                catch (FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                    return false;
-                }
             }
             else
             {
@@ -137,7 +129,7 @@ public class UserManagementImpl implements UserManagement
      * {@inheritDoc}
      */
     @Override
-    public boolean removeUser(String username) throws FileNotFoundException
+    public boolean removeUser(String username)
     {
         logger.debug("removeUser({})", username);
         boolean result = false;
@@ -146,7 +138,9 @@ public class UserManagementImpl implements UserManagement
             if(users.remove(username) != null)
             {
                 result = true;
-                saveUsers();
+
+                    saveUsers();
+
             }
             else
             {
@@ -213,7 +207,7 @@ public class UserManagementImpl implements UserManagement
         return resultMap;
     }
 
-    private boolean saveUsers() throws FileNotFoundException
+    private boolean saveUsers()
     {
         logger.debug("saveUsers()");
         try(ObjectOutputStream oos = new ObjectOutputStream(

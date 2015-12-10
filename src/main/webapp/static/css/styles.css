@@ -22,17 +22,36 @@
   margin-bottom:20px;
 }
 
-.navbar-grey {
-    background-color: #afd9ee;
+.navbar-wedoit {
+    background-color: #507F77;
+    color: #060a09;
 }
+
+.navbar-wedoit .navbar-text {
+    color: #e6fffc;
+}
+
+.navbar-wedoit .navbar-brand {
+    color: #e6fffc;
+}
+
+.navbar-wedoit .navbar-toggle .icon-bar {
+    background-color: #8bccbf;
+}
+
 i {
   font-size:16px;
 }
 
 .nav > li > a {
-  color:#787878;
+  color: #e6fffc;
 }
-  
+
+
+.nav-left > li > a {
+    color: #384341;
+}
+
 footer {
   margin-top:20px;
   padding-top:20px;
@@ -59,18 +78,116 @@ footer {
 
 .selected {
     font-weight:bold;
-    color: #005983;
+    color: #284038;
 }
 
 .login-panel {
     margin-top: 25%;
 }
 
-.datepickerdemoBasicUsage {
-    /** Demo styles for mdCalendar. */ }
-.datepickerdemoBasicUsage {
-    padding-bottom: 200px; }
-.datepickerdemoBasicUsage .validation-messages {
-    font-size: 11px;
-    color: darkred;
-    margin: 10px 0 0 25px; }
+.wedoit-hr{
+   color: #507f77;
+}
+
+.wedoit-button {
+    color: #e6fffc;
+    background-color: #77bfb2;
+    border-color: #77bfb2;
+}
+
+.wedoit-button:disabled,
+.wedoit-button.disabled{
+    color: #333;
+    background-color: #ffffff;
+    border-color: #77bfb2;
+    cursor: not-allowed;
+}
+
+.wedoit-button:focus,
+.wedoit-button.focus {
+    color: #e6fffc;
+    background-color: #a2f3e6;
+    border-color: #77bfb2;
+}
+.wedoit-button:hover {
+    color: #707474;
+    background-color: #a2f3e6;
+    border-color: #5d978a;
+}
+.wedoit-button:active,
+.wedoit-button.active,
+.open > .dropdown-toggle.wedoit-button {
+    color: #e6fffc;
+    background-color: #a2f3e6;
+    border-color: #7fe2cc;
+}
+
+.wedoit-toggleButton {
+    color: #333;
+    background-color: #77bfb2;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+.wedoit-toggleButton:enabled,
+.wedoit-toggleButton.enabled {
+    color: #333;
+    background-color: #a2f3e6;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.wedoit-toggleButton:disabled,
+.wedoit-toggleButton.disabled {
+    color: #333;
+    background-color: #77bfb2;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.wedoit-toggleButton:hover {
+    color: #333;
+    background-color: #a2f3e6;
+    border-color: #5d978a;
+}
+
+.wedoit-page-info {
+    color: #384341;;
+}
+
+.wedoit-panel {
+    color: #384341;
+    background-color: #a2f3e6;
+}
+
+form[name="classification"] > div {
+    height: auto;
+    padding: 5px 0;
+}
+
+form[name="classification"] .title {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 5px;
+    vertical-align: top;
+    min-width: 90px;
+}
+
+form[name="classification"] .editable {
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: top;
+}
+
+form[name="classification"] select {
+    width: 120px;
+}
+
+
+tfoot .st-pagination {
+    color: #333;
+    background-color: #a2f3e6;
+    border-color: #77bfb2;
+}
