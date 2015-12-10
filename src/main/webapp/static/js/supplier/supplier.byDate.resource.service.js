@@ -11,10 +11,10 @@
 
     function supplierserviceByDate ($resource) {
 
-        var service = $resource('../../api/supplier/all/:classification/between/:from/:to ', {}, {
+        var service = $resource('../../api/supplier/all/between/:from/:to ', {}, {
             query: {
                 method:'GET',
-                params: {classification: 'classification',from: 'from', to: 'to'},
+                params: {from: 'from', to: 'to'},
                 isArray: true
             }
         });
