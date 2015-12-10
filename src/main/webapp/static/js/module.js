@@ -29,7 +29,9 @@ angular.module('WeDoIt', [
     'deleteUser',
     'settings',
     'barChartModule',
-    'loginInformationHolderModule'
+    'loginInformationHolderModule',
+    'ClassificationFactoryModule',
+    'ScoringFactoryModule'
 
 ]);
 

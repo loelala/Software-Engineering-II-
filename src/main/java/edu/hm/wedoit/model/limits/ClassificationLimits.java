@@ -2,14 +2,17 @@ package edu.hm.wedoit.model.limits;
 
 import edu.hm.wedoit.model.enums.Classification;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Joncn on 03.12.2015.
  */
-public class ClassificationLimits
+public class ClassificationLimits implements Serializable
 {
+
+    public ClassificationLimits(){}
     private Map<String, Integer> classificationLimits;
 
     public ClassificationLimits(Map<String, Integer> classificationLimits)

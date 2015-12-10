@@ -4,22 +4,45 @@
     angular.module('settings', [])
         .controller('SettingsCtrl', SettingsCtrl);
 
-    SettingsCtrl.$inject = ['toastr', '$filter'];
+    SettingsCtrl.$inject = ['toastr', '$filter','classificationService','scoringService'];
 
-    function SettingsCtrl(toastr, $filter) {
+    function SettingsCtrl(toastr, $filter,classificationService,scoringService) {
         var vm = this;
 
         vm.classificationSettings = false;
         vm.dateSettings = false;
-
+        vm.scoringSettings = false;
+        vm.saveClassification = saveClassification;
+        vm.saveScoring = saveScoring;
         vm.editCompareRanges =  editCompareSettings;
         vm.editDateRanges = editDateRanges;
+        vm.editScoring = editScoring;
 
-        vm.classifications = [
-            {title: 'Top', fromVal: 4, toVal: 10},
-            {title: 'Normal', fromVal: 11, toVal: 25},
-            {title: 'One_Off', fromVal: 26, toVal: 10}
-        ];
+        vm.classifications = {};
+        vm.scoring = {};
+
+        classificationService.getClassification().query()
+            .$promise.then(function(data) {
+                console.log('got Classification' + data);
+                vm.classifications = data;
+            }, function(error) {
+                console.log('some error occurred', error);
+                toastr.error('Couldn\'t fetch to the classification','Fetching error!');
+            });
+
+        scoringService.getScoring().query()
+            .$promise.then(function(data){
+                vm.scoring = data;
+                console.log("got Scoring " +data);
+            }, function(error){
+                console.log("error fetching scoring " + error);
+            });
+
+        //vm.classifications = [
+        //    {title: 'Top', fromVal: 4, toVal: 10},
+        //    {title: 'Normal', fromVal: 11, toVal: 25},
+        //    {title: 'One_Off', fromVal: 26, toVal: 10}
+        //];
 
         vm.dateRanges =[
             {title: 'much too early', fromVal: 0, toVal: 0},
@@ -30,17 +53,21 @@
         ];
 
         function editCompareSettings() {
-            vm.classificationSettings = vm.classificationSettings !== true;
-            if(vm.classificationSettings){
-                vm.dateSettings = false;
-            }
+            vm.classificationSettings = true;
+            vm.dateSettings = false;
+            vm.scoringSettings = false;
         }
 
         function editDateRanges() {
-            vm.dateSettings = vm.dateSettings !== true;
-            if (vm.dateSettings) {
-                vm.classificationSettings = false;
-            }
+            vm.classificationSettings = false;
+            vm.dateSettings = true;
+            vm.scoringSettings = false;
+        }
+
+        function editScoring(){
+            vm.classificationSettings = false;
+            vm.dateSettings = false;
+            vm.scoringSettings = true;
         }
 
         vm.checkFromCl= function(index,data) {
@@ -72,11 +99,23 @@
 
         };
 
-        vm.saveClassification = function(index, data) {
-           vm.classifications[index].fromVal = data.fromVal;
-           vm.classifications[index].toVal = data.toVal;
-            toastr.success('Saved classification range for ' + vm.classifications[index].title);
+        function saveClassification() {
+           classificationService.saveClassification(vm.classifications)
+               .then(function(response){
+                    console.log(response.status);
+            },function(response){
+                   console.log(response.status);
+               });
         };
+
+        function saveScoring(){
+            scoringService.saveScoring(vm.scoring)
+                .then(function (response) {
+                    console.log(response.status);
+                },function(response){
+                    console.log(response.status);
+                });
+        }
 
         vm.saveDateRanges = function(index, data) {
             console.log(data);

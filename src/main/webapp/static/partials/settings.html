@@ -11,52 +11,263 @@
     </div>
 
     <div class="row" style="margin-top: 20px">
-        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
+        <div class="col-lg-4 col-md-4" style="margin-top: 10px">
             <button type="button" class="btn wedoit-button" ng-click="vm.editCompareRanges()">
                 <i class="fa fa-edit"></i> Edit classification ranges
             </button>
         </div>
-        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
-            <button type="button" class="btn wedoit-button" ng-click="vm.editDateRanges()">
+        <div ng-show="false" class="col-lg-4 col-md-4" style="margin-top: 10px">
+            <button type="button"  class="btn wedoit-button" ng-click="vm.editDateRanges()">
                 <i class="fa fa-edit"></i> Edit date ranges
+            </button>
+        </div>
+        <div class="col-lg-4 col-md-4" style="margin-top: 10px">
+            <button type="button" class="btn wedoit-button" ng-click="vm.editScoring()">
+                <i class="fa fa-edit"></i> Edit Scoring
             </button>
         </div>
     </div>
 
+    <div class="row" ng-show="vm.scoringSettings">
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <h2>Edit the ranges for the scoring</h2>
+                    <p>Here you can edit the settings for the ranges of the scoring <br>
+                        for orders of the suppliers</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button type="button" ng-click='vm.saveScoring()' class="btn wedoit-button">
+                        <i class="fa fa-floppy-o"></i> Save
+                    </button>
+                </div>
+            </div>
+            <table class="table table-responsive table-condensed">
+                <tr style="font-weight: bold">
+                    <td style="width:20%">Score</td>
+                    <td style="width:20%">positiv from</td>
+                    <td style="width:20%">positiv To</td>
+                    <td style="width:20%">negative from</td>
+                    <td style="width:20%">negative to</td>
+
+                </tr>
+                <tr>
+                    <!-- 100 SCORE  -->
+                    <td> 100 </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMIN100']" class="form-control" placeholder="vm.scoring.scoringLimits['PMIN100']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX100']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX100']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMAX100']" class="form-control" placeholder="vm.scoring.scoringLimits['NMAX100']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN100']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN100']">
+                        </div>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <!-- 90 SCORE  -->
+                    <td> 90 </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['PMAX100']+1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX90']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX90']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {{vm.scoring.scoringLimits['NMIN100']-1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN90']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN90']">
+                        </div>
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <!-- 80 SCORE  -->
+                    <td> 80 </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['PMAX90']+1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX80']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX80']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {{vm.scoring.scoringLimits['NMIN90']-1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN80']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN80']">
+                        </div>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <!-- 60 SCORE  -->
+                    <td> 60 </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['PMAX80']+1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX60']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX60']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {{vm.scoring.scoringLimits['NMIN80']-1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN60']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN60']">
+                        </div>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <!-- 40 SCORE  -->
+                    <td> 40 </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['PMAX60']+1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX40']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX40']">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {{vm.scoring.scoringLimits['NMIN60']-1}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN40']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN40']">
+                        </div>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <!-- 0 SCORE  -->
+                    <td> 0 </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['PMAX40']+1}}
+                        </div>
+                    </td>
+                    <td>
+                        <span> &infin; </span>
+                    </td>
+                    <td>
+                        <div >
+                            {{vm.scoring.scoringLimits['NMIN40']-1}}
+                        </div>
+                    </td>
+                    <td>
+                        <span> -&infin; </span>
+                    </td>
+
+
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <!--
+    CLASSIFICATION
+    -->
     <div class="row" ng-show="vm.classificationSettings">
         <div class="col-lg-12 col-md-12">
-            <h2>Edit the ranges for classification</h2>
-            <p>Here you can edit the settings for the ranges of classification <br>
-            At which limit is a supplier a top, normal or one off supplier</p>
-
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <h2>Edit the ranges for classification</h2>
+                    <p>Here you can edit the settings for the ranges of classification <br>
+                    At which limit is a supplier a top, normal or one off supplier</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button type="button" ng-click='vm.saveClassification()' class="btn wedoit-button">
+                        <i class="fa fa-floppy-o"></i> Save
+                    </button>
+                </div>
+            </div>
             <table class="table table-responsive table-condensed">
                 <tr style="font-weight: bold">
                     <td style="width:35%">Classification</td>
                     <td style="width:20%">From</td>
                     <td style="width:20%">To</td>
-                    <td style="width:25%">Edit</td>
                 </tr>
-                <tr ng-repeat="cf in vm.classifications">
-                    <td> {{cf.title}}</td>
+                <tr>
+                    <!-- TOP CLASSIFICATION  -->
+                    <td> TOP </td>
                     <td>
-                        <span editable-number="cf.from" e-name="from" e-form="rowform" onbeforesave="vm.checkFromCl($index, $data)" e-required> {{cf.fromVal}}</span>
-                    </td>
-                    <td>
-                        <span editable-number="cf.to" e-name="to" e-form="rowform" onbeforesave="vm.checkToCl($index, $data)" e-required> {{cf.toVal}} </span>
-                    </td>
-                    <td style="white-space: nowrap">
-                        <!-- form -->
-                        <form editable-form name="rowform" onbeforesave="vm.saveClassification($index, $data)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == cf">
-                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-default">
-                                save
-                            </button>
-                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                                cancel
-                            </button>
-                        </form>
-                        <div class="buttons" ng-show="!rowform.$visible">
-                            <button class="btn wedoit-button" ng-click="rowform.$show()">edit</button>
+                        <div class="form-group">
+                            <input type="number" ng-model="vm.classifications.classificationLimits['TOP']" class="form-control" id="TOP_NUMBER" placeholder="vm.classifications.classificationLimits['TOP']">
                         </div>
+                    </td>
+                    <td>
+                        <span> &infin; </span>
+                    </td>
+                </tr>
+                <!-- NORMAL CLASSIFICATION  -->
+                <tr>
+                    <td> NORMAL </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" max="{{vm.classifications.classificationLimits['TOP'] -1}}" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="vm.classifications.classificationLimits['NORMAL']">
+                        </div>
+                    </td>
+                    <td>
+                        <span>{{vm.classifications.classificationLimits["TOP"] -1}} </span>
+                    </td>
+                  </tr>
+
+                <!-- ONE_OFF CLASSIFICATION  -->
+                <tr>
+                    <td> ONE OFF </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" max="{{vm.classifications.classificationLimits['NORMAL'] -1}}" ng-model="vm.classifications.classificationLimits['ONE_OFF']" class="form-control" id="ONEOFF_NUMBER" placeholder="vm.classifications.classificationLimits['ONE_OFF']">
+                        </div>                    </td>
+                    <td>
+                        <span>{{vm.classifications.classificationLimits["NORMAL"] -1}} </span>
                     </td>
                 </tr>
             </table>

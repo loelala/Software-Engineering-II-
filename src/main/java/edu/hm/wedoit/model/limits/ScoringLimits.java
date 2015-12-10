@@ -1,13 +1,15 @@
 package edu.hm.wedoit.model.limits;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Joncn on 03.12.2015.
  */
-public class ScoringLimits
+public class ScoringLimits implements Serializable
 {
+    public ScoringLimits() {}
     public enum Limits
     {
         PMIN100,
