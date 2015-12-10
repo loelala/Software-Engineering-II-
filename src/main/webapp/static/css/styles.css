@@ -108,6 +108,37 @@ footer {
     border-color: #7fe2cc;
 }
 
+.wedoit-toggleButton {
+    color: #333;
+    background-color: #77bfb2;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+.wedoit-toggleButton:enabled,
+.wedoit-toggleButton.enabled {
+    color: #333;
+    background-color: #a2f3e6;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.wedoit-toggleButton:disabled,
+.wedoit-toggleButton.disabled {
+    color: #333;
+    background-color: #77bfb2;
+    border-color: #77bfb2;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.wedoit-toggleButton:hover {
+    color: #333;
+    background-color: #a2f3e6;
+    border-color: #5d978a;
+}
+
 .wedoit-page-info {
     color: #384341;;
 }

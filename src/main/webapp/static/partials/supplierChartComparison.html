@@ -17,12 +17,12 @@
             </button>
         </div>
         <div class="col-md-3 col-lg-3">
-            <button type="button" ng-click="vm.toggleScoreChart()" ng-class="{'btn btn-default':vm.displayScoreChart,'btn wedoit-button':!vm.displayScoreChart}">
+            <button type="button" ng-click="vm.toggleScoreChart()" ng-class="{'btn wedoit-toggleButton enabled':vm.displayScoreChart,'btn wedoit-toggleButton disabled':!vm.displayScoreChart}">
                 <i class="fa fa-map"></i> Score Chart
             </button>
         </div>
         <div class="col-md-3 col-lg-3">
-            <button type="button" ng-click="vm.toggleDetailChart()" ng-class="{'btn btn-default':vm.displayDetailChart,'btn wedoit-button':!vm.displayDetailChart}">
+            <button type="button" ng-click="vm.toggleDetailChart()" ng-class="{'btn wedoit-toggleButton enabled':vm.displayDetailChart,'btn wedoit-toggleButton disabled':!vm.displayDetailChart}">
                 <i class="fa fa-map"></i> Delay Chart
             </button>
         </div>

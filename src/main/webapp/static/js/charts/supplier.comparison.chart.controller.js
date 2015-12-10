@@ -282,15 +282,25 @@
                 var count = 0;
                 for(k = 0 ; k < vm.selectedRow.length ; k++)
                 {
-                    if(vm.selectedRow[k] && k != index)
+                    if(vm.selectedRow[k])
                     {
-                        vm.selectedRow[index] = false;
-                        break;
+                        count++;
                     }
-                    else
+                }
+                if(count < 2)
+                {
+                    toastr.warning('Last supplier can\'t be deactivated');
+                    console.log("last supplier cant be deactivated");
+                }
+                else
+                {
+                    for(k = 0 ; k < vm.selectedRow.length ; k++)
                     {
-                        toastr.warning('Last supplier can\'t be deactivated');
-                        console.log("last supplier cant be deactivated");
+                        if(vm.selectedRow[k] && k != index)
+                        {
+                            vm.selectedRow[index] = false;
+                            break;
+                        }
                     }
                 }
             }
