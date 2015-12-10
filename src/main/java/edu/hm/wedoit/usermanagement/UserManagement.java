@@ -31,7 +31,7 @@ public interface UserManagement
      * @param username
      * @return true if the user could be deleted
      */
-    boolean removeUser(String username) throws FileNotFoundException;
+    boolean removeUser(String username);
 
     /**
      * gets the username

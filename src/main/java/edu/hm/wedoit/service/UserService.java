@@ -2,6 +2,7 @@ package edu.hm.wedoit.service;
 
 import edu.hm.wedoit.model.User;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
