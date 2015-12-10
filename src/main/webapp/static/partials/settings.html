@@ -55,23 +55,23 @@
                     <!-- 100 SCORE  -->
                     <td> 100 </td>
                     <td>
-                        <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMIN100']" class="form-control" placeholder="vm.scoring.scoringLimits['PMIN100']">
-                        </div>
+                        <span>
+                            {{vm.scoring.scoringLimits['PMIN100']=0}}
+                        </span>
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX100']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX100']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX100']" min="vm.scoring.scoringLimits['PMIN100']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX100']">
                         </div>
                     </td>
                     <td>
-                        <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMAX100']" class="form-control" placeholder="vm.scoring.scoringLimits['NMAX100']">
-                        </div>
+                        <span>
+                            {{vm.scoring.scoringLimits['NMAX100']=0}}
+                        </span>
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN100']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN100']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN100']" max=vm.scoring.scoringLimits['NMAX100']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN100']">
                         </div>
                     </td>
 
@@ -88,7 +88,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX90']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX90']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX90']" min="m.scoring.scoringLimits['PMAX100']+1" class="form-control" placeholder="{{vm.scoring.scoringLimits['PMAX90']<(vm.scoring.scoringLimits['PMAX100']+1)?vm.scoring.scoringLimits['PMAX90']=(vm.scoring.scoringLimits['PMAX100']+1):vm.scoring.scoringLimits['PMAX90']}}">
                         </div>
                     </td>
                     <td>
@@ -98,7 +98,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN90']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN90']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN90']" max="vm.scoring.scoringLimits['NMIN100']-1" class="form-control" placeholder="{{vm.scoring.scoringLimits['NMIN90']>(vm.scoring.scoringLimits['NMIN100']-1)?vm.scoring.scoringLimits['NMIN90']=(vm.scoring.scoringLimits['NMIN100']-1):vm.scoring.scoringLimits['NMIN90']}}">
                         </div>
                     </td>
 
@@ -114,7 +114,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX80']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX80']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX80']" min="vm.scoring.scoringLimits['PMAX90']+1" class="form-control" placeholder="{{vm.scoring.scoringLimits['PMAX80']<(vm.scoring.scoringLimits['PMAX90']+1)?vm.scoring.scoringLimits['PMAX80']=(vm.scoring.scoringLimits['PMAX90']+1):vm.scoring.scoringLimits['PMAX80']}}">
                         </div>
                     </td>
                     <td>
@@ -124,7 +124,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN80']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN80']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN80']" max="vm.scoring.scoringLimits['NMIN90']-1" class="form-control" placeholder="{{vm.scoring.scoringLimits['NMIN80']>(vm.scoring.scoringLimits['NMIN90']-1)?vm.scoring.scoringLimits['NMIN80']=(vm.scoring.scoringLimits['NMIN90']-1):vm.scoring.scoringLimits['NMIN80']}}">
                         </div>
                     </td>
 
@@ -141,7 +141,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX60']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX60']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX60']" min="vm.scoring.scoringLimits['PMAX80']+1" class="form-control" placeholder="{{vm.scoring.scoringLimits['PMAX60']<(vm.scoring.scoringLimits['PMAX80']+1)?vm.scoring.scoringLimits['PMAX60']=(vm.scoring.scoringLimits['PMAX80']+1):vm.scoring.scoringLimits['PMAX60']}}">
                         </div>
                     </td>
                     <td>
@@ -151,7 +151,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN60']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN60']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN60']" max="vm.scoring.scoringLimits['NMIN80']-1" class="form-control" placeholder="{{vm.scoring.scoringLimits['NMIN60']>(vm.scoring.scoringLimits['NMIN80']-1)?vm.scoring.scoringLimits['NMIN60']=(vm.scoring.scoringLimits['NMIN80']-1):vm.scoring.scoringLimits['NMIN60']}}">
                         </div>
                     </td>
 
@@ -168,7 +168,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX40']" class="form-control" placeholder="vm.scoring.scoringLimits['PMAX40']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['PMAX40']" min="vm.scoring.scoringLimits['PMAX60']+1" class="form-control" placeholder="{{vm.scoring.scoringLimits['PMAX40']<(vm.scoring.scoringLimits['PMAX60']+1)?vm.scoring.scoringLimits['PMAX40']=(vm.scoring.scoringLimits['PMAX60']+1):vm.scoring.scoringLimits['PMAX40']}}">
                         </div>
                     </td>
                     <td>
@@ -178,7 +178,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN40']" class="form-control" placeholder="vm.scoring.scoringLimits['NMIN40']">
+                            <input type="number" ng-model="vm.scoring.scoringLimits['NMIN40']" max="vm.scoring.scoringLimits['NMIN60']-1" class="form-control" placeholder="{{vm.scoring.scoringLimits['NMIN40']>(vm.scoring.scoringLimits['NMIN60']-1)?vm.scoring.scoringLimits['NMIN40']=(vm.scoring.scoringLimits['NMIN60']-1):vm.scoring.scoringLimits['NMIN40']}}">
                         </div>
                     </td>
 
@@ -234,40 +234,38 @@
                     <td style="width:20%">From</td>
                     <td style="width:20%">To</td>
                 </tr>
+                <!-- ONE_OFF CLASSIFICATION  -->
                 <tr>
-                    <!-- TOP CLASSIFICATION  -->
-                    <td> TOP </td>
+                    <td> ONE OFF </td>
                     <td>
-                        <div class="form-group">
-                            <input type="number" ng-model="vm.classifications.classificationLimits['TOP']" class="form-control" id="TOP_NUMBER" placeholder="vm.classifications.classificationLimits['TOP']">
-                        </div>
+                        <span> 0 </span>
                     </td>
                     <td>
-                        <span> &infin; </span>
+                        <div class="form-group">
+                            <input type="number" min="0" ng-model="vm.classifications.classificationLimits['ONE_OFF']" class="form-control" id="ONEOFF_NUMBER" placeholder="vm.classifications.classificationLimits['ONE_OFF']">
+                        </div>
                     </td>
                 </tr>
                 <!-- NORMAL CLASSIFICATION  -->
                 <tr>
                     <td> NORMAL </td>
                     <td>
+                        <span>{{vm.classifications.classificationLimits["ONE_OFF"] +1}} </span>
+                    </td>
+                    <td>
                         <div class="form-group">
-                            <input type="number" max="{{vm.classifications.classificationLimits['TOP'] -1}}" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="vm.classifications.classificationLimits['NORMAL']">
+                            <input type="number" min="vm.classifications.classificationLimits['ONE_OFF']+1" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="{{vm.classifications.classificationLimits['NORMAL']<(vm.classifications.classificationLimits['ONE_OFF']+1)?(vm.classifications.classificationLimits['NORMAL']=vm.classifications.classificationLimits['ONE_OFF']+1):vm.classifications.classificationLimits['NORMAL']}}">
                         </div>
                     </td>
-                    <td>
-                        <span>{{vm.classifications.classificationLimits["TOP"] -1}} </span>
-                    </td>
-                  </tr>
-
-                <!-- ONE_OFF CLASSIFICATION  -->
+                </tr>
                 <tr>
-                    <td> ONE OFF </td>
+                    <!-- TOP CLASSIFICATION  -->
+                    <td> TOP </td>
                     <td>
-                        <div class="form-group">
-                            <input type="number" max="{{vm.classifications.classificationLimits['NORMAL'] -1}}" ng-model="vm.classifications.classificationLimits['ONE_OFF']" class="form-control" id="ONEOFF_NUMBER" placeholder="vm.classifications.classificationLimits['ONE_OFF']">
-                        </div>                    </td>
+                        <span>{{vm.classifications.classificationLimits["NORMAL"] +1}} </span>
+                    </td>
                     <td>
-                        <span>{{vm.classifications.classificationLimits["NORMAL"] -1}} </span>
+                        <span> &infin; </span>
                     </td>
                 </tr>
             </table>

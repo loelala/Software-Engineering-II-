@@ -47,12 +47,14 @@ public class SettingsController
         logger.debug("setScoringLimits({})",newLimits);
         if (su.validateScoringLimits(newLimits))
         {
+            logger.debug("ScoringLimits valid");
             sm.setScoringlimits(newLimits);
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
             return responseEntity;
         }
         else
         {
+            logger.debug("ScoringLimits not valid");
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
             return responseEntity;
         }
@@ -64,12 +66,14 @@ public class SettingsController
         logger.debug("setClassificationLimits({})",newLimits);
         if (cu.validateClassificationLimits(newLimits))
         {
+            logger.debug("ClassificationLimits valid");
             sm.setClassificationLimits(newLimits);
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
             return responseEntity;
         }
         else
         {
+            logger.debug("ClassificationLimits not valid");
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
             return responseEntity;
         }

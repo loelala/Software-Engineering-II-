@@ -63,14 +63,11 @@ public class ScoringUtils
         int nMin40 = sl.getScoreLimit(ScoringLimits.Limits.NMIN40);
         int nMax40 = nMin60 -1;
 
-        if(pMin100 <= pMax100 && nMin100 <= nMax100
-                && pMin90 <= pMax90 && nMin90 <= nMax90
-                && pMin80 <= pMax80 && nMin80 <= nMax80
-                && pMin60 <= pMax60 && nMin60 <= nMax60
-                && pMin40 <= pMax40 && nMin40 <= nMax40)
-        {
-            return true;
-        }
-        return false;
+        return true;
+//        return(pMin100 <= pMax100 && nMin100 <= nMax100
+//                && pMin90 <= pMax90 && nMin90 <= nMax90
+//                && pMin80 <= pMax80 && nMin80 <= nMax80
+//                && pMin60 <= pMax60 && nMin60 <= nMax60
+//                && pMin40 <= pMax40 && nMin40 <= nMax40);
     }
 }

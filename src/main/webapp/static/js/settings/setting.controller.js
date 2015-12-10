@@ -103,8 +103,10 @@
            classificationService.saveClassification(vm.classifications)
                .then(function(response){
                     console.log(response.status);
+                   toastr.success('Classifications saved');
             },function(response){
                    console.log(response.status);
+                   toastr.error('Failed to save classifications');
                });
         };
 
@@ -112,8 +114,10 @@
             scoringService.saveScoring(vm.scoring)
                 .then(function (response) {
                     console.log(response.status);
+                    toastr.success('Scores saved');
                 },function(response){
                     console.log(response.status);
+                    toastr.error('Failed to save scores');
                 });
         }
 
