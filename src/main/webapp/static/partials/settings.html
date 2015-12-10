@@ -250,11 +250,11 @@
                 <tr>
                     <td> NORMAL </td>
                     <td>
-                        <span>{{vm.classifications.classificationLimits["ONE_OFF"] +1}} </span>
+                        <span>{{(vm.classifications.classificationLimits["ONE_OFF"] +1)}} </span>
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" min="vm.classifications.classificationLimits['ONE_OFF']+1" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="{{vm.classifications.classificationLimits['NORMAL']<(vm.classifications.classificationLimits['ONE_OFF']+1)?(vm.classifications.classificationLimits['NORMAL']=vm.classifications.classificationLimits['ONE_OFF']+1):vm.classifications.classificationLimits['NORMAL']}}">
+                            <input type="number" min="vm.classifications.classificationLimits['ONE_OFF']+1" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="{{(vm.classifications.classificationLimits['NORMAL']<(vm.classifications.classificationLimits['ONE_OFF']+1)?(vm.classifications.classificationLimits['NORMAL']=vm.classifications.classificationLimits['ONE_OFF']+1):vm.classifications.classificationLimits['NORMAL'])}}">
                         </div>
                     </td>
                 </tr>

@@ -93,28 +93,32 @@ public class SupplierUtils
 
     public Classification calculateClassification(int numberOfOrders)
     {
-        logger.debug("calculateClassification()");
+        //logger.debug("calculateClassification({})", numberOfOrders);
 
         ClassificationLimits cl = sm.getClassificationLimits();
-        logger.debug("TOP is {}", cl.getClassificationLimit(Classification.TOP));
-        logger.debug("NORMAL is {}", cl.getClassificationLimit(Classification.NORMAL));
-        logger.debug("ONE_OFF is {}", cl.getClassificationLimit(Classification.ONE_OFF));
+        Classification c;
 
-        if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
+        if(numberOfOrders <= 0)
         {
-            return Classification.TOP;
+            c = Classification.NONE;
         }
-        else if(numberOfOrders < cl.getClassificationLimit(Classification.TOP) && numberOfOrders >= cl.getClassificationLimit(Classification.NORMAL))
+        else if(numberOfOrders > 0 && numberOfOrders <= cl.getClassificationLimit(Classification.ONE_OFF))
         {
-            return Classification.NORMAL;
+            c = Classification.ONE_OFF;
         }
-        else if(numberOfOrders < cl.getClassificationLimit(Classification.NORMAL) && numberOfOrders >= cl.getClassificationLimit(Classification.ONE_OFF))
+        else if(numberOfOrders > cl.getClassificationLimit(Classification.ONE_OFF) && numberOfOrders <= cl.getClassificationLimit(Classification.NORMAL))
         {
-            return Classification.ONE_OFF;
+            c = Classification.NORMAL;
+        }
+        else if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
+        {
+            c = Classification.TOP;
         }
         else
         {
-            return Classification.NONE;
+            c = Classification.NONE;
         }
+        logger.debug("calculateClassification({}) returns {}", numberOfOrders, c);
+        return c;
     }
 }
