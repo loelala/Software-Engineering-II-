@@ -27,7 +27,9 @@
         vm.itemsByPage = 10;
 
         vm.supplierList = [];
-        vm.classifications = [ {id: 1, name: 'TOP'}, {id: 2, name:'NORMAL'}, {id: 3, name:'ONE_OFF'}, {id: 4, name:'NONE'}];
+
+        vm.classifications = [{id: 1, name: 'TOP'}, {id: 2, name:'NORMAL'}, {id: 3, name:'ONE_OFF'}, {id: 4, name:'NONE'}];
+
         vm.formData = {};
         vm.date = {
             // from
@@ -35,7 +37,6 @@
             // to
             endDate: moment()
         };
-
 
         vm.dataOptions = {
             locale: {
