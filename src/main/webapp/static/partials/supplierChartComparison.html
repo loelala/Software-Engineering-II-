@@ -13,22 +13,22 @@
     <div class="row" style="margin-top: 20px; margin-bottom: 20px">
         <div class="col-md-3 col-lg-3">
             <button type="button" ng-click='vm.goToSupplierList()' class="btn wedoit-button">
-                <i class="fa fa-step-backward"></i> Back to supplierlist
+                <i class="fa fa-chevron-left"></i> Back to supplierlist
             </button>
         </div>
         <div class="col-md-3 col-lg-3">
             <button type="button" ng-click="vm.toggleScoreChart()" ng-class="{'btn wedoit-toggleButton enabled':vm.displayScoreChart,'btn wedoit-toggleButton disabled':!vm.displayScoreChart}">
-                <i class="fa fa-map"></i> Score Chart
+                <i class="fa fa-bar-chart"></i> Score Chart
             </button>
         </div>
         <div class="col-md-3 col-lg-3">
             <button type="button" ng-click="vm.toggleDetailChart()" ng-class="{'btn wedoit-toggleButton enabled':vm.displayDetailChart,'btn wedoit-toggleButton disabled':!vm.displayDetailChart}">
-                <i class="fa fa-map"></i> Delay Chart
+                <i class="fa fa-bar-chart"></i> Delay Chart
             </button>
         </div>
         <div class="col-md-3 col-lg-3">
-            <button type="button" ng-click="vm.generatePdf()" class="btn wedoit-button" ng-enabled="vm.displayScoreChart || vm.displayDetailChart">
-                <i class="fa fa-compass"></i> Download PDF
+            <button type="button" ng-click="vm.generatePdf()" class="btn wedoit-button" ng-enabled="vm.displayScoreChart || vm.displayDetailChart" ng-class="{'disabled': !(vm.displayScoreChart || vm.displayDetailChart)}">
+                <i class="fa fa-file-pdf-o"></i> Download PDF
             </button>
         </div>
     </div>

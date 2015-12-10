@@ -29,7 +29,7 @@
                     <label for="input2" class="control-label">Search by classification</label>
                     <select id="input2" class="form-control" ng-model="filter.classifications">
                         <option value="">All classifications</option>
-                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>
+                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.classType}}</option>
                     </select>
                 </div>
             </form>
@@ -79,10 +79,10 @@
         <div class="col-md-2 col-lg-2">
             <button style="margin-left: 16px" type="button"
                     ng-click='vm.goToComparison()'
-                    ng-disabled="vm.selectedSuppliers.length <= 1"
-                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 1,
-                                        'btn wedoit-button':vm.selectedSuppliers.length > 1}" >
-                Compare
+                    ng-disabled="vm.selectedSuppliers.length <= 0"
+                    ng-class="{'btn btn-default': vm.selectedSuppliers.length <= 0,
+                                        'btn wedoit-button':vm.selectedSuppliers.length > 0}" >
+                <i class="fa fa-bar-chart"></i> {{vm.selectedSuppliers.length <= 1 ? 'Details' : 'Compare'}}
             </button>
         </div>
     </div>
