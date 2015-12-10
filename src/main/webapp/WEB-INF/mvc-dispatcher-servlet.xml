@@ -42,7 +42,7 @@
     <bean id="allDao"
           class="edu.hm.wedoit.dao.impl.AllDaoImpl"
           init-method="initData"
-            depends-on="settingsManagement, supplierUtils, orderUtils">
+            depends-on="settingsManagement, orderUtils">
         <property name="dataSource"  ref="dataSource"/>
     </bean>
 
