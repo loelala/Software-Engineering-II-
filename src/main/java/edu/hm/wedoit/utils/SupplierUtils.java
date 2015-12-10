@@ -5,6 +5,8 @@ import edu.hm.wedoit.model.enums.DeliveryDifference;
 import edu.hm.wedoit.model.Order;
 import edu.hm.wedoit.model.limits.ClassificationLimits;
 import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public class SupplierUtils
 {
     @Autowired
     SettingsManagement sm;
+
+    private final static Logger logger = LoggerFactory.getLogger(SupplierUtils.class);
 
     private static volatile SupplierUtils instance;
 
@@ -89,7 +93,12 @@ public class SupplierUtils
 
     public Classification calculateClassification(int numberOfOrders)
     {
+        logger.debug("calculateClassification()");
+
         ClassificationLimits cl = sm.getClassificationLimits();
+        logger.debug("TOP is {}", cl.getClassificationLimit(Classification.TOP));
+        logger.debug("NORMAL is {}", cl.getClassificationLimit(Classification.NORMAL));
+        logger.debug("ONE_OFF is {}", cl.getClassificationLimit(Classification.ONE_OFF));
 
         if(numberOfOrders >= cl.getClassificationLimit(Classification.TOP))
         {

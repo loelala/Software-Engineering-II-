@@ -21,6 +21,8 @@ public interface AllDao
         CONNECTED, CACHE_ONLY, NO_CONNECTION_AND_CACHE;
     }
 
+    void renewCache();
+
     /**
      * Returns a list of all suppliers
      * @return The list of the suppliers

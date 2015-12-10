@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/settings")
 public class SettingsController
 {
-    private final static Logger logger = LoggerFactory.getLogger(SupplierController.class);
+    private final static Logger logger = LoggerFactory.getLogger(SettingsController.class);
 
     @Autowired
     SettingsManagement sm;

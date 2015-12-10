@@ -128,6 +128,13 @@ public class AllDaoImpl extends AbstractDao implements AllDao
         }
     }
 
+    public void renewCache()
+    {
+        logger.debug("Set cache to null");
+        supplierList = null;
+        supplierMap = null;
+    }
+
     /**
      * {@inheritDoc}
      */

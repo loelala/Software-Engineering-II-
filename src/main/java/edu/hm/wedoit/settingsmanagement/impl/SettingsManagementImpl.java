@@ -1,9 +1,11 @@
 package edu.hm.wedoit.settingsmanagement.impl;
 
+import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.limits.ClassificationLimits;
 import edu.hm.wedoit.model.limits.ScoringLimits;
 import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.HashMap;
@@ -21,6 +23,9 @@ public class SettingsManagementImpl implements SettingsManagement
     private final File classificationFile;
     private final static String SCORING_FILE = "scoresettings.dat";
     private final static String CLASSIFICATION_FILE = "classificationsettings.dat";
+
+    @Autowired
+    private AllDao dao;
 
     private SettingsManagementImpl(String rootDir)
     {
@@ -114,6 +119,7 @@ public class SettingsManagementImpl implements SettingsManagement
     {
         scoringLimits = sl;
         saveScoreLimits();
+        dao.renewCache();
     }
 
     private void saveScoreLimits()
@@ -143,6 +149,7 @@ public class SettingsManagementImpl implements SettingsManagement
     {
         classificationLimits = cl;
         saveClassificationLimits();
+        dao.renewCache();
     }
 
     private void saveClassificationLimits()
