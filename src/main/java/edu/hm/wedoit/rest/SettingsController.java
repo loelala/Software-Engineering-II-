@@ -1,5 +1,6 @@
 package edu.hm.wedoit.rest;
 
+import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.limits.ClassificationLimits;
 import edu.hm.wedoit.model.limits.ScoringLimits;
 import edu.hm.wedoit.settingsmanagement.SettingsManagement;
@@ -23,6 +24,9 @@ public class SettingsController
 
     @Autowired
     SettingsManagement sm;
+
+    @Autowired
+    AllDao dao;
 
     private ScoringUtils su = ScoringUtils.getInstance();
     private ClassificationUtils cu = ClassificationUtils.getInstance();
@@ -49,6 +53,7 @@ public class SettingsController
         {
             logger.debug("ScoringLimits valid");
             sm.setScoringlimits(newLimits);
+            dao.renewCache();
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
             return responseEntity;
         }
@@ -68,6 +73,7 @@ public class SettingsController
         {
             logger.debug("ClassificationLimits valid");
             sm.setClassificationLimits(newLimits);
+            dao.renewCache();
             ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
             return responseEntity;
         }

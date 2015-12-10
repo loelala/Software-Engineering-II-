@@ -24,9 +24,6 @@ public class SettingsManagementImpl implements SettingsManagement
     private final static String SCORING_FILE = "scoresettings.dat";
     private final static String CLASSIFICATION_FILE = "classificationsettings.dat";
 
-    @Autowired
-    private AllDao dao;
-
     private SettingsManagementImpl(String rootDir)
     {
         this.rootDir = rootDir;
@@ -85,7 +82,7 @@ public class SettingsManagementImpl implements SettingsManagement
         map.put(ScoringLimits.Limits.PMIN100.toString(), 0);
         map.put(ScoringLimits.Limits.PMAX100.toString(), 0);
         map.put(ScoringLimits.Limits.NMIN100.toString(), -1);
-        map.put(ScoringLimits.Limits.NMAX100.toString(), -1);
+        map.put(ScoringLimits.Limits.NMAX100.toString(), 0);
 
         map.put(ScoringLimits.Limits.PMAX90.toString(), 3);
         map.put(ScoringLimits.Limits.NMIN90.toString(), -2);
@@ -119,7 +116,7 @@ public class SettingsManagementImpl implements SettingsManagement
     {
         scoringLimits = sl;
         saveScoreLimits();
-        dao.renewCache();
+
     }
 
     private void saveScoreLimits()
@@ -149,7 +146,6 @@ public class SettingsManagementImpl implements SettingsManagement
     {
         classificationLimits = cl;
         saveClassificationLimits();
-        dao.renewCache();
     }
 
     private void saveClassificationLimits()
