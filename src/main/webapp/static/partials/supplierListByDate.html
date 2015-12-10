@@ -19,21 +19,21 @@
             </div>  <!-- .datepicker -->
         </div>
 
-        <div class="col-md-6 col-lg-6">
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label for="input1" class="control-label">Search by suppliers name</label>
-                    <input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">
-                </div>
-                <div class="form-group">
-                    <label for="input2" class="control-label">Search by classification</label>
-                    <select id="input2" class="form-control" ng-model="filter.classifications">
-                        <option value="">All classifications</option>
-                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>
-                    </select>
-                </div>
-            </form>
-        </div>
+        <!--<div class="col-md-6 col-lg-6">-->
+            <!--<form class="form-horizontal" role="form">-->
+                <!--<div class="form-group">-->
+                    <!--<label for="input1" class="control-label">Search by suppliers name</label>-->
+                    <!--<input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="input2" class="control-label">Search by classification</label>-->
+                    <!--<select id="input2" class="form-control" ng-model="filter.classifications">-->
+                        <!--<option value="">All classifications</option>-->
+                        <!--<option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
     </div>
 
 
@@ -111,7 +111,7 @@
                     <th></th>
                     <th></th>
                     <th>
-                        <select st-search="classification">
+                        <select st-search="classification" st-input-event="change">
                         <option value="">All</option>
                         <option ng-repeat="item in vm.classifications" value="{{item.name}}">{{item.name}}</option>
                         </select>
