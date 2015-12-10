@@ -90,7 +90,7 @@
                         </form>
                         <div class="buttons" ng-show="!rowform.$visible">
                             <button class="btn wedoit-button" ng-click="rowform.$show()">edit</button>
-                            <button class="btn btn-danger" ng-hide="vm.isAdmin" ng-click="vm.deleteUser($index)">delete</button>
+                            <button class="btn btn-danger" ng-hide="vm.checkIfAdmin(user.name)" ng-click="vm.deleteUser($index)">delete</button>
                         </div>
                     </td>
                 </tr>

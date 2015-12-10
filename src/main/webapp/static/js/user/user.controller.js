@@ -14,7 +14,6 @@
         vm.isNewUser = false;
         vm.isAllUsers = false;
         vm.userList = [];
-        vm.isAdmin = loginInformationHolderService.isAdmin;
 
         vm.create = create;
         vm.newUser = newUser;
@@ -22,6 +21,7 @@
         vm.showAllCurrentUsers = showAllUsers;
         vm.editUser = editUser;
         vm.deleteUser = deleteUser;
+        vm.checkIfAdmin = checkIfAdmin;
 
         function create (username, password, email, name){
             UserService.createNew(username,password, email, name)
@@ -78,6 +78,9 @@
         }
 
 
+        function checkIfAdmin(userName) {
+            return userName === 'admin';
+        }
 
 
     }
