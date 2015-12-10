@@ -29,7 +29,7 @@
                     <label for="input2" class="control-label">Search by classification</label>
                     <select id="input2" class="form-control" ng-model="filter.classifications">
                         <option value="">All classifications</option>
-                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>
+                        <option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.classType}}</option>
                     </select>
                 </div>
             </form>
