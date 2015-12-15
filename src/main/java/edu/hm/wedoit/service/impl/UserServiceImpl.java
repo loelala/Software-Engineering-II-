@@ -72,4 +72,10 @@ public class UserServiceImpl implements UserService
         logger.debug("getAllUser ()");
         return userManagement.getAllUser();
     }
+
+    @Override
+    public boolean updateUser(User user) {
+        logger.debug("edit user " + user.getName());
+        return userManagement.editUser(user);
+    }
 }

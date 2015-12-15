@@ -7,13 +7,14 @@
     angular.module('newuser', [])
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$state','UserService','AllUserService','toastr', 'loginInformationHolderService'];
-    function UserController($state,UserService,AllUserService,toastr, loginInformationHolderService) {
+    UserController.$inject = ['$state','UserService','AllUserService','toastr', 'DeleteUserService', 'EditUserService'];
+    function UserController($state,UserService,AllUserService,toastr, DeleteUserService, EditUserService) {
         var vm = this;
 
         vm.isNewUser = false;
         vm.isAllUsers = false;
         vm.userList = [];
+        vm.newPassword = '';
 
         vm.create = create;
         vm.newUser = newUser;
@@ -22,6 +23,8 @@
         vm.editUser = editUser;
         vm.deleteUser = deleteUser;
         vm.checkIfAdmin = checkIfAdmin;
+        vm.checkPassword = checkPassword;
+
 
         function create (username, password, email, name){
             UserService.createNew(username,password, email, name)
@@ -65,23 +68,44 @@
         }
 
 
-        function editUser(index,user) {
-            vm.userList[index].surname = user.surname;
-            vm.userList[index].email = user.emailAddress;
-            // TODO API call to update user data
+        function editUser(index) {
+            var user = vm.userList[index];
+            EditUserService.editUser({username: user.name}, user).$promise.then(
+                function() {
+                    toastr.success("Edit " + user.name + " successfully!");
+                }, function(error) {
+                    console.log("some error occurred!", error);
+                    toastr.error("Could not update user!");
+                }
+            );
+            vm.newPassword = '';
+            showAllUsers();
         }
 
 
         function deleteUser(index) {
-            vm.userList.splice(index, 1);
-            // TODO delete user with api call
+            var user = vm.userList[index];
+            DeleteUserService.deleteUser({username: user.name}, user).$promise.then(
+                function() {
+                    vm.userList.splice(index, 1);
+                    toastr.success("Delete user from DB");
+                }, function(error) {
+                    console.log("some error occurred!", error);
+                    toastr.error('Could not delete user!');
+                }
+            )
         }
-
 
         function checkIfAdmin(userName) {
             return userName === 'admin';
         }
 
+        function checkPassword(data) {
+            console.log("Length of pw: ", data.length);
+            if (data.length <= 0) {
+                return "Please enter a password"
+            }
+        }
 
     }
 

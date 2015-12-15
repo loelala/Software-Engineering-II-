@@ -1,7 +1,7 @@
 <div class="container-fluid" ng-controller="SupplierListByDateCtrl as vm"  xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <p class="wedoit-page-info"><strong><i class="fa fa-coffee"></i> Suppliers </strong></p>
+            <p class="wedoit-page-info"><strong><i class="fa fa-database"></i> Suppliers </strong></p>
             <hr>
             <div class="col-md-12 col-lg-12">
                 <h1>Suppliers</h1>
@@ -10,7 +10,6 @@
     </div>
 
     <div class="row" style="margin-top: 20px">
-
         <div class="col-md-6 col-lg-6">
             <div class="form-group"> <!--datepicker-->
                 <label for="datepicker"> Select a daterange: </label>
@@ -18,22 +17,6 @@
                        ng-model="vm.date" clearable="false" options="vm.dataOptions"/>
             </div>  <!-- .datepicker -->
         </div>
-
-        <!--<div class="col-md-6 col-lg-6">-->
-            <!--<form class="form-horizontal" role="form">-->
-                <!--<div class="form-group">-->
-                    <!--<label for="input1" class="control-label">Search by suppliers name</label>-->
-                    <!--<input type="text" class="form-control" id="input1" placeholder="suppliers name ... " ng-model="filter.supplierList.name">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="input2" class="control-label">Search by classification</label>-->
-                    <!--<select id="input2" class="form-control" ng-model="filter.classifications">-->
-                        <!--<option value="">All classifications</option>-->
-                        <!--<option ng-repeat="classification in vm.classifications" value="{{classification.id}}">{{classification.name}}</option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
     </div>
 
 

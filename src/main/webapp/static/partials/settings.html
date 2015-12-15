@@ -11,22 +11,24 @@
     </div>
 
     <div class="row" style="margin-top: 20px">
-        <div class="col-lg-4 col-md-4" style="margin-top: 10px">
+        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
             <button type="button" class="btn wedoit-button" ng-click="vm.editCompareRanges()">
                 <i class="fa fa-edit"></i> Edit classification ranges
             </button>
         </div>
-        <div ng-show="false" class="col-lg-4 col-md-4" style="margin-top: 10px">
+        <div ng-show="false" class="col-lg-3 col-md-3" style="margin-top: 10px">
             <button type="button"  class="btn wedoit-button" ng-click="vm.editDateRanges()">
                 <i class="fa fa-edit"></i> Edit date ranges
             </button>
         </div>
-        <div class="col-lg-4 col-md-4" style="margin-top: 10px">
+        <div class="col-lg-3 col-md-3" style="margin-top: 10px">
             <button type="button" class="btn wedoit-button" ng-click="vm.editScoring()">
                 <i class="fa fa-edit"></i> Edit Scoring
             </button>
         </div>
     </div>
+
+    <hr>
 
     <div class="row" ng-show="vm.scoringSettings">
         <div class="col-lg-12 col-md-12">
@@ -204,14 +206,20 @@
                 </tr>
             </table>
 
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <button type="button" ng-click='vm.saveScoring()' class="btn wedoit-button">
+            <hr>
+
+            <div class="row" style="margin-top: 20px">
+                <div style="margin-top: 10px; margin-right: 15px">
+                    <button type="button" ng-click='vm.saveScoring()' class="btn wedoit-button pull-right">
                         <i class="fa fa-floppy-o"></i> Save
                     </button>
                 </div>
+                <div style="margin-top: 10px">
+                    <button type="button" ng-click='vm.defaultScoring()' class="btn wedoit-button pull-right">
+                        <i class="fa fa-undo"></i> Reload default scorings
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
     <!--
@@ -268,10 +276,17 @@
                 </tr>
             </table>
 
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <button type="button" ng-click='vm.saveClassification()' class="btn wedoit-button">
+            <hr>
+
+            <div class="row" style="margin-top: 20px">
+                <div style="margin-top: 10px; margin-left: 15px">
+                    <button type="button" ng-click='vm.saveClassification()' class="btn wedoit-button pull-right">
                         <i class="fa fa-floppy-o"></i> Save
+                    </button>
+                </div>
+                <div style="margin-top: 10px">
+                    <button type="button" ng-click='vm.defaultRanges()' class="btn wedoit-button pull-right">
+                        <i class="fa fa-undo"></i> Reload default ranges
                     </button>
                 </div>
             </div>

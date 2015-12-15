@@ -12,14 +12,18 @@
         vm.classificationSettings = false;
         vm.dateSettings = false;
         vm.scoringSettings = false;
+
+        vm.classifications = {};
+        vm.scoring = {};
+
         vm.saveClassification = saveClassification;
         vm.saveScoring = saveScoring;
         vm.editCompareRanges =  editCompareSettings;
         vm.editDateRanges = editDateRanges;
         vm.editScoring = editScoring;
-
-        vm.classifications = {};
-        vm.scoring = {};
+        vm.saveDateRanges = saveDateRanges;
+        vm.defaultScoring = enableDefaultScoring;
+        vm.defaultRanges = enableDefaultRanges;
 
         classificationService.getClassification().query()
             .$promise.then(function(data) {
@@ -38,11 +42,6 @@
                 console.log("error fetching scoring " + error);
             });
 
-        //vm.classifications = [
-        //    {title: 'Top', fromVal: 4, toVal: 10},
-        //    {title: 'Normal', fromVal: 11, toVal: 25},
-        //    {title: 'One_Off', fromVal: 26, toVal: 10}
-        //];
 
         vm.dateRanges =[
             {title: 'much too early', fromVal: 0, toVal: 0},
@@ -89,15 +88,24 @@
             }
         };
 
-        // TODO add date range validation
+        function enableDefaultScoring() {
+            vm.scoring.scoringLimits['PMAX100'] = 0;
+            vm.scoring.scoringLimits['NMIN100'] = -1;
+            vm.scoring.scoringLimits['PMAX90'] = 3;
+            vm.scoring.scoringLimits['NMIN90'] = -2;
+            vm.scoring.scoringLimits['PMAX80'] = 7;
+            vm.scoring.scoringLimits['NMIN80'] = -3;
+            vm.scoring.scoringLimits['PMAX60'] = 14;
+            vm.scoring.scoringLimits['NMIN60'] = -7;
+            vm.scoring.scoringLimits['PMAX40'] = 28;
+            vm.scoring.scoringLimits['NMIN40'] = -10;
+        }
 
-        vm.checkFromDr = function(index,data) {
 
-        };
-
-        vm.checkToDr = function(index,data) {
-
-        };
+        function enableDefaultRanges() {
+            vm.classifications.classificationLimits['ONE_OFF'] = 1;
+            vm.classifications.classificationLimits['NORMAL'] = 3;
+        }
 
         function saveClassification() {
            classificationService.saveClassification(vm.classifications)
@@ -108,7 +116,7 @@
                    console.log(response.status);
                    toastr.error('Failed to save classifications');
                });
-        };
+        }
 
         function saveScoring(){
             scoringService.saveScoring(vm.scoring)
@@ -121,7 +129,7 @@
                 });
         }
 
-        vm.saveDateRanges = function(index, data) {
+        function saveDateRanges(index, data) {
             console.log(data);
             vm.dateRanges[index].fromVal = data.fromVal;
             vm.dateRanges[index].toVal = data.toVal;

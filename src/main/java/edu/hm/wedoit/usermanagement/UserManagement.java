@@ -2,6 +2,7 @@ package edu.hm.wedoit.usermanagement;
 
 import edu.hm.wedoit.model.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -34,6 +35,13 @@ public interface UserManagement
     boolean removeUser(String username);
 
     /**
+     * edit a user
+     * @param user user to edit
+     * @return true if the user could be edited
+     */
+    boolean editUser(User user);
+
+    /**
      * gets the username
      * @param username
      * @return the user
@@ -45,4 +53,5 @@ public interface UserManagement
      * @return list with all users
      */
     List<User> getAllUser();
+
 }

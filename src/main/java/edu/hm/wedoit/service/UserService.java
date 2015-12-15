@@ -34,6 +34,14 @@ public interface UserService
     boolean removeUser(String username);
 
     /**
+     * Update a user.
+     *
+     * @param user the user to update
+     * @return if user was updated or not
+     */
+    boolean updateUser(User user);
+
+    /**
      * gets the user
      * @param username
      * @return the User-Object for the username
