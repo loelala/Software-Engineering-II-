@@ -104,7 +104,7 @@
 
         function enableDefaultRanges() {
             vm.classifications.classificationLimits['ONE_OFF'] = 1;
-            vm.classifications.classificationLimits['NORMAL'] = 3;
+            vm.classifications.classificationLimits['NORMAL'] = 19;
         }
 
         function saveClassification() {
