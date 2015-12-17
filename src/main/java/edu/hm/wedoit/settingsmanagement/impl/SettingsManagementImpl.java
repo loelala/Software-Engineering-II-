@@ -1,9 +1,11 @@
 package edu.hm.wedoit.settingsmanagement.impl;
 
+import edu.hm.wedoit.dao.AllDao;
 import edu.hm.wedoit.model.enums.Classification;
 import edu.hm.wedoit.model.limits.ClassificationLimits;
 import edu.hm.wedoit.model.limits.ScoringLimits;
 import edu.hm.wedoit.settingsmanagement.SettingsManagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.HashMap;
@@ -80,7 +82,7 @@ public class SettingsManagementImpl implements SettingsManagement
         map.put(ScoringLimits.Limits.PMIN100.toString(), 0);
         map.put(ScoringLimits.Limits.PMAX100.toString(), 0);
         map.put(ScoringLimits.Limits.NMIN100.toString(), -1);
-        map.put(ScoringLimits.Limits.NMAX100.toString(), -1);
+        map.put(ScoringLimits.Limits.NMAX100.toString(), 0);
 
         map.put(ScoringLimits.Limits.PMAX90.toString(), 3);
         map.put(ScoringLimits.Limits.NMIN90.toString(), -2);
@@ -114,6 +116,7 @@ public class SettingsManagementImpl implements SettingsManagement
     {
         scoringLimits = sl;
         saveScoreLimits();
+
     }
 
     private void saveScoreLimits()

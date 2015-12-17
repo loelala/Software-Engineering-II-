@@ -42,8 +42,8 @@
             <table class="table table-responsive table-condensed">
                 <tr style="font-weight: bold">
                     <td style="width:20%">Score</td>
-                    <td style="width:20%">positiv from</td>
-                    <td style="width:20%">positiv To</td>
+                    <td style="width:20%">positive from</td>
+                    <td style="width:20%">positive To</td>
                     <td style="width:20%">negative from</td>
                     <td style="width:20%">negative to</td>
 
@@ -53,7 +53,7 @@
                     <td> 100 </td>
                     <td>
                         <span>
-                            {{vm.scoring.scoringLimits['PMIN100']=0}}
+                            {{(vm.scoring.scoringLimits['PMIN100']=0)}}
                         </span>
                     </td>
                     <td>
@@ -63,7 +63,7 @@
                     </td>
                     <td>
                         <span>
-                            {{vm.scoring.scoringLimits['NMAX100']=0}}
+                            {{(vm.scoring.scoringLimits['NMAX100']=0)}}
                         </span>
                     </td>
                     <td>
@@ -187,7 +187,7 @@
                     <td> 0 </td>
                     <td>
                         <div >
-                            {{vm.scoring.scoringLimits['PMAX40']+1}}
+                            {{scoring.scoringLimits['PMAX40']+1}}
                         </div>
                     </td>
                     <td>
@@ -256,11 +256,11 @@
                 <tr>
                     <td> NORMAL </td>
                     <td>
-                        <span>{{vm.classifications.classificationLimits["ONE_OFF"] +1}} </span>
+                        <span>{{(vm.classifications.classificationLimits["ONE_OFF"] +1)}} </span>
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="number" min="vm.classifications.classificationLimits['ONE_OFF']+1" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="{{vm.classifications.classificationLimits['NORMAL']<(vm.classifications.classificationLimits['ONE_OFF']+1)?(vm.classifications.classificationLimits['NORMAL']=vm.classifications.classificationLimits['ONE_OFF']+1):vm.classifications.classificationLimits['NORMAL']}}">
+                            <input type="number" min="vm.classifications.classificationLimits['ONE_OFF']+1" ng-model="vm.classifications.classificationLimits['NORMAL']" class="form-control" id="NORMAL_NUMBER" placeholder="{{(vm.classifications.classificationLimits['NORMAL']<(vm.classifications.classificationLimits['ONE_OFF']+1)?(vm.classifications.classificationLimits['NORMAL']=vm.classifications.classificationLimits['ONE_OFF']+1):vm.classifications.classificationLimits['NORMAL'])}}">
                         </div>
                     </td>
                 </tr>
@@ -268,7 +268,7 @@
                     <!-- TOP CLASSIFICATION  -->
                     <td> TOP </td>
                     <td>
-                        <span>{{vm.classifications.classificationLimits["NORMAL"] +1}} </span>
+                        <span>{{(vm.classifications.classificationLimits["TOP"] = (vm.classifications.classificationLimits["NORMAL"] +1))}} </span>
                     </td>
                     <td>
                         <span> &infin; </span>
