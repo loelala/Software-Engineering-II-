@@ -38,10 +38,10 @@ A time interval must be chooseable for the whole application, so that the compar
 ### 1.3	Authentication (done)
 A dynamic login must be possible. It requires a username and a password. Only after the authentication the application is able to get data from the client-company.
 
-### 1.3.1	User control (done)
+### 1.3.1	User control (not all is done!)
 There should be 1 admin user, who can create, delete and manage users for the system.
 
-### 1.4	Export reports as PDF 
+### 1.4	Export reports as PDF (done)
 The Overview (1.1.1), the Detailed-View (1.1.2) and the Comparing-View (1.1.3) must be exportable as a PDF containing all important information and the important charts.
 
 ### 1.5	Useable on a desktop and a tablet (done)
@@ -53,7 +53,7 @@ The application must inform the user if there are any error with the database (f
 ### 1.7 Supplier cathegories (done)
 There should be a possibility to categorise suppliers by the amount of orders.
 
-### 1.7.1 Category management
+### 1.7.1 Category management (done)
 The admin should be able to change the category requirements.
 
 ### 1.7.2 Category selection (done)
@@ -62,7 +62,7 @@ Allow the user to select all the users in a category.
 ### 1.7.3 Category graphs (done)
 A graph comparing all the suppliers in a specific category.
 
-### 1.8 Scoring management
+### 1.8 Scoring management (done)
 The admin should be able to change the scoring algorithm.
 
 
@@ -77,7 +77,7 @@ A documentation of the software is needed and must be handed over to the client-
 ### 2.2.1	Code documentation (in progress)
 A document explaining the code needs to be done in pdf.
 
-### 2.2.2	User manual
+### 2.2.2	User manual (done)
 A user manual needs to be done for the customer as a pdf. It should explain how to use the software.
 
 ### 2.2.3	Coding standards (done)
