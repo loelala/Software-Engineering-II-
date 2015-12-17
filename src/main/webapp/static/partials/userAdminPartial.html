@@ -51,7 +51,7 @@
                     <input class="form-control" type="password" name="newPassword" id="newPassword" placeholder="Enter a password" ng-model="vm.p" required>
                     <span ng-show="newUser.newPassword.$dirty && newUser.newPassword.$error.required" class="help-block">Password is required</span>
                 </div>
-                <div class="form-actions">
+                <div class="form-actions" style="margin-bottom: 30px">
                     <button type="button" class="btn wedoit-button" ng-click="vm.create(vm.un, vm.p, vm.email, vm.name)"
                             ng-show="newUser.$valid">Create</button>
                 </div>
