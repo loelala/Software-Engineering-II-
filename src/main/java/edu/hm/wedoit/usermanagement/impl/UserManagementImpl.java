@@ -3,6 +3,7 @@ package edu.hm.wedoit.usermanagement.impl;
 import edu.hm.wedoit.config.Constants;
 import edu.hm.wedoit.model.User;
 import edu.hm.wedoit.usermanagement.UserManagement;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -179,12 +180,12 @@ public class UserManagementImpl implements UserManagement
         logger.debug("createDefault()");
         users = new HashMap<>();
         String defaultAdmin = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
-        String defaultAdminPW = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
-
-        createUser(defaultAdmin,defaultAdminPW, "admin@wedoit.com", "Admin");
-
+        String defaultAdminName = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP_NAME,"Admin");
+        String defaultAdminMail = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP_MAIL,"noreply@example.com");
+        String defaultAdminPWEncoded = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
+        String defaultAdminPW = new String(Base64.decodeBase64(defaultAdminPWEncoded));
+        createUser(defaultAdmin,defaultAdminPW, defaultAdminMail,defaultAdminName);
         saveUsers();
-
     }
 
 
