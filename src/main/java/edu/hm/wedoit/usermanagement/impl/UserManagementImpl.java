@@ -182,8 +182,9 @@ public class UserManagementImpl implements UserManagement
         String defaultAdmin = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP,"admin");
         String defaultAdminName = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP_NAME,"Admin");
         String defaultAdminMail = springEnv.getProperty(Constants.DEFAULT_ADMIN_PROP_MAIL,"noreply@example.com");
-        String defaultAdminPWEncoded = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"nokloo");
+        String defaultAdminPWEncoded = springEnv.getProperty(Constants.DEFAULT_ADMIN_PW_PROP,"bm9rbG9v");
         String defaultAdminPW = new String(Base64.decodeBase64(defaultAdminPWEncoded));
+        logger.debug("encoded {} and decoded: {}",defaultAdminPWEncoded,defaultAdminPW);
         createUser(defaultAdmin,defaultAdminPW, defaultAdminMail,defaultAdminName);
         saveUsers();
     }
