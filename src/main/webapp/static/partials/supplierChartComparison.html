@@ -33,6 +33,7 @@
         </div>
     </div>
 
+    <hr>
 
     <div class="row" style="margin-top: 10px">
         <div class="col-md-12 col-lg-12">
@@ -58,7 +59,7 @@
     </div>
 
     <div class="row" ng-show="vm.displayScoreChart">
-        <div class="col-md-10"> <!-- Chart Div -->
+        <div class="col-md-12 col-lg-12"> <!-- Chart Div -->
             <div id="bar">
                 <canvas  class="chart chart-bar" width="600" height="320"
                         chart-data="vm.data" chart-legend="true" chart-labels="vm.labels" chart-colours="vm.colours" chart-series="vm.series">
@@ -69,7 +70,7 @@
     </div>
 
     <div class="row" ng-show="vm.displayDetailChart">
-        <div class="col-md-10"> <!-- Chart2 Div -->
+        <div class="col-md-12 col-lg-12"> <!-- Chart2 Div -->
             <div id="bar2">
                 <canvas  class="chart chart-bar" width="600" height="320"
                         chart-data="vm.data_detail" chart-legend="true" chart-labels="vm.labels_detail" chart-colours="vm.colours_detail"

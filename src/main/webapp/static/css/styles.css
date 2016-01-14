@@ -1,17 +1,17 @@
 body {
     font-size: 16px;
-    /*font-family: "Lato", sans-serif;*/
+    font-family: "Lato", sans-serif;
 }
 
 
-/*.login-landingPage {*/
-    /*/!*background: url(/static/img/clouds-984175_1920.jpg) no-repeat center center fixed;*!/*/
-    /*-webkit-background-size: cover;*/
-    /*-moz-background-size: cover;*/
-    /*-o-background-size: cover;*/
-    /*background-size: cover;*/
-    /*height: 100%;*/
-/*}*/
+.login-landingPage {
+    background: url(/static/img/clouds-984175_1920.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
 
 #wrapper {
     width: 100%;

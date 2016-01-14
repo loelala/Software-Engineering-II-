@@ -174,6 +174,37 @@ public class UserManagementImpl implements UserManagement
         return result;
     }
 
+    @Override
+    public boolean editUser(User user) {
+        logger.debug("=========================  User: " +  user.getName());
+        String unique = user.getName();
+
+        if (!users.containsKey(unique)){
+            return false;
+        }
+
+        User current = users.get(unique);
+
+        String currentUsername = current.getName();
+        String currentEmail = current.getEmail();
+        String currentSurname = current.getSurname();
+
+        if (user.getPassword() != null) {
+            String passwordHash = DigestUtils.sha256Hex(user.getPassword());
+            users.get(unique).setPassword(passwordHash);
+        }
+        if (!user.getName().equals(currentUsername)) {
+            users.get(unique).setName(user.getName());
+        }
+        if (!user.getEmail().equals(currentEmail)) {
+            users.get(unique).setEmail(user.getEmail());
+        }
+        if (!user.getSurname().equals(currentSurname)) {
+            users.get(unique).setSurname(user.getSurname());
+        }
+        saveUsers();
+        return true;
+    }
 
     private void createDefault() throws FileNotFoundException
     {
